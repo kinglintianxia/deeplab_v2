@@ -1,0 +1,4 @@
+Log file created at: 2018/05/05 19:11:31
+Running on machine: king-jun
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+F0505 19:11:31.641432 27257 image_seg_data_layer.cpp:82] Check failed: cv_img.data Could not load /nyu_images/1374.jpg

@@ -1,0 +1,4 @@
+Log file created at: 2018/05/13 19:20:21
+Running on machine: king-jun
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+F0513 19:20:21.537061 16831 image_seg_data_layer.cpp:82] Check failed: cv_img.data Could not load rgb/1526185333.138188.png

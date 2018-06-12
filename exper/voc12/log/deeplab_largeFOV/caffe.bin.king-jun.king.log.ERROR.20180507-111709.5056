@@ -1,0 +1,4 @@
+Log file created at: 2018/05/07 11:17:09
+Running on machine: king-jun
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+F0507 11:17:09.725447  5056 mat_write_layer.cpp:18] Check failed: infile.good() Failed to open source file voc12/list/val_id.txt

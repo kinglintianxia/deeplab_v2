@@ -1,0 +1,4 @@
+Log file created at: 2018/05/11 13:33:19
+Running on machine: king-jun
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+F0511 13:33:19.042027 11007 upgrade_proto.cpp:68] Check failed: ReadProtoFromTextFile(param_file, param) Failed to parse NetParameter file: nyu/config/deeplab_largeFOV/test_val.prototxt

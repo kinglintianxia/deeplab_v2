@@ -1,0 +1,4 @@
+Log file created at: 2018/05/13 13:55:15
+Running on machine: king-jun
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+F0513 13:55:15.056519  6903 data_transformer.cpp:474] Check failed: img_channels == data_channels (1 vs. 3) 

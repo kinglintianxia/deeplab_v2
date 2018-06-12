@@ -1,0 +1,2621 @@
+Log file created at: 2018/05/07 11:18:08
+Running on machine: king-jun
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I0507 11:18:08.662839  5117 caffe.cpp:237] Use GPU with device ID 0
+I0507 11:18:08.680830  5117 caffe.cpp:241] GPU device name: GeForce GT 730
+I0507 11:18:08.842697  5117 net.cpp:49] Initializing net from parameters: 
+name: "deeplab_largeFOV"
+state {
+  phase: TEST
+}
+layer {
+  name: "data"
+  type: "ImageSegData"
+  top: "data"
+  top: "label"
+  top: "data_dim"
+  include {
+    phase: TEST
+  }
+  transform_param {
+    mirror: false
+    crop_size: 10
+    mean_value: 104.008
+    mean_value: 116.669
+    mean_value: 122.675
+  }
+  image_data_param {
+    source: "../voc12/list/val.txt"
+    batch_size: 1
+    root_folder: "/home/king/Documents/image/VOC_aug/dataset/"
+    label_type: NONE
+  }
+}
+layer {
+  name: "conv1_1"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv1_1"
+  convolution_param {
+    num_output: 64
+    pad: 1
+    kernel_size: 3
+  }
+}
+layer {
+  name: "relu1_1"
+  type: "ReLU"
+  bottom: "conv1_1"
+  top: "conv1_1"
+}
+layer {
+  name: "conv1_2"
+  type: "Convolution"
+  bottom: "conv1_1"
+  top: "conv1_2"
+  convolution_param {
+    num_output: 64
+    pad: 1
+    kernel_size: 3
+  }
+}
+layer {
+  name: "relu1_2"
+  type: "ReLU"
+  bottom: "conv1_2"
+  top: "conv1_2"
+}
+layer {
+  name: "pool1"
+  type: "Pooling"
+  bottom: "conv1_2"
+  top: "pool1"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+    pad: 1
+  }
+}
+layer {
+  name: "conv2_1"
+  type: "Convolution"
+  bottom: "pool1"
+  top: "conv2_1"
+  convolution_param {
+    num_output: 128
+    pad: 1
+    kernel_size: 3
+  }
+}
+layer {
+  name: "relu2_1"
+  type: "ReLU"
+  bottom: "conv2_1"
+  top: "conv2_1"
+}
+layer {
+  name: "conv2_2"
+  type: "Convolution"
+  bottom: "conv2_1"
+  top: "conv2_2"
+  convolution_param {
+    num_output: 128
+    pad: 1
+    kernel_size: 3
+  }
+}
+layer {
+  name: "relu2_2"
+  type: "ReLU"
+  bottom: "conv2_2"
+  top: "conv2_2"
+}
+layer {
+  name: "pool2"
+  type: "Pooling"
+  bottom: "conv2_2"
+  top: "pool2"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+    pad: 1
+  }
+}
+layer {
+  name: "conv3_1"
+  type: "Convolution"
+  bottom: "pool2"
+  top: "conv3_1"
+  convolution_param {
+    num_output: 256
+    pad: 1
+    kernel_size: 3
+  }
+}
+layer {
+  name: "relu3_1"
+  type: "ReLU"
+  bottom: "conv3_1"
+  top: "conv3_1"
+}
+layer {
+  name: "conv3_2"
+  type: "Convolution"
+  bottom: "conv3_1"
+  top: "conv3_2"
+  convolution_param {
+    num_output: 256
+    pad: 1
+    kernel_size: 3
+  }
+}
+layer {
+  name: "relu3_2"
+  type: "ReLU"
+  bottom: "conv3_2"
+  top: "conv3_2"
+}
+layer {
+  name: "conv3_3"
+  type: "Convolution"
+  bottom: "conv3_2"
+  top: "conv3_3"
+  convolution_param {
+    num_output: 256
+    pad: 1
+    kernel_size: 3
+  }
+}
+layer {
+  name: "relu3_3"
+  type: "ReLU"
+  bottom: "conv3_3"
+  top: "conv3_3"
+}
+layer {
+  name: "pool3"
+  type: "Pooling"
+  bottom: "conv3_3"
+  top: "pool3"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+    pad: 1
+  }
+}
+layer {
+  name: "conv4_1"
+  type: "Convolution"
+  bottom: "pool3"
+  top: "conv4_1"
+  convolution_param {
+    num_output: 512
+    pad: 1
+    kernel_size: 3
+  }
+}
+layer {
+  name: "relu4_1"
+  type: "ReLU"
+  bottom: "conv4_1"
+  top: "conv4_1"
+}
+layer {
+  name: "conv4_2"
+  type: "Convolution"
+  bottom: "conv4_1"
+  top: "conv4_2"
+  convolution_param {
+    num_output: 512
+    pad: 1
+    kernel_size: 3
+  }
+}
+layer {
+  name: "relu4_2"
+  type: "ReLU"
+  bottom: "conv4_2"
+  top: "conv4_2"
+}
+layer {
+  name: "conv4_3"
+  type: "Convolution"
+  bottom: "conv4_2"
+  top: "conv4_3"
+  convolution_param {
+    num_output: 512
+    pad: 1
+    kernel_size: 3
+  }
+}
+layer {
+  name: "relu4_3"
+  type: "ReLU"
+  bottom: "conv4_3"
+  top: "conv4_3"
+}
+layer {
+  name: "pool4"
+  type: "Pooling"
+  bottom: "conv4_3"
+  top: "pool4"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 1
+    pad: 1
+  }
+}
+layer {
+  name: "conv5_1"
+  type: "Convolution"
+  bottom: "pool4"
+  top: "conv5_1"
+  convolution_param {
+    num_output: 512
+    pad: 2
+    kernel_size: 3
+    dilation: 2
+  }
+}
+layer {
+  name: "relu5_1"
+  type: "ReLU"
+  bottom: "conv5_1"
+  top: "conv5_1"
+}
+layer {
+  name: "conv5_2"
+  type: "Convolution"
+  bottom: "conv5_1"
+  top: "conv5_2"
+  convolution_param {
+    num_output: 512
+    pad: 2
+    kernel_size: 3
+    dilation: 2
+  }
+}
+layer {
+  name: "relu5_2"
+  type: "ReLU"
+  bottom: "conv5_2"
+  top: "conv5_2"
+}
+layer {
+  name: "conv5_3"
+  type: "Convolution"
+  bottom: "conv5_2"
+  top: "conv5_3"
+  convolution_param {
+    num_output: 512
+    pad: 2
+    kernel_size: 3
+    dilation: 2
+  }
+}
+layer {
+  name: "relu5_3"
+  type: "ReLU"
+  bottom: "conv5_3"
+  top: "conv5_3"
+}
+layer {
+  name: "pool5"
+  type: "Pooling"
+  bottom: "conv5_3"
+  top: "pool5"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 1
+    pad: 1
+  }
+}
+layer {
+  name: "fc6_1"
+  type: "Convolution"
+  bottom: "pool5"
+  top: "fc6_1"
+  convolution_param {
+    num_output: 1024
+    pad: 6
+    kernel_size: 3
+    dilation: 6
+  }
+}
+layer {
+  name: "relu6_1"
+  type: "ReLU"
+  bottom: "fc6_1"
+  top: "fc6_1"
+}
+layer {
+  name: "drop6_1"
+  type: "Dropout"
+  bottom: "fc6_1"
+  top: "fc6_1"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "fc7_1"
+  type: "Convolution"
+  bottom: "fc6_1"
+  top: "fc7_1"
+  convolution_param {
+    num_output: 1024
+    kernel_size: 1
+  }
+}
+layer {
+  name: "relu7_1"
+  type: "ReLU"
+  bottom: "fc7_1"
+  top: "fc7_1"
+}
+layer {
+  name: "drop7_1"
+  type: "Dropout"
+  bottom: "fc7_1"
+  top: "fc7_1"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "fc8_voc12_1"
+  type: "Convolution"
+  bottom: "fc7_1"
+  top: "fc8_voc12_1"
+  convolution_param {
+    num_output: 21
+    kernel_size: 1
+  }
+}
+layer {
+  name: "fc6_2"
+  type: "Convolution"
+  bottom: "pool5"
+  top: "fc6_2"
+  convolution_param {
+    num_output: 1024
+    pad: 12
+    kernel_size: 3
+    dilation: 12
+  }
+}
+layer {
+  name: "relu6_2"
+  type: "ReLU"
+  bottom: "fc6_2"
+  top: "fc6_2"
+}
+layer {
+  name: "drop6_2"
+  type: "Dropout"
+  bottom: "fc6_2"
+  top: "fc6_2"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "fc7_2"
+  type: "Convolution"
+  bottom: "fc6_2"
+  top: "fc7_2"
+  convolution_param {
+    num_output: 1024
+    kernel_size: 1
+  }
+}
+layer {
+  name: "relu7_2"
+  type: "ReLU"
+  bottom: "fc7_2"
+  top: "fc7_2"
+}
+layer {
+  name: "drop7_2"
+  type: "Dropout"
+  bottom: "fc7_2"
+  top: "fc7_2"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "fc8_voc12_2"
+  type: "Convolution"
+  bottom: "fc7_2"
+  top: "fc8_voc12_2"
+  convolution_param {
+    num_output: 21
+    kernel_size: 1
+  }
+}
+layer {
+  name: "fc6_3"
+  type: "Convolution"
+  bottom: "pool5"
+  top: "fc6_3"
+  convolution_param {
+    num_output: 1024
+    pad: 18
+    kernel_size: 3
+    dilation: 18
+  }
+}
+layer {
+  name: "relu6_3"
+  type: "ReLU"
+  bottom: "fc6_3"
+  top: "fc6_3"
+}
+layer {
+  name: "drop6_3"
+  type: "Dropout"
+  bottom: "fc6_3"
+  top: "fc6_3"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "fc7_3"
+  type: "Convolution"
+  bottom: "fc6_3"
+  top: "fc7_3"
+  convolution_param {
+    num_output: 1024
+    kernel_size: 1
+  }
+}
+layer {
+  name: "relu7_3"
+  type: "ReLU"
+  bottom: "fc7_3"
+  top: "fc7_3"
+}
+layer {
+  name: "drop7_3"
+  type: "Dropout"
+  bottom: "fc7_3"
+  top: "fc7_3"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "fc8_voc12_3"
+  type: "Convolution"
+  bottom: "fc7_3"
+  top: "fc8_voc12_3"
+  convolution_param {
+    num_output: 21
+    kernel_size: 1
+  }
+}
+layer {
+  name: "fc6_4"
+  type: "Convolution"
+  bottom: "pool5"
+  top: "fc6_4"
+  convolution_param {
+    num_output: 1024
+    pad: 24
+    kernel_size: 3
+    dilation: 24
+  }
+}
+layer {
+  name: "relu6_4"
+  type: "ReLU"
+  bottom: "fc6_4"
+  top: "fc6_4"
+}
+layer {
+  name: "drop6_4"
+  type: "Dropout"
+  bottom: "fc6_4"
+  top: "fc6_4"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "fc7_4"
+  type: "Convolution"
+  bottom: "fc6_4"
+  top: "fc7_4"
+  convolution_param {
+    num_output: 1024
+    kernel_size: 1
+  }
+}
+layer {
+  name: "relu7_4"
+  type: "ReLU"
+  bottom: "fc7_4"
+  top: "fc7_4"
+}
+layer {
+  name: "drop7_4"
+  type: "Dropout"
+  bottom: "fc7_4"
+  top: "fc7_4"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "fc8_voc12_4"
+  type: "Convolution"
+  bottom: "fc7_4"
+  top: "fc8_voc12_4"
+  convolution_param {
+    num_output: 21
+    kernel_size: 1
+  }
+}
+layer {
+  name: "fc8_voc12"
+  type: "Eltwise"
+  bottom: "fc8_voc12_1"
+  bottom: "fc8_voc12_2"
+  bottom: "fc8_voc12_3"
+  bottom: "fc8_voc12_4"
+  top: "fc8_voc12"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "fc8_interp"
+  type: "Interp"
+  bottom: "fc8_voc12"
+  top: "fc8_interp"
+  interp_param {
+    zoom_factor: 8
+  }
+}
+layer {
+  name: "fc8_mat"
+  type: "MatWrite"
+  bottom: "fc8_interp"
+  include {
+    phase: TEST
+  }
+  mat_write_param {
+    prefix: "./features/deeplab_largeFOV/val/fc8/"
+    source: "../voc12/list/val_id.txt"
+    strip: 0
+    period: 1
+  }
+}
+layer {
+  name: "silence"
+  type: "Silence"
+  bottom: "label"
+  bottom: "data_dim"
+}
+I0507 11:18:08.842911  5117 layer_factory.hpp:77] Creating layer data
+I0507 11:18:08.842936  5117 net.cpp:106] Creating Layer data
+I0507 11:18:08.842943  5117 net.cpp:411] data -> data
+I0507 11:18:08.842972  5117 net.cpp:411] data -> label
+I0507 11:18:08.842978  5117 net.cpp:411] data -> data_dim
+I0507 11:18:08.842985  5117 image_seg_data_layer.cpp:46] Opening file ../voc12/list/val.txt
+I0507 11:18:08.844044  5117 image_seg_data_layer.cpp:68] A total of 1449 images.
+I0507 11:18:08.855715  5117 image_seg_data_layer.cpp:137] output data size: 1,3,10,10
+I0507 11:18:08.855731  5117 image_seg_data_layer.cpp:141] output label size: 1,1,10,10
+I0507 11:18:08.855733  5117 image_seg_data_layer.cpp:145] output data_dim size: 1,1,1,2
+I0507 11:18:08.857324  5117 net.cpp:150] Setting up data
+I0507 11:18:08.857340  5117 net.cpp:157] Top shape: 1 3 10 10 (300)
+I0507 11:18:08.857344  5117 net.cpp:157] Top shape: 1 1 10 10 (100)
+I0507 11:18:08.857347  5117 net.cpp:157] Top shape: 1 1 1 2 (2)
+I0507 11:18:08.857349  5117 net.cpp:165] Memory required for data: 1608
+I0507 11:18:08.857372  5117 layer_factory.hpp:77] Creating layer conv1_1
+I0507 11:18:08.857403  5117 net.cpp:106] Creating Layer conv1_1
+I0507 11:18:08.857409  5117 net.cpp:454] conv1_1 <- data
+I0507 11:18:08.857436  5117 net.cpp:411] conv1_1 -> conv1_1
+I0507 11:18:09.183624  5117 net.cpp:150] Setting up conv1_1
+I0507 11:18:09.183650  5117 net.cpp:157] Top shape: 1 64 10 10 (6400)
+I0507 11:18:09.183652  5117 net.cpp:165] Memory required for data: 27208
+I0507 11:18:09.183667  5117 layer_factory.hpp:77] Creating layer relu1_1
+I0507 11:18:09.183678  5117 net.cpp:106] Creating Layer relu1_1
+I0507 11:18:09.183681  5117 net.cpp:454] relu1_1 <- conv1_1
+I0507 11:18:09.183686  5117 net.cpp:397] relu1_1 -> conv1_1 (in-place)
+I0507 11:18:09.183979  5117 net.cpp:150] Setting up relu1_1
+I0507 11:18:09.183986  5117 net.cpp:157] Top shape: 1 64 10 10 (6400)
+I0507 11:18:09.183989  5117 net.cpp:165] Memory required for data: 52808
+I0507 11:18:09.183991  5117 layer_factory.hpp:77] Creating layer conv1_2
+I0507 11:18:09.184000  5117 net.cpp:106] Creating Layer conv1_2
+I0507 11:18:09.184002  5117 net.cpp:454] conv1_2 <- conv1_1
+I0507 11:18:09.184007  5117 net.cpp:411] conv1_2 -> conv1_2
+I0507 11:18:09.185793  5117 net.cpp:150] Setting up conv1_2
+I0507 11:18:09.185803  5117 net.cpp:157] Top shape: 1 64 10 10 (6400)
+I0507 11:18:09.185806  5117 net.cpp:165] Memory required for data: 78408
+I0507 11:18:09.185812  5117 layer_factory.hpp:77] Creating layer relu1_2
+I0507 11:18:09.185818  5117 net.cpp:106] Creating Layer relu1_2
+I0507 11:18:09.185822  5117 net.cpp:454] relu1_2 <- conv1_2
+I0507 11:18:09.185825  5117 net.cpp:397] relu1_2 -> conv1_2 (in-place)
+I0507 11:18:09.186239  5117 net.cpp:150] Setting up relu1_2
+I0507 11:18:09.186247  5117 net.cpp:157] Top shape: 1 64 10 10 (6400)
+I0507 11:18:09.186249  5117 net.cpp:165] Memory required for data: 104008
+I0507 11:18:09.186252  5117 layer_factory.hpp:77] Creating layer pool1
+I0507 11:18:09.186257  5117 net.cpp:106] Creating Layer pool1
+I0507 11:18:09.186260  5117 net.cpp:454] pool1 <- conv1_2
+I0507 11:18:09.186264  5117 net.cpp:411] pool1 -> pool1
+I0507 11:18:09.186311  5117 net.cpp:150] Setting up pool1
+I0507 11:18:09.186317  5117 net.cpp:157] Top shape: 1 64 6 6 (2304)
+I0507 11:18:09.186332  5117 net.cpp:165] Memory required for data: 113224
+I0507 11:18:09.186334  5117 layer_factory.hpp:77] Creating layer conv2_1
+I0507 11:18:09.186355  5117 net.cpp:106] Creating Layer conv2_1
+I0507 11:18:09.186383  5117 net.cpp:454] conv2_1 <- pool1
+I0507 11:18:09.186388  5117 net.cpp:411] conv2_1 -> conv2_1
+I0507 11:18:09.188032  5117 net.cpp:150] Setting up conv2_1
+I0507 11:18:09.188043  5117 net.cpp:157] Top shape: 1 128 6 6 (4608)
+I0507 11:18:09.188046  5117 net.cpp:165] Memory required for data: 131656
+I0507 11:18:09.188053  5117 layer_factory.hpp:77] Creating layer relu2_1
+I0507 11:18:09.188057  5117 net.cpp:106] Creating Layer relu2_1
+I0507 11:18:09.188060  5117 net.cpp:454] relu2_1 <- conv2_1
+I0507 11:18:09.188066  5117 net.cpp:397] relu2_1 -> conv2_1 (in-place)
+I0507 11:18:09.188477  5117 net.cpp:150] Setting up relu2_1
+I0507 11:18:09.188484  5117 net.cpp:157] Top shape: 1 128 6 6 (4608)
+I0507 11:18:09.188488  5117 net.cpp:165] Memory required for data: 150088
+I0507 11:18:09.188489  5117 layer_factory.hpp:77] Creating layer conv2_2
+I0507 11:18:09.188495  5117 net.cpp:106] Creating Layer conv2_2
+I0507 11:18:09.188498  5117 net.cpp:454] conv2_2 <- conv2_1
+I0507 11:18:09.188503  5117 net.cpp:411] conv2_2 -> conv2_2
+I0507 11:18:09.190001  5117 net.cpp:150] Setting up conv2_2
+I0507 11:18:09.190011  5117 net.cpp:157] Top shape: 1 128 6 6 (4608)
+I0507 11:18:09.190013  5117 net.cpp:165] Memory required for data: 168520
+I0507 11:18:09.190018  5117 layer_factory.hpp:77] Creating layer relu2_2
+I0507 11:18:09.190022  5117 net.cpp:106] Creating Layer relu2_2
+I0507 11:18:09.190024  5117 net.cpp:454] relu2_2 <- conv2_2
+I0507 11:18:09.190028  5117 net.cpp:397] relu2_2 -> conv2_2 (in-place)
+I0507 11:18:09.190444  5117 net.cpp:150] Setting up relu2_2
+I0507 11:18:09.190454  5117 net.cpp:157] Top shape: 1 128 6 6 (4608)
+I0507 11:18:09.190455  5117 net.cpp:165] Memory required for data: 186952
+I0507 11:18:09.190459  5117 layer_factory.hpp:77] Creating layer pool2
+I0507 11:18:09.190462  5117 net.cpp:106] Creating Layer pool2
+I0507 11:18:09.190465  5117 net.cpp:454] pool2 <- conv2_2
+I0507 11:18:09.190469  5117 net.cpp:411] pool2 -> pool2
+I0507 11:18:09.190516  5117 net.cpp:150] Setting up pool2
+I0507 11:18:09.190536  5117 net.cpp:157] Top shape: 1 128 4 4 (2048)
+I0507 11:18:09.190537  5117 net.cpp:165] Memory required for data: 195144
+I0507 11:18:09.190541  5117 layer_factory.hpp:77] Creating layer conv3_1
+I0507 11:18:09.190559  5117 net.cpp:106] Creating Layer conv3_1
+I0507 11:18:09.190562  5117 net.cpp:454] conv3_1 <- pool2
+I0507 11:18:09.190567  5117 net.cpp:411] conv3_1 -> conv3_1
+I0507 11:18:09.192363  5117 net.cpp:150] Setting up conv3_1
+I0507 11:18:09.192374  5117 net.cpp:157] Top shape: 1 256 4 4 (4096)
+I0507 11:18:09.192378  5117 net.cpp:165] Memory required for data: 211528
+I0507 11:18:09.192384  5117 layer_factory.hpp:77] Creating layer relu3_1
+I0507 11:18:09.192389  5117 net.cpp:106] Creating Layer relu3_1
+I0507 11:18:09.192391  5117 net.cpp:454] relu3_1 <- conv3_1
+I0507 11:18:09.192396  5117 net.cpp:397] relu3_1 -> conv3_1 (in-place)
+I0507 11:18:09.192802  5117 net.cpp:150] Setting up relu3_1
+I0507 11:18:09.192811  5117 net.cpp:157] Top shape: 1 256 4 4 (4096)
+I0507 11:18:09.192813  5117 net.cpp:165] Memory required for data: 227912
+I0507 11:18:09.192816  5117 layer_factory.hpp:77] Creating layer conv3_2
+I0507 11:18:09.192821  5117 net.cpp:106] Creating Layer conv3_2
+I0507 11:18:09.192824  5117 net.cpp:454] conv3_2 <- conv3_1
+I0507 11:18:09.192829  5117 net.cpp:411] conv3_2 -> conv3_2
+I0507 11:18:09.194970  5117 net.cpp:150] Setting up conv3_2
+I0507 11:18:09.194985  5117 net.cpp:157] Top shape: 1 256 4 4 (4096)
+I0507 11:18:09.194988  5117 net.cpp:165] Memory required for data: 244296
+I0507 11:18:09.194993  5117 layer_factory.hpp:77] Creating layer relu3_2
+I0507 11:18:09.195014  5117 net.cpp:106] Creating Layer relu3_2
+I0507 11:18:09.195017  5117 net.cpp:454] relu3_2 <- conv3_2
+I0507 11:18:09.195022  5117 net.cpp:397] relu3_2 -> conv3_2 (in-place)
+I0507 11:18:09.195299  5117 net.cpp:150] Setting up relu3_2
+I0507 11:18:09.195307  5117 net.cpp:157] Top shape: 1 256 4 4 (4096)
+I0507 11:18:09.195310  5117 net.cpp:165] Memory required for data: 260680
+I0507 11:18:09.195312  5117 layer_factory.hpp:77] Creating layer conv3_3
+I0507 11:18:09.195340  5117 net.cpp:106] Creating Layer conv3_3
+I0507 11:18:09.195358  5117 net.cpp:454] conv3_3 <- conv3_2
+I0507 11:18:09.195363  5117 net.cpp:411] conv3_3 -> conv3_3
+I0507 11:18:09.198236  5117 net.cpp:150] Setting up conv3_3
+I0507 11:18:09.198258  5117 net.cpp:157] Top shape: 1 256 4 4 (4096)
+I0507 11:18:09.198261  5117 net.cpp:165] Memory required for data: 277064
+I0507 11:18:09.198283  5117 layer_factory.hpp:77] Creating layer relu3_3
+I0507 11:18:09.198294  5117 net.cpp:106] Creating Layer relu3_3
+I0507 11:18:09.198298  5117 net.cpp:454] relu3_3 <- conv3_3
+I0507 11:18:09.198305  5117 net.cpp:397] relu3_3 -> conv3_3 (in-place)
+I0507 11:18:09.198849  5117 net.cpp:150] Setting up relu3_3
+I0507 11:18:09.198860  5117 net.cpp:157] Top shape: 1 256 4 4 (4096)
+I0507 11:18:09.198863  5117 net.cpp:165] Memory required for data: 293448
+I0507 11:18:09.198866  5117 layer_factory.hpp:77] Creating layer pool3
+I0507 11:18:09.198909  5117 net.cpp:106] Creating Layer pool3
+I0507 11:18:09.198913  5117 net.cpp:454] pool3 <- conv3_3
+I0507 11:18:09.198918  5117 net.cpp:411] pool3 -> pool3
+I0507 11:18:09.198972  5117 net.cpp:150] Setting up pool3
+I0507 11:18:09.198977  5117 net.cpp:157] Top shape: 1 256 3 3 (2304)
+I0507 11:18:09.198979  5117 net.cpp:165] Memory required for data: 302664
+I0507 11:18:09.198982  5117 layer_factory.hpp:77] Creating layer conv4_1
+I0507 11:18:09.198992  5117 net.cpp:106] Creating Layer conv4_1
+I0507 11:18:09.198993  5117 net.cpp:454] conv4_1 <- pool3
+I0507 11:18:09.198998  5117 net.cpp:411] conv4_1 -> conv4_1
+I0507 11:18:09.202201  5117 net.cpp:150] Setting up conv4_1
+I0507 11:18:09.202226  5117 net.cpp:157] Top shape: 1 512 3 3 (4608)
+I0507 11:18:09.202229  5117 net.cpp:165] Memory required for data: 321096
+I0507 11:18:09.202239  5117 layer_factory.hpp:77] Creating layer relu4_1
+I0507 11:18:09.202265  5117 net.cpp:106] Creating Layer relu4_1
+I0507 11:18:09.202270  5117 net.cpp:454] relu4_1 <- conv4_1
+I0507 11:18:09.202276  5117 net.cpp:397] relu4_1 -> conv4_1 (in-place)
+I0507 11:18:09.202687  5117 net.cpp:150] Setting up relu4_1
+I0507 11:18:09.202697  5117 net.cpp:157] Top shape: 1 512 3 3 (4608)
+I0507 11:18:09.202700  5117 net.cpp:165] Memory required for data: 339528
+I0507 11:18:09.202703  5117 layer_factory.hpp:77] Creating layer conv4_2
+I0507 11:18:09.202709  5117 net.cpp:106] Creating Layer conv4_2
+I0507 11:18:09.202728  5117 net.cpp:454] conv4_2 <- conv4_1
+I0507 11:18:09.202733  5117 net.cpp:411] conv4_2 -> conv4_2
+I0507 11:18:09.207900  5117 net.cpp:150] Setting up conv4_2
+I0507 11:18:09.207926  5117 net.cpp:157] Top shape: 1 512 3 3 (4608)
+I0507 11:18:09.207928  5117 net.cpp:165] Memory required for data: 357960
+I0507 11:18:09.207957  5117 layer_factory.hpp:77] Creating layer relu4_2
+I0507 11:18:09.207979  5117 net.cpp:106] Creating Layer relu4_2
+I0507 11:18:09.207983  5117 net.cpp:454] relu4_2 <- conv4_2
+I0507 11:18:09.207989  5117 net.cpp:397] relu4_2 -> conv4_2 (in-place)
+I0507 11:18:09.208480  5117 net.cpp:150] Setting up relu4_2
+I0507 11:18:09.208489  5117 net.cpp:157] Top shape: 1 512 3 3 (4608)
+I0507 11:18:09.208492  5117 net.cpp:165] Memory required for data: 376392
+I0507 11:18:09.208494  5117 layer_factory.hpp:77] Creating layer conv4_3
+I0507 11:18:09.208518  5117 net.cpp:106] Creating Layer conv4_3
+I0507 11:18:09.208519  5117 net.cpp:454] conv4_3 <- conv4_2
+I0507 11:18:09.208525  5117 net.cpp:411] conv4_3 -> conv4_3
+I0507 11:18:09.214362  5117 net.cpp:150] Setting up conv4_3
+I0507 11:18:09.214386  5117 net.cpp:157] Top shape: 1 512 3 3 (4608)
+I0507 11:18:09.214390  5117 net.cpp:165] Memory required for data: 394824
+I0507 11:18:09.214411  5117 layer_factory.hpp:77] Creating layer relu4_3
+I0507 11:18:09.214433  5117 net.cpp:106] Creating Layer relu4_3
+I0507 11:18:09.214438  5117 net.cpp:454] relu4_3 <- conv4_3
+I0507 11:18:09.214447  5117 net.cpp:397] relu4_3 -> conv4_3 (in-place)
+I0507 11:18:09.215113  5117 net.cpp:150] Setting up relu4_3
+I0507 11:18:09.215126  5117 net.cpp:157] Top shape: 1 512 3 3 (4608)
+I0507 11:18:09.215129  5117 net.cpp:165] Memory required for data: 413256
+I0507 11:18:09.215157  5117 layer_factory.hpp:77] Creating layer pool4
+I0507 11:18:09.215164  5117 net.cpp:106] Creating Layer pool4
+I0507 11:18:09.215167  5117 net.cpp:454] pool4 <- conv4_3
+I0507 11:18:09.215173  5117 net.cpp:411] pool4 -> pool4
+I0507 11:18:09.215257  5117 net.cpp:150] Setting up pool4
+I0507 11:18:09.215262  5117 net.cpp:157] Top shape: 1 512 3 3 (4608)
+I0507 11:18:09.215265  5117 net.cpp:165] Memory required for data: 431688
+I0507 11:18:09.215267  5117 layer_factory.hpp:77] Creating layer conv5_1
+I0507 11:18:09.215273  5117 net.cpp:106] Creating Layer conv5_1
+I0507 11:18:09.215288  5117 net.cpp:454] conv5_1 <- pool4
+I0507 11:18:09.215293  5117 net.cpp:411] conv5_1 -> conv5_1
+I0507 11:18:09.219135  5117 net.cpp:150] Setting up conv5_1
+I0507 11:18:09.219164  5117 net.cpp:157] Top shape: 1 512 3 3 (4608)
+I0507 11:18:09.219167  5117 net.cpp:165] Memory required for data: 450120
+I0507 11:18:09.219174  5117 layer_factory.hpp:77] Creating layer relu5_1
+I0507 11:18:09.219182  5117 net.cpp:106] Creating Layer relu5_1
+I0507 11:18:09.219184  5117 net.cpp:454] relu5_1 <- conv5_1
+I0507 11:18:09.219192  5117 net.cpp:397] relu5_1 -> conv5_1 (in-place)
+I0507 11:18:09.219763  5117 net.cpp:150] Setting up relu5_1
+I0507 11:18:09.219772  5117 net.cpp:157] Top shape: 1 512 3 3 (4608)
+I0507 11:18:09.219775  5117 net.cpp:165] Memory required for data: 468552
+I0507 11:18:09.219777  5117 layer_factory.hpp:77] Creating layer conv5_2
+I0507 11:18:09.219784  5117 net.cpp:106] Creating Layer conv5_2
+I0507 11:18:09.219787  5117 net.cpp:454] conv5_2 <- conv5_1
+I0507 11:18:09.219791  5117 net.cpp:411] conv5_2 -> conv5_2
+I0507 11:18:09.223454  5117 net.cpp:150] Setting up conv5_2
+I0507 11:18:09.223482  5117 net.cpp:157] Top shape: 1 512 3 3 (4608)
+I0507 11:18:09.223485  5117 net.cpp:165] Memory required for data: 486984
+I0507 11:18:09.223492  5117 layer_factory.hpp:77] Creating layer relu5_2
+I0507 11:18:09.223500  5117 net.cpp:106] Creating Layer relu5_2
+I0507 11:18:09.223502  5117 net.cpp:454] relu5_2 <- conv5_2
+I0507 11:18:09.223510  5117 net.cpp:397] relu5_2 -> conv5_2 (in-place)
+I0507 11:18:09.224082  5117 net.cpp:150] Setting up relu5_2
+I0507 11:18:09.224092  5117 net.cpp:157] Top shape: 1 512 3 3 (4608)
+I0507 11:18:09.224094  5117 net.cpp:165] Memory required for data: 505416
+I0507 11:18:09.224097  5117 layer_factory.hpp:77] Creating layer conv5_3
+I0507 11:18:09.224104  5117 net.cpp:106] Creating Layer conv5_3
+I0507 11:18:09.224107  5117 net.cpp:454] conv5_3 <- conv5_2
+I0507 11:18:09.224112  5117 net.cpp:411] conv5_3 -> conv5_3
+I0507 11:18:09.227890  5117 net.cpp:150] Setting up conv5_3
+I0507 11:18:09.227917  5117 net.cpp:157] Top shape: 1 512 3 3 (4608)
+I0507 11:18:09.227921  5117 net.cpp:165] Memory required for data: 523848
+I0507 11:18:09.227927  5117 layer_factory.hpp:77] Creating layer relu5_3
+I0507 11:18:09.227934  5117 net.cpp:106] Creating Layer relu5_3
+I0507 11:18:09.227937  5117 net.cpp:454] relu5_3 <- conv5_3
+I0507 11:18:09.227946  5117 net.cpp:397] relu5_3 -> conv5_3 (in-place)
+I0507 11:18:09.228323  5117 net.cpp:150] Setting up relu5_3
+I0507 11:18:09.228332  5117 net.cpp:157] Top shape: 1 512 3 3 (4608)
+I0507 11:18:09.228333  5117 net.cpp:165] Memory required for data: 542280
+I0507 11:18:09.228335  5117 layer_factory.hpp:77] Creating layer pool5
+I0507 11:18:09.228340  5117 net.cpp:106] Creating Layer pool5
+I0507 11:18:09.228343  5117 net.cpp:454] pool5 <- conv5_3
+I0507 11:18:09.228348  5117 net.cpp:411] pool5 -> pool5
+I0507 11:18:09.228399  5117 net.cpp:150] Setting up pool5
+I0507 11:18:09.228416  5117 net.cpp:157] Top shape: 1 512 3 3 (4608)
+I0507 11:18:09.228420  5117 net.cpp:165] Memory required for data: 560712
+I0507 11:18:09.228421  5117 layer_factory.hpp:77] Creating layer pool5_pool5_0_split
+I0507 11:18:09.228446  5117 net.cpp:106] Creating Layer pool5_pool5_0_split
+I0507 11:18:09.228449  5117 net.cpp:454] pool5_pool5_0_split <- pool5
+I0507 11:18:09.228466  5117 net.cpp:411] pool5_pool5_0_split -> pool5_pool5_0_split_0
+I0507 11:18:09.228471  5117 net.cpp:411] pool5_pool5_0_split -> pool5_pool5_0_split_1
+I0507 11:18:09.228504  5117 net.cpp:411] pool5_pool5_0_split -> pool5_pool5_0_split_2
+I0507 11:18:09.228520  5117 net.cpp:411] pool5_pool5_0_split -> pool5_pool5_0_split_3
+I0507 11:18:09.228596  5117 net.cpp:150] Setting up pool5_pool5_0_split
+I0507 11:18:09.228615  5117 net.cpp:157] Top shape: 1 512 3 3 (4608)
+I0507 11:18:09.228617  5117 net.cpp:157] Top shape: 1 512 3 3 (4608)
+I0507 11:18:09.228621  5117 net.cpp:157] Top shape: 1 512 3 3 (4608)
+I0507 11:18:09.228622  5117 net.cpp:157] Top shape: 1 512 3 3 (4608)
+I0507 11:18:09.228626  5117 net.cpp:165] Memory required for data: 634440
+I0507 11:18:09.228627  5117 layer_factory.hpp:77] Creating layer fc6_1
+I0507 11:18:09.228633  5117 net.cpp:106] Creating Layer fc6_1
+I0507 11:18:09.228636  5117 net.cpp:454] fc6_1 <- pool5_pool5_0_split_0
+I0507 11:18:09.228641  5117 net.cpp:411] fc6_1 -> fc6_1
+I0507 11:18:09.236003  5117 net.cpp:150] Setting up fc6_1
+I0507 11:18:09.236032  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.236035  5117 net.cpp:165] Memory required for data: 671304
+I0507 11:18:09.236043  5117 layer_factory.hpp:77] Creating layer relu6_1
+I0507 11:18:09.236049  5117 net.cpp:106] Creating Layer relu6_1
+I0507 11:18:09.236053  5117 net.cpp:454] relu6_1 <- fc6_1
+I0507 11:18:09.236060  5117 net.cpp:397] relu6_1 -> fc6_1 (in-place)
+I0507 11:18:09.236677  5117 net.cpp:150] Setting up relu6_1
+I0507 11:18:09.236686  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.236688  5117 net.cpp:165] Memory required for data: 708168
+I0507 11:18:09.236691  5117 layer_factory.hpp:77] Creating layer drop6_1
+I0507 11:18:09.236698  5117 net.cpp:106] Creating Layer drop6_1
+I0507 11:18:09.236701  5117 net.cpp:454] drop6_1 <- fc6_1
+I0507 11:18:09.236706  5117 net.cpp:397] drop6_1 -> fc6_1 (in-place)
+I0507 11:18:09.236730  5117 net.cpp:150] Setting up drop6_1
+I0507 11:18:09.236750  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.236752  5117 net.cpp:165] Memory required for data: 745032
+I0507 11:18:09.236754  5117 layer_factory.hpp:77] Creating layer fc7_1
+I0507 11:18:09.236774  5117 net.cpp:106] Creating Layer fc7_1
+I0507 11:18:09.236778  5117 net.cpp:454] fc7_1 <- fc6_1
+I0507 11:18:09.236781  5117 net.cpp:411] fc7_1 -> fc7_1
+I0507 11:18:09.239579  5117 net.cpp:150] Setting up fc7_1
+I0507 11:18:09.239603  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.239608  5117 net.cpp:165] Memory required for data: 781896
+I0507 11:18:09.239614  5117 layer_factory.hpp:77] Creating layer relu7_1
+I0507 11:18:09.239620  5117 net.cpp:106] Creating Layer relu7_1
+I0507 11:18:09.239624  5117 net.cpp:454] relu7_1 <- fc7_1
+I0507 11:18:09.239629  5117 net.cpp:397] relu7_1 -> fc7_1 (in-place)
+I0507 11:18:09.240041  5117 net.cpp:150] Setting up relu7_1
+I0507 11:18:09.240049  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.240052  5117 net.cpp:165] Memory required for data: 818760
+I0507 11:18:09.240056  5117 layer_factory.hpp:77] Creating layer drop7_1
+I0507 11:18:09.240061  5117 net.cpp:106] Creating Layer drop7_1
+I0507 11:18:09.240063  5117 net.cpp:454] drop7_1 <- fc7_1
+I0507 11:18:09.240067  5117 net.cpp:397] drop7_1 -> fc7_1 (in-place)
+I0507 11:18:09.240088  5117 net.cpp:150] Setting up drop7_1
+I0507 11:18:09.240093  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.240095  5117 net.cpp:165] Memory required for data: 855624
+I0507 11:18:09.240113  5117 layer_factory.hpp:77] Creating layer fc8_voc12_1
+I0507 11:18:09.240119  5117 net.cpp:106] Creating Layer fc8_voc12_1
+I0507 11:18:09.240123  5117 net.cpp:454] fc8_voc12_1 <- fc7_1
+I0507 11:18:09.240126  5117 net.cpp:411] fc8_voc12_1 -> fc8_voc12_1
+I0507 11:18:09.241417  5117 net.cpp:150] Setting up fc8_voc12_1
+I0507 11:18:09.241427  5117 net.cpp:157] Top shape: 1 21 3 3 (189)
+I0507 11:18:09.241430  5117 net.cpp:165] Memory required for data: 856380
+I0507 11:18:09.241434  5117 layer_factory.hpp:77] Creating layer fc6_2
+I0507 11:18:09.241439  5117 net.cpp:106] Creating Layer fc6_2
+I0507 11:18:09.241442  5117 net.cpp:454] fc6_2 <- pool5_pool5_0_split_1
+I0507 11:18:09.241447  5117 net.cpp:411] fc6_2 -> fc6_2
+I0507 11:18:09.251432  5117 net.cpp:150] Setting up fc6_2
+I0507 11:18:09.251457  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.251461  5117 net.cpp:165] Memory required for data: 893244
+I0507 11:18:09.251474  5117 layer_factory.hpp:77] Creating layer relu6_2
+I0507 11:18:09.251482  5117 net.cpp:106] Creating Layer relu6_2
+I0507 11:18:09.251487  5117 net.cpp:454] relu6_2 <- fc6_2
+I0507 11:18:09.251493  5117 net.cpp:397] relu6_2 -> fc6_2 (in-place)
+I0507 11:18:09.252061  5117 net.cpp:150] Setting up relu6_2
+I0507 11:18:09.252070  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.252073  5117 net.cpp:165] Memory required for data: 930108
+I0507 11:18:09.252075  5117 layer_factory.hpp:77] Creating layer drop6_2
+I0507 11:18:09.252080  5117 net.cpp:106] Creating Layer drop6_2
+I0507 11:18:09.252082  5117 net.cpp:454] drop6_2 <- fc6_2
+I0507 11:18:09.252087  5117 net.cpp:397] drop6_2 -> fc6_2 (in-place)
+I0507 11:18:09.252108  5117 net.cpp:150] Setting up drop6_2
+I0507 11:18:09.252113  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.252115  5117 net.cpp:165] Memory required for data: 966972
+I0507 11:18:09.252132  5117 layer_factory.hpp:77] Creating layer fc7_2
+I0507 11:18:09.252140  5117 net.cpp:106] Creating Layer fc7_2
+I0507 11:18:09.252146  5117 net.cpp:454] fc7_2 <- fc6_2
+I0507 11:18:09.252149  5117 net.cpp:411] fc7_2 -> fc7_2
+I0507 11:18:09.254950  5117 net.cpp:150] Setting up fc7_2
+I0507 11:18:09.254972  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.254976  5117 net.cpp:165] Memory required for data: 1003836
+I0507 11:18:09.254982  5117 layer_factory.hpp:77] Creating layer relu7_2
+I0507 11:18:09.254990  5117 net.cpp:106] Creating Layer relu7_2
+I0507 11:18:09.254994  5117 net.cpp:454] relu7_2 <- fc7_2
+I0507 11:18:09.255000  5117 net.cpp:397] relu7_2 -> fc7_2 (in-place)
+I0507 11:18:09.255300  5117 net.cpp:150] Setting up relu7_2
+I0507 11:18:09.255306  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.255309  5117 net.cpp:165] Memory required for data: 1040700
+I0507 11:18:09.255312  5117 layer_factory.hpp:77] Creating layer drop7_2
+I0507 11:18:09.255316  5117 net.cpp:106] Creating Layer drop7_2
+I0507 11:18:09.255319  5117 net.cpp:454] drop7_2 <- fc7_2
+I0507 11:18:09.255322  5117 net.cpp:397] drop7_2 -> fc7_2 (in-place)
+I0507 11:18:09.255344  5117 net.cpp:150] Setting up drop7_2
+I0507 11:18:09.255349  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.255352  5117 net.cpp:165] Memory required for data: 1077564
+I0507 11:18:09.255368  5117 layer_factory.hpp:77] Creating layer fc8_voc12_2
+I0507 11:18:09.255375  5117 net.cpp:106] Creating Layer fc8_voc12_2
+I0507 11:18:09.255378  5117 net.cpp:454] fc8_voc12_2 <- fc7_2
+I0507 11:18:09.255383  5117 net.cpp:411] fc8_voc12_2 -> fc8_voc12_2
+I0507 11:18:09.256906  5117 net.cpp:150] Setting up fc8_voc12_2
+I0507 11:18:09.256916  5117 net.cpp:157] Top shape: 1 21 3 3 (189)
+I0507 11:18:09.256918  5117 net.cpp:165] Memory required for data: 1078320
+I0507 11:18:09.256922  5117 layer_factory.hpp:77] Creating layer fc6_3
+I0507 11:18:09.256928  5117 net.cpp:106] Creating Layer fc6_3
+I0507 11:18:09.256932  5117 net.cpp:454] fc6_3 <- pool5_pool5_0_split_2
+I0507 11:18:09.256937  5117 net.cpp:411] fc6_3 -> fc6_3
+I0507 11:18:09.264561  5117 net.cpp:150] Setting up fc6_3
+I0507 11:18:09.264591  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.264595  5117 net.cpp:165] Memory required for data: 1115184
+I0507 11:18:09.264602  5117 layer_factory.hpp:77] Creating layer relu6_3
+I0507 11:18:09.264608  5117 net.cpp:106] Creating Layer relu6_3
+I0507 11:18:09.264612  5117 net.cpp:454] relu6_3 <- fc6_3
+I0507 11:18:09.264619  5117 net.cpp:397] relu6_3 -> fc6_3 (in-place)
+I0507 11:18:09.265204  5117 net.cpp:150] Setting up relu6_3
+I0507 11:18:09.265215  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.265218  5117 net.cpp:165] Memory required for data: 1152048
+I0507 11:18:09.265220  5117 layer_factory.hpp:77] Creating layer drop6_3
+I0507 11:18:09.265225  5117 net.cpp:106] Creating Layer drop6_3
+I0507 11:18:09.265239  5117 net.cpp:454] drop6_3 <- fc6_3
+I0507 11:18:09.265244  5117 net.cpp:397] drop6_3 -> fc6_3 (in-place)
+I0507 11:18:09.265285  5117 net.cpp:150] Setting up drop6_3
+I0507 11:18:09.265302  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.265305  5117 net.cpp:165] Memory required for data: 1188912
+I0507 11:18:09.265306  5117 layer_factory.hpp:77] Creating layer fc7_3
+I0507 11:18:09.265313  5117 net.cpp:106] Creating Layer fc7_3
+I0507 11:18:09.265316  5117 net.cpp:454] fc7_3 <- fc6_3
+I0507 11:18:09.265319  5117 net.cpp:411] fc7_3 -> fc7_3
+I0507 11:18:09.268007  5117 net.cpp:150] Setting up fc7_3
+I0507 11:18:09.268030  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.268033  5117 net.cpp:165] Memory required for data: 1225776
+I0507 11:18:09.268040  5117 layer_factory.hpp:77] Creating layer relu7_3
+I0507 11:18:09.268046  5117 net.cpp:106] Creating Layer relu7_3
+I0507 11:18:09.268049  5117 net.cpp:454] relu7_3 <- fc7_3
+I0507 11:18:09.268056  5117 net.cpp:397] relu7_3 -> fc7_3 (in-place)
+I0507 11:18:09.268489  5117 net.cpp:150] Setting up relu7_3
+I0507 11:18:09.268498  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.268501  5117 net.cpp:165] Memory required for data: 1262640
+I0507 11:18:09.268503  5117 layer_factory.hpp:77] Creating layer drop7_3
+I0507 11:18:09.268507  5117 net.cpp:106] Creating Layer drop7_3
+I0507 11:18:09.268510  5117 net.cpp:454] drop7_3 <- fc7_3
+I0507 11:18:09.268515  5117 net.cpp:397] drop7_3 -> fc7_3 (in-place)
+I0507 11:18:09.268537  5117 net.cpp:150] Setting up drop7_3
+I0507 11:18:09.268543  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.268559  5117 net.cpp:165] Memory required for data: 1299504
+I0507 11:18:09.268563  5117 layer_factory.hpp:77] Creating layer fc8_voc12_3
+I0507 11:18:09.268568  5117 net.cpp:106] Creating Layer fc8_voc12_3
+I0507 11:18:09.268570  5117 net.cpp:454] fc8_voc12_3 <- fc7_3
+I0507 11:18:09.268574  5117 net.cpp:411] fc8_voc12_3 -> fc8_voc12_3
+I0507 11:18:09.270077  5117 net.cpp:150] Setting up fc8_voc12_3
+I0507 11:18:09.270087  5117 net.cpp:157] Top shape: 1 21 3 3 (189)
+I0507 11:18:09.270088  5117 net.cpp:165] Memory required for data: 1300260
+I0507 11:18:09.270093  5117 layer_factory.hpp:77] Creating layer fc6_4
+I0507 11:18:09.270099  5117 net.cpp:106] Creating Layer fc6_4
+I0507 11:18:09.270102  5117 net.cpp:454] fc6_4 <- pool5_pool5_0_split_3
+I0507 11:18:09.270107  5117 net.cpp:411] fc6_4 -> fc6_4
+I0507 11:18:09.279614  5117 net.cpp:150] Setting up fc6_4
+I0507 11:18:09.279637  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.279640  5117 net.cpp:165] Memory required for data: 1337124
+I0507 11:18:09.279647  5117 layer_factory.hpp:77] Creating layer relu6_4
+I0507 11:18:09.279655  5117 net.cpp:106] Creating Layer relu6_4
+I0507 11:18:09.279659  5117 net.cpp:454] relu6_4 <- fc6_4
+I0507 11:18:09.279664  5117 net.cpp:397] relu6_4 -> fc6_4 (in-place)
+I0507 11:18:09.280210  5117 net.cpp:150] Setting up relu6_4
+I0507 11:18:09.280220  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.280222  5117 net.cpp:165] Memory required for data: 1373988
+I0507 11:18:09.280225  5117 layer_factory.hpp:77] Creating layer drop6_4
+I0507 11:18:09.280230  5117 net.cpp:106] Creating Layer drop6_4
+I0507 11:18:09.280231  5117 net.cpp:454] drop6_4 <- fc6_4
+I0507 11:18:09.280236  5117 net.cpp:397] drop6_4 -> fc6_4 (in-place)
+I0507 11:18:09.280258  5117 net.cpp:150] Setting up drop6_4
+I0507 11:18:09.280263  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.280279  5117 net.cpp:165] Memory required for data: 1410852
+I0507 11:18:09.280282  5117 layer_factory.hpp:77] Creating layer fc7_4
+I0507 11:18:09.280302  5117 net.cpp:106] Creating Layer fc7_4
+I0507 11:18:09.280303  5117 net.cpp:454] fc7_4 <- fc6_4
+I0507 11:18:09.280308  5117 net.cpp:411] fc7_4 -> fc7_4
+I0507 11:18:09.283109  5117 net.cpp:150] Setting up fc7_4
+I0507 11:18:09.283135  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.283138  5117 net.cpp:165] Memory required for data: 1447716
+I0507 11:18:09.283160  5117 layer_factory.hpp:77] Creating layer relu7_4
+I0507 11:18:09.283205  5117 net.cpp:106] Creating Layer relu7_4
+I0507 11:18:09.283210  5117 net.cpp:454] relu7_4 <- fc7_4
+I0507 11:18:09.283231  5117 net.cpp:397] relu7_4 -> fc7_4 (in-place)
+I0507 11:18:09.283685  5117 net.cpp:150] Setting up relu7_4
+I0507 11:18:09.283694  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.283696  5117 net.cpp:165] Memory required for data: 1484580
+I0507 11:18:09.283699  5117 layer_factory.hpp:77] Creating layer drop7_4
+I0507 11:18:09.283704  5117 net.cpp:106] Creating Layer drop7_4
+I0507 11:18:09.283706  5117 net.cpp:454] drop7_4 <- fc7_4
+I0507 11:18:09.283711  5117 net.cpp:397] drop7_4 -> fc7_4 (in-place)
+I0507 11:18:09.283733  5117 net.cpp:150] Setting up drop7_4
+I0507 11:18:09.283738  5117 net.cpp:157] Top shape: 1 1024 3 3 (9216)
+I0507 11:18:09.283754  5117 net.cpp:165] Memory required for data: 1521444
+I0507 11:18:09.283757  5117 layer_factory.hpp:77] Creating layer fc8_voc12_4
+I0507 11:18:09.283762  5117 net.cpp:106] Creating Layer fc8_voc12_4
+I0507 11:18:09.283777  5117 net.cpp:454] fc8_voc12_4 <- fc7_4
+I0507 11:18:09.283782  5117 net.cpp:411] fc8_voc12_4 -> fc8_voc12_4
+I0507 11:18:09.285254  5117 net.cpp:150] Setting up fc8_voc12_4
+I0507 11:18:09.285262  5117 net.cpp:157] Top shape: 1 21 3 3 (189)
+I0507 11:18:09.285264  5117 net.cpp:165] Memory required for data: 1522200
+I0507 11:18:09.285269  5117 layer_factory.hpp:77] Creating layer fc8_voc12
+I0507 11:18:09.285275  5117 net.cpp:106] Creating Layer fc8_voc12
+I0507 11:18:09.285279  5117 net.cpp:454] fc8_voc12 <- fc8_voc12_1
+I0507 11:18:09.285282  5117 net.cpp:454] fc8_voc12 <- fc8_voc12_2
+I0507 11:18:09.285284  5117 net.cpp:454] fc8_voc12 <- fc8_voc12_3
+I0507 11:18:09.285287  5117 net.cpp:454] fc8_voc12 <- fc8_voc12_4
+I0507 11:18:09.285291  5117 net.cpp:411] fc8_voc12 -> fc8_voc12
+I0507 11:18:09.285334  5117 net.cpp:150] Setting up fc8_voc12
+I0507 11:18:09.285339  5117 net.cpp:157] Top shape: 1 21 3 3 (189)
+I0507 11:18:09.285342  5117 net.cpp:165] Memory required for data: 1522956
+I0507 11:18:09.285344  5117 layer_factory.hpp:77] Creating layer fc8_interp
+I0507 11:18:09.285363  5117 net.cpp:106] Creating Layer fc8_interp
+I0507 11:18:09.285367  5117 net.cpp:454] fc8_interp <- fc8_voc12
+I0507 11:18:09.285382  5117 net.cpp:411] fc8_interp -> fc8_interp
+I0507 11:18:09.285418  5117 net.cpp:150] Setting up fc8_interp
+I0507 11:18:09.285423  5117 net.cpp:157] Top shape: 1 21 17 17 (6069)
+I0507 11:18:09.285424  5117 net.cpp:165] Memory required for data: 1547232
+I0507 11:18:09.285428  5117 layer_factory.hpp:77] Creating layer fc8_mat
+I0507 11:18:09.285447  5117 net.cpp:106] Creating Layer fc8_mat
+I0507 11:18:09.285450  5117 net.cpp:454] fc8_mat <- fc8_interp
+I0507 11:18:09.285989  5117 mat_write_layer.cpp:30] MatWrite will save a maximum of 1449 files.
+I0507 11:18:09.286000  5117 net.cpp:150] Setting up fc8_mat
+I0507 11:18:09.286001  5117 net.cpp:165] Memory required for data: 1547232
+I0507 11:18:09.286005  5117 layer_factory.hpp:77] Creating layer silence
+I0507 11:18:09.286011  5117 net.cpp:106] Creating Layer silence
+I0507 11:18:09.286015  5117 net.cpp:454] silence <- label
+I0507 11:18:09.286017  5117 net.cpp:454] silence <- data_dim
+I0507 11:18:09.286021  5117 net.cpp:150] Setting up silence
+I0507 11:18:09.286023  5117 net.cpp:165] Memory required for data: 1547232
+I0507 11:18:09.286026  5117 net.cpp:228] silence does not need backward computation.
+I0507 11:18:09.286028  5117 net.cpp:228] fc8_mat does not need backward computation.
+I0507 11:18:09.286031  5117 net.cpp:228] fc8_interp does not need backward computation.
+I0507 11:18:09.286033  5117 net.cpp:228] fc8_voc12 does not need backward computation.
+I0507 11:18:09.286037  5117 net.cpp:228] fc8_voc12_4 does not need backward computation.
+I0507 11:18:09.286039  5117 net.cpp:228] drop7_4 does not need backward computation.
+I0507 11:18:09.286056  5117 net.cpp:228] relu7_4 does not need backward computation.
+I0507 11:18:09.286058  5117 net.cpp:228] fc7_4 does not need backward computation.
+I0507 11:18:09.286062  5117 net.cpp:228] drop6_4 does not need backward computation.
+I0507 11:18:09.286072  5117 net.cpp:228] relu6_4 does not need backward computation.
+I0507 11:18:09.286074  5117 net.cpp:228] fc6_4 does not need backward computation.
+I0507 11:18:09.286077  5117 net.cpp:228] fc8_voc12_3 does not need backward computation.
+I0507 11:18:09.286092  5117 net.cpp:228] drop7_3 does not need backward computation.
+I0507 11:18:09.286094  5117 net.cpp:228] relu7_3 does not need backward computation.
+I0507 11:18:09.286098  5117 net.cpp:228] fc7_3 does not need backward computation.
+I0507 11:18:09.286099  5117 net.cpp:228] drop6_3 does not need backward computation.
+I0507 11:18:09.286103  5117 net.cpp:228] relu6_3 does not need backward computation.
+I0507 11:18:09.286104  5117 net.cpp:228] fc6_3 does not need backward computation.
+I0507 11:18:09.286108  5117 net.cpp:228] fc8_voc12_2 does not need backward computation.
+I0507 11:18:09.286109  5117 net.cpp:228] drop7_2 does not need backward computation.
+I0507 11:18:09.286126  5117 net.cpp:228] relu7_2 does not need backward computation.
+I0507 11:18:09.286128  5117 net.cpp:228] fc7_2 does not need backward computation.
+I0507 11:18:09.286131  5117 net.cpp:228] drop6_2 does not need backward computation.
+I0507 11:18:09.286134  5117 net.cpp:228] relu6_2 does not need backward computation.
+I0507 11:18:09.286136  5117 net.cpp:228] fc6_2 does not need backward computation.
+I0507 11:18:09.286139  5117 net.cpp:228] fc8_voc12_1 does not need backward computation.
+I0507 11:18:09.286141  5117 net.cpp:228] drop7_1 does not need backward computation.
+I0507 11:18:09.286144  5117 net.cpp:228] relu7_1 does not need backward computation.
+I0507 11:18:09.286146  5117 net.cpp:228] fc7_1 does not need backward computation.
+I0507 11:18:09.286149  5117 net.cpp:228] drop6_1 does not need backward computation.
+I0507 11:18:09.286151  5117 net.cpp:228] relu6_1 does not need backward computation.
+I0507 11:18:09.286154  5117 net.cpp:228] fc6_1 does not need backward computation.
+I0507 11:18:09.286156  5117 net.cpp:228] pool5_pool5_0_split does not need backward computation.
+I0507 11:18:09.286159  5117 net.cpp:228] pool5 does not need backward computation.
+I0507 11:18:09.286161  5117 net.cpp:228] relu5_3 does not need backward computation.
+I0507 11:18:09.286164  5117 net.cpp:228] conv5_3 does not need backward computation.
+I0507 11:18:09.286167  5117 net.cpp:228] relu5_2 does not need backward computation.
+I0507 11:18:09.286170  5117 net.cpp:228] conv5_2 does not need backward computation.
+I0507 11:18:09.286172  5117 net.cpp:228] relu5_1 does not need backward computation.
+I0507 11:18:09.286175  5117 net.cpp:228] conv5_1 does not need backward computation.
+I0507 11:18:09.286177  5117 net.cpp:228] pool4 does not need backward computation.
+I0507 11:18:09.286180  5117 net.cpp:228] relu4_3 does not need backward computation.
+I0507 11:18:09.286182  5117 net.cpp:228] conv4_3 does not need backward computation.
+I0507 11:18:09.286185  5117 net.cpp:228] relu4_2 does not need backward computation.
+I0507 11:18:09.286201  5117 net.cpp:228] conv4_2 does not need backward computation.
+I0507 11:18:09.286203  5117 net.cpp:228] relu4_1 does not need backward computation.
+I0507 11:18:09.286206  5117 net.cpp:228] conv4_1 does not need backward computation.
+I0507 11:18:09.286207  5117 net.cpp:228] pool3 does not need backward computation.
+I0507 11:18:09.286211  5117 net.cpp:228] relu3_3 does not need backward computation.
+I0507 11:18:09.286212  5117 net.cpp:228] conv3_3 does not need backward computation.
+I0507 11:18:09.286216  5117 net.cpp:228] relu3_2 does not need backward computation.
+I0507 11:18:09.286217  5117 net.cpp:228] conv3_2 does not need backward computation.
+I0507 11:18:09.286221  5117 net.cpp:228] relu3_1 does not need backward computation.
+I0507 11:18:09.286223  5117 net.cpp:228] conv3_1 does not need backward computation.
+I0507 11:18:09.286226  5117 net.cpp:228] pool2 does not need backward computation.
+I0507 11:18:09.286228  5117 net.cpp:228] relu2_2 does not need backward computation.
+I0507 11:18:09.286231  5117 net.cpp:228] conv2_2 does not need backward computation.
+I0507 11:18:09.286237  5117 net.cpp:228] relu2_1 does not need backward computation.
+I0507 11:18:09.286240  5117 net.cpp:228] conv2_1 does not need backward computation.
+I0507 11:18:09.286242  5117 net.cpp:228] pool1 does not need backward computation.
+I0507 11:18:09.286245  5117 net.cpp:228] relu1_2 does not need backward computation.
+I0507 11:18:09.286247  5117 net.cpp:228] conv1_2 does not need backward computation.
+I0507 11:18:09.286250  5117 net.cpp:228] relu1_1 does not need backward computation.
+I0507 11:18:09.286252  5117 net.cpp:228] conv1_1 does not need backward computation.
+I0507 11:18:09.286257  5117 net.cpp:228] data does not need backward computation.
+I0507 11:18:09.286278  5117 net.cpp:283] Network initialization done.
+I0507 11:18:09.532461  5117 net.cpp:816] Ignoring source layer data_data_0_split
+I0507 11:18:09.532482  5117 net.cpp:816] Ignoring source layer label_data_1_split
+I0507 11:18:09.532485  5117 net.cpp:816] Ignoring source layer data_res05
+I0507 11:18:09.532487  5117 net.cpp:816] Ignoring source layer data_res075
+I0507 11:18:09.532490  5117 net.cpp:816] Ignoring source layer conv1
+I0507 11:18:09.532491  5117 net.cpp:816] Ignoring source layer bn_conv1
+I0507 11:18:09.532495  5117 net.cpp:816] Ignoring source layer scale_conv1
+I0507 11:18:09.532511  5117 net.cpp:816] Ignoring source layer conv1_relu
+I0507 11:18:09.532513  5117 net.cpp:816] Ignoring source layer pool1_pool1_0_split
+I0507 11:18:09.532516  5117 net.cpp:816] Ignoring source layer res2a_branch1
+I0507 11:18:09.532518  5117 net.cpp:816] Ignoring source layer bn2a_branch1
+I0507 11:18:09.532521  5117 net.cpp:816] Ignoring source layer scale2a_branch1
+I0507 11:18:09.532522  5117 net.cpp:816] Ignoring source layer res2a_branch2a
+I0507 11:18:09.532524  5117 net.cpp:816] Ignoring source layer bn2a_branch2a
+I0507 11:18:09.532527  5117 net.cpp:816] Ignoring source layer scale2a_branch2a
+I0507 11:18:09.532529  5117 net.cpp:816] Ignoring source layer res2a_branch2a_relu
+I0507 11:18:09.532531  5117 net.cpp:816] Ignoring source layer res2a_branch2b
+I0507 11:18:09.532533  5117 net.cpp:816] Ignoring source layer bn2a_branch2b
+I0507 11:18:09.532536  5117 net.cpp:816] Ignoring source layer scale2a_branch2b
+I0507 11:18:09.532537  5117 net.cpp:816] Ignoring source layer res2a_branch2b_relu
+I0507 11:18:09.532539  5117 net.cpp:816] Ignoring source layer res2a_branch2c
+I0507 11:18:09.532541  5117 net.cpp:816] Ignoring source layer bn2a_branch2c
+I0507 11:18:09.532543  5117 net.cpp:816] Ignoring source layer scale2a_branch2c
+I0507 11:18:09.532546  5117 net.cpp:816] Ignoring source layer res2a
+I0507 11:18:09.532548  5117 net.cpp:816] Ignoring source layer res2a_relu
+I0507 11:18:09.532564  5117 net.cpp:816] Ignoring source layer res2a_res2a_relu_0_split
+I0507 11:18:09.532567  5117 net.cpp:816] Ignoring source layer res2b_branch2a
+I0507 11:18:09.532569  5117 net.cpp:816] Ignoring source layer bn2b_branch2a
+I0507 11:18:09.532572  5117 net.cpp:816] Ignoring source layer scale2b_branch2a
+I0507 11:18:09.532573  5117 net.cpp:816] Ignoring source layer res2b_branch2a_relu
+I0507 11:18:09.532577  5117 net.cpp:816] Ignoring source layer res2b_branch2b
+I0507 11:18:09.532578  5117 net.cpp:816] Ignoring source layer bn2b_branch2b
+I0507 11:18:09.532580  5117 net.cpp:816] Ignoring source layer scale2b_branch2b
+I0507 11:18:09.532583  5117 net.cpp:816] Ignoring source layer res2b_branch2b_relu
+I0507 11:18:09.532585  5117 net.cpp:816] Ignoring source layer res2b_branch2c
+I0507 11:18:09.532588  5117 net.cpp:816] Ignoring source layer bn2b_branch2c
+I0507 11:18:09.532589  5117 net.cpp:816] Ignoring source layer scale2b_branch2c
+I0507 11:18:09.532591  5117 net.cpp:816] Ignoring source layer res2b
+I0507 11:18:09.532594  5117 net.cpp:816] Ignoring source layer res2b_relu
+I0507 11:18:09.532596  5117 net.cpp:816] Ignoring source layer res2b_res2b_relu_0_split
+I0507 11:18:09.532598  5117 net.cpp:816] Ignoring source layer res2c_branch2a
+I0507 11:18:09.532601  5117 net.cpp:816] Ignoring source layer bn2c_branch2a
+I0507 11:18:09.532603  5117 net.cpp:816] Ignoring source layer scale2c_branch2a
+I0507 11:18:09.532636  5117 net.cpp:816] Ignoring source layer res2c_branch2a_relu
+I0507 11:18:09.532639  5117 net.cpp:816] Ignoring source layer res2c_branch2b
+I0507 11:18:09.532641  5117 net.cpp:816] Ignoring source layer bn2c_branch2b
+I0507 11:18:09.532642  5117 net.cpp:816] Ignoring source layer scale2c_branch2b
+I0507 11:18:09.532645  5117 net.cpp:816] Ignoring source layer res2c_branch2b_relu
+I0507 11:18:09.532647  5117 net.cpp:816] Ignoring source layer res2c_branch2c
+I0507 11:18:09.532649  5117 net.cpp:816] Ignoring source layer bn2c_branch2c
+I0507 11:18:09.532652  5117 net.cpp:816] Ignoring source layer scale2c_branch2c
+I0507 11:18:09.532655  5117 net.cpp:816] Ignoring source layer res2c
+I0507 11:18:09.532656  5117 net.cpp:816] Ignoring source layer res2c_relu
+I0507 11:18:09.532658  5117 net.cpp:816] Ignoring source layer res2c_res2c_relu_0_split
+I0507 11:18:09.532660  5117 net.cpp:816] Ignoring source layer res3a_branch1
+I0507 11:18:09.532663  5117 net.cpp:816] Ignoring source layer bn3a_branch1
+I0507 11:18:09.532665  5117 net.cpp:816] Ignoring source layer scale3a_branch1
+I0507 11:18:09.532668  5117 net.cpp:816] Ignoring source layer res3a_branch2a
+I0507 11:18:09.532670  5117 net.cpp:816] Ignoring source layer bn3a_branch2a
+I0507 11:18:09.532671  5117 net.cpp:816] Ignoring source layer scale3a_branch2a
+I0507 11:18:09.532675  5117 net.cpp:816] Ignoring source layer res3a_branch2a_relu
+I0507 11:18:09.532676  5117 net.cpp:816] Ignoring source layer res3a_branch2b
+I0507 11:18:09.532678  5117 net.cpp:816] Ignoring source layer bn3a_branch2b
+I0507 11:18:09.532681  5117 net.cpp:816] Ignoring source layer scale3a_branch2b
+I0507 11:18:09.532683  5117 net.cpp:816] Ignoring source layer res3a_branch2b_relu
+I0507 11:18:09.532685  5117 net.cpp:816] Ignoring source layer res3a_branch2c
+I0507 11:18:09.532687  5117 net.cpp:816] Ignoring source layer bn3a_branch2c
+I0507 11:18:09.532690  5117 net.cpp:816] Ignoring source layer scale3a_branch2c
+I0507 11:18:09.532692  5117 net.cpp:816] Ignoring source layer res3a
+I0507 11:18:09.532707  5117 net.cpp:816] Ignoring source layer res3a_relu
+I0507 11:18:09.532709  5117 net.cpp:816] Ignoring source layer res3a_res3a_relu_0_split
+I0507 11:18:09.532711  5117 net.cpp:816] Ignoring source layer res3b1_branch2a
+I0507 11:18:09.532713  5117 net.cpp:816] Ignoring source layer bn3b1_branch2a
+I0507 11:18:09.532716  5117 net.cpp:816] Ignoring source layer scale3b1_branch2a
+I0507 11:18:09.532730  5117 net.cpp:816] Ignoring source layer res3b1_branch2a_relu
+I0507 11:18:09.532732  5117 net.cpp:816] Ignoring source layer res3b1_branch2b
+I0507 11:18:09.532735  5117 net.cpp:816] Ignoring source layer bn3b1_branch2b
+I0507 11:18:09.532737  5117 net.cpp:816] Ignoring source layer scale3b1_branch2b
+I0507 11:18:09.532753  5117 net.cpp:816] Ignoring source layer res3b1_branch2b_relu
+I0507 11:18:09.532755  5117 net.cpp:816] Ignoring source layer res3b1_branch2c
+I0507 11:18:09.532758  5117 net.cpp:816] Ignoring source layer bn3b1_branch2c
+I0507 11:18:09.532760  5117 net.cpp:816] Ignoring source layer scale3b1_branch2c
+I0507 11:18:09.532763  5117 net.cpp:816] Ignoring source layer res3b1
+I0507 11:18:09.532764  5117 net.cpp:816] Ignoring source layer res3b1_relu
+I0507 11:18:09.532766  5117 net.cpp:816] Ignoring source layer res3b1_res3b1_relu_0_split
+I0507 11:18:09.532768  5117 net.cpp:816] Ignoring source layer res3b2_branch2a
+I0507 11:18:09.532770  5117 net.cpp:816] Ignoring source layer bn3b2_branch2a
+I0507 11:18:09.532773  5117 net.cpp:816] Ignoring source layer scale3b2_branch2a
+I0507 11:18:09.532774  5117 net.cpp:816] Ignoring source layer res3b2_branch2a_relu
+I0507 11:18:09.532776  5117 net.cpp:816] Ignoring source layer res3b2_branch2b
+I0507 11:18:09.532778  5117 net.cpp:816] Ignoring source layer bn3b2_branch2b
+I0507 11:18:09.532780  5117 net.cpp:816] Ignoring source layer scale3b2_branch2b
+I0507 11:18:09.532783  5117 net.cpp:816] Ignoring source layer res3b2_branch2b_relu
+I0507 11:18:09.532785  5117 net.cpp:816] Ignoring source layer res3b2_branch2c
+I0507 11:18:09.532788  5117 net.cpp:816] Ignoring source layer bn3b2_branch2c
+I0507 11:18:09.532793  5117 net.cpp:816] Ignoring source layer scale3b2_branch2c
+I0507 11:18:09.532796  5117 net.cpp:816] Ignoring source layer res3b2
+I0507 11:18:09.532799  5117 net.cpp:816] Ignoring source layer res3b2_relu
+I0507 11:18:09.532800  5117 net.cpp:816] Ignoring source layer res3b2_res3b2_relu_0_split
+I0507 11:18:09.532802  5117 net.cpp:816] Ignoring source layer res3b3_branch2a
+I0507 11:18:09.532805  5117 net.cpp:816] Ignoring source layer bn3b3_branch2a
+I0507 11:18:09.532807  5117 net.cpp:816] Ignoring source layer scale3b3_branch2a
+I0507 11:18:09.532809  5117 net.cpp:816] Ignoring source layer res3b3_branch2a_relu
+I0507 11:18:09.532811  5117 net.cpp:816] Ignoring source layer res3b3_branch2b
+I0507 11:18:09.532826  5117 net.cpp:816] Ignoring source layer bn3b3_branch2b
+I0507 11:18:09.532829  5117 net.cpp:816] Ignoring source layer scale3b3_branch2b
+I0507 11:18:09.532830  5117 net.cpp:816] Ignoring source layer res3b3_branch2b_relu
+I0507 11:18:09.532832  5117 net.cpp:816] Ignoring source layer res3b3_branch2c
+I0507 11:18:09.532835  5117 net.cpp:816] Ignoring source layer bn3b3_branch2c
+I0507 11:18:09.532836  5117 net.cpp:816] Ignoring source layer scale3b3_branch2c
+I0507 11:18:09.532838  5117 net.cpp:816] Ignoring source layer res3b3
+I0507 11:18:09.532840  5117 net.cpp:816] Ignoring source layer res3b3_relu
+I0507 11:18:09.532843  5117 net.cpp:816] Ignoring source layer res3b3_res3b3_relu_0_split
+I0507 11:18:09.532845  5117 net.cpp:816] Ignoring source layer res4a_branch1
+I0507 11:18:09.532847  5117 net.cpp:816] Ignoring source layer bn4a_branch1
+I0507 11:18:09.532850  5117 net.cpp:816] Ignoring source layer scale4a_branch1
+I0507 11:18:09.532851  5117 net.cpp:816] Ignoring source layer res4a_branch2a
+I0507 11:18:09.532853  5117 net.cpp:816] Ignoring source layer bn4a_branch2a
+I0507 11:18:09.532855  5117 net.cpp:816] Ignoring source layer scale4a_branch2a
+I0507 11:18:09.532857  5117 net.cpp:816] Ignoring source layer res4a_branch2a_relu
+I0507 11:18:09.532860  5117 net.cpp:816] Ignoring source layer res4a_branch2b
+I0507 11:18:09.532861  5117 net.cpp:816] Ignoring source layer bn4a_branch2b
+I0507 11:18:09.532863  5117 net.cpp:816] Ignoring source layer scale4a_branch2b
+I0507 11:18:09.532866  5117 net.cpp:816] Ignoring source layer res4a_branch2b_relu
+I0507 11:18:09.532868  5117 net.cpp:816] Ignoring source layer res4a_branch2c
+I0507 11:18:09.532871  5117 net.cpp:816] Ignoring source layer bn4a_branch2c
+I0507 11:18:09.532872  5117 net.cpp:816] Ignoring source layer scale4a_branch2c
+I0507 11:18:09.532874  5117 net.cpp:816] Ignoring source layer res4a
+I0507 11:18:09.532877  5117 net.cpp:816] Ignoring source layer res4a_relu
+I0507 11:18:09.532879  5117 net.cpp:816] Ignoring source layer res4a_res4a_relu_0_split
+I0507 11:18:09.532881  5117 net.cpp:816] Ignoring source layer res4b1_branch2a
+I0507 11:18:09.532882  5117 net.cpp:816] Ignoring source layer bn4b1_branch2a
+I0507 11:18:09.532886  5117 net.cpp:816] Ignoring source layer scale4b1_branch2a
+I0507 11:18:09.532887  5117 net.cpp:816] Ignoring source layer res4b1_branch2a_relu
+I0507 11:18:09.532889  5117 net.cpp:816] Ignoring source layer res4b1_branch2b
+I0507 11:18:09.532891  5117 net.cpp:816] Ignoring source layer bn4b1_branch2b
+I0507 11:18:09.532893  5117 net.cpp:816] Ignoring source layer scale4b1_branch2b
+I0507 11:18:09.532896  5117 net.cpp:816] Ignoring source layer res4b1_branch2b_relu
+I0507 11:18:09.532898  5117 net.cpp:816] Ignoring source layer res4b1_branch2c
+I0507 11:18:09.532901  5117 net.cpp:816] Ignoring source layer bn4b1_branch2c
+I0507 11:18:09.532917  5117 net.cpp:816] Ignoring source layer scale4b1_branch2c
+I0507 11:18:09.532919  5117 net.cpp:816] Ignoring source layer res4b1
+I0507 11:18:09.532922  5117 net.cpp:816] Ignoring source layer res4b1_relu
+I0507 11:18:09.532923  5117 net.cpp:816] Ignoring source layer res4b1_res4b1_relu_0_split
+I0507 11:18:09.532927  5117 net.cpp:816] Ignoring source layer res4b2_branch2a
+I0507 11:18:09.532940  5117 net.cpp:816] Ignoring source layer bn4b2_branch2a
+I0507 11:18:09.532943  5117 net.cpp:816] Ignoring source layer scale4b2_branch2a
+I0507 11:18:09.532950  5117 net.cpp:816] Ignoring source layer res4b2_branch2a_relu
+I0507 11:18:09.532953  5117 net.cpp:816] Ignoring source layer res4b2_branch2b
+I0507 11:18:09.532954  5117 net.cpp:816] Ignoring source layer bn4b2_branch2b
+I0507 11:18:09.532956  5117 net.cpp:816] Ignoring source layer scale4b2_branch2b
+I0507 11:18:09.532958  5117 net.cpp:816] Ignoring source layer res4b2_branch2b_relu
+I0507 11:18:09.532961  5117 net.cpp:816] Ignoring source layer res4b2_branch2c
+I0507 11:18:09.532963  5117 net.cpp:816] Ignoring source layer bn4b2_branch2c
+I0507 11:18:09.532965  5117 net.cpp:816] Ignoring source layer scale4b2_branch2c
+I0507 11:18:09.532968  5117 net.cpp:816] Ignoring source layer res4b2
+I0507 11:18:09.532969  5117 net.cpp:816] Ignoring source layer res4b2_relu
+I0507 11:18:09.532971  5117 net.cpp:816] Ignoring source layer res4b2_res4b2_relu_0_split
+I0507 11:18:09.532974  5117 net.cpp:816] Ignoring source layer res4b3_branch2a
+I0507 11:18:09.532975  5117 net.cpp:816] Ignoring source layer bn4b3_branch2a
+I0507 11:18:09.532979  5117 net.cpp:816] Ignoring source layer scale4b3_branch2a
+I0507 11:18:09.532980  5117 net.cpp:816] Ignoring source layer res4b3_branch2a_relu
+I0507 11:18:09.532982  5117 net.cpp:816] Ignoring source layer res4b3_branch2b
+I0507 11:18:09.532984  5117 net.cpp:816] Ignoring source layer bn4b3_branch2b
+I0507 11:18:09.532986  5117 net.cpp:816] Ignoring source layer scale4b3_branch2b
+I0507 11:18:09.532989  5117 net.cpp:816] Ignoring source layer res4b3_branch2b_relu
+I0507 11:18:09.532990  5117 net.cpp:816] Ignoring source layer res4b3_branch2c
+I0507 11:18:09.532992  5117 net.cpp:816] Ignoring source layer bn4b3_branch2c
+I0507 11:18:09.532994  5117 net.cpp:816] Ignoring source layer scale4b3_branch2c
+I0507 11:18:09.532996  5117 net.cpp:816] Ignoring source layer res4b3
+I0507 11:18:09.532999  5117 net.cpp:816] Ignoring source layer res4b3_relu
+I0507 11:18:09.533000  5117 net.cpp:816] Ignoring source layer res4b3_res4b3_relu_0_split
+I0507 11:18:09.533018  5117 net.cpp:816] Ignoring source layer res4b4_branch2a
+I0507 11:18:09.533020  5117 net.cpp:816] Ignoring source layer bn4b4_branch2a
+I0507 11:18:09.533022  5117 net.cpp:816] Ignoring source layer scale4b4_branch2a
+I0507 11:18:09.533025  5117 net.cpp:816] Ignoring source layer res4b4_branch2a_relu
+I0507 11:18:09.533026  5117 net.cpp:816] Ignoring source layer res4b4_branch2b
+I0507 11:18:09.533028  5117 net.cpp:816] Ignoring source layer bn4b4_branch2b
+I0507 11:18:09.533043  5117 net.cpp:816] Ignoring source layer scale4b4_branch2b
+I0507 11:18:09.533046  5117 net.cpp:816] Ignoring source layer res4b4_branch2b_relu
+I0507 11:18:09.533047  5117 net.cpp:816] Ignoring source layer res4b4_branch2c
+I0507 11:18:09.533049  5117 net.cpp:816] Ignoring source layer bn4b4_branch2c
+I0507 11:18:09.533051  5117 net.cpp:816] Ignoring source layer scale4b4_branch2c
+I0507 11:18:09.533053  5117 net.cpp:816] Ignoring source layer res4b4
+I0507 11:18:09.533056  5117 net.cpp:816] Ignoring source layer res4b4_relu
+I0507 11:18:09.533058  5117 net.cpp:816] Ignoring source layer res4b4_res4b4_relu_0_split
+I0507 11:18:09.533061  5117 net.cpp:816] Ignoring source layer res4b5_branch2a
+I0507 11:18:09.533062  5117 net.cpp:816] Ignoring source layer bn4b5_branch2a
+I0507 11:18:09.533066  5117 net.cpp:816] Ignoring source layer scale4b5_branch2a
+I0507 11:18:09.533066  5117 net.cpp:816] Ignoring source layer res4b5_branch2a_relu
+I0507 11:18:09.533068  5117 net.cpp:816] Ignoring source layer res4b5_branch2b
+I0507 11:18:09.533071  5117 net.cpp:816] Ignoring source layer bn4b5_branch2b
+I0507 11:18:09.533088  5117 net.cpp:816] Ignoring source layer scale4b5_branch2b
+I0507 11:18:09.533090  5117 net.cpp:816] Ignoring source layer res4b5_branch2b_relu
+I0507 11:18:09.533092  5117 net.cpp:816] Ignoring source layer res4b5_branch2c
+I0507 11:18:09.533094  5117 net.cpp:816] Ignoring source layer bn4b5_branch2c
+I0507 11:18:09.533097  5117 net.cpp:816] Ignoring source layer scale4b5_branch2c
+I0507 11:18:09.533099  5117 net.cpp:816] Ignoring source layer res4b5
+I0507 11:18:09.533105  5117 net.cpp:816] Ignoring source layer res4b5_relu
+I0507 11:18:09.533108  5117 net.cpp:816] Ignoring source layer res4b5_res4b5_relu_0_split
+I0507 11:18:09.533110  5117 net.cpp:816] Ignoring source layer res4b6_branch2a
+I0507 11:18:09.533113  5117 net.cpp:816] Ignoring source layer bn4b6_branch2a
+I0507 11:18:09.533114  5117 net.cpp:816] Ignoring source layer scale4b6_branch2a
+I0507 11:18:09.533118  5117 net.cpp:816] Ignoring source layer res4b6_branch2a_relu
+I0507 11:18:09.533119  5117 net.cpp:816] Ignoring source layer res4b6_branch2b
+I0507 11:18:09.533121  5117 net.cpp:816] Ignoring source layer bn4b6_branch2b
+I0507 11:18:09.533123  5117 net.cpp:816] Ignoring source layer scale4b6_branch2b
+I0507 11:18:09.533125  5117 net.cpp:816] Ignoring source layer res4b6_branch2b_relu
+I0507 11:18:09.533128  5117 net.cpp:816] Ignoring source layer res4b6_branch2c
+I0507 11:18:09.533130  5117 net.cpp:816] Ignoring source layer bn4b6_branch2c
+I0507 11:18:09.533133  5117 net.cpp:816] Ignoring source layer scale4b6_branch2c
+I0507 11:18:09.533134  5117 net.cpp:816] Ignoring source layer res4b6
+I0507 11:18:09.533136  5117 net.cpp:816] Ignoring source layer res4b6_relu
+I0507 11:18:09.533138  5117 net.cpp:816] Ignoring source layer res4b6_res4b6_relu_0_split
+I0507 11:18:09.533140  5117 net.cpp:816] Ignoring source layer res4b7_branch2a
+I0507 11:18:09.533143  5117 net.cpp:816] Ignoring source layer bn4b7_branch2a
+I0507 11:18:09.533145  5117 net.cpp:816] Ignoring source layer scale4b7_branch2a
+I0507 11:18:09.533147  5117 net.cpp:816] Ignoring source layer res4b7_branch2a_relu
+I0507 11:18:09.533162  5117 net.cpp:816] Ignoring source layer res4b7_branch2b
+I0507 11:18:09.533164  5117 net.cpp:816] Ignoring source layer bn4b7_branch2b
+I0507 11:18:09.533167  5117 net.cpp:816] Ignoring source layer scale4b7_branch2b
+I0507 11:18:09.533169  5117 net.cpp:816] Ignoring source layer res4b7_branch2b_relu
+I0507 11:18:09.533170  5117 net.cpp:816] Ignoring source layer res4b7_branch2c
+I0507 11:18:09.533172  5117 net.cpp:816] Ignoring source layer bn4b7_branch2c
+I0507 11:18:09.533175  5117 net.cpp:816] Ignoring source layer scale4b7_branch2c
+I0507 11:18:09.533177  5117 net.cpp:816] Ignoring source layer res4b7
+I0507 11:18:09.533179  5117 net.cpp:816] Ignoring source layer res4b7_relu
+I0507 11:18:09.533181  5117 net.cpp:816] Ignoring source layer res4b7_res4b7_relu_0_split
+I0507 11:18:09.533185  5117 net.cpp:816] Ignoring source layer res4b8_branch2a
+I0507 11:18:09.533186  5117 net.cpp:816] Ignoring source layer bn4b8_branch2a
+I0507 11:18:09.533188  5117 net.cpp:816] Ignoring source layer scale4b8_branch2a
+I0507 11:18:09.533190  5117 net.cpp:816] Ignoring source layer res4b8_branch2a_relu
+I0507 11:18:09.533193  5117 net.cpp:816] Ignoring source layer res4b8_branch2b
+I0507 11:18:09.533195  5117 net.cpp:816] Ignoring source layer bn4b8_branch2b
+I0507 11:18:09.533197  5117 net.cpp:816] Ignoring source layer scale4b8_branch2b
+I0507 11:18:09.533200  5117 net.cpp:816] Ignoring source layer res4b8_branch2b_relu
+I0507 11:18:09.533201  5117 net.cpp:816] Ignoring source layer res4b8_branch2c
+I0507 11:18:09.533203  5117 net.cpp:816] Ignoring source layer bn4b8_branch2c
+I0507 11:18:09.533205  5117 net.cpp:816] Ignoring source layer scale4b8_branch2c
+I0507 11:18:09.533207  5117 net.cpp:816] Ignoring source layer res4b8
+I0507 11:18:09.533210  5117 net.cpp:816] Ignoring source layer res4b8_relu
+I0507 11:18:09.533211  5117 net.cpp:816] Ignoring source layer res4b8_res4b8_relu_0_split
+I0507 11:18:09.533215  5117 net.cpp:816] Ignoring source layer res4b9_branch2a
+I0507 11:18:09.533216  5117 net.cpp:816] Ignoring source layer bn4b9_branch2a
+I0507 11:18:09.533218  5117 net.cpp:816] Ignoring source layer scale4b9_branch2a
+I0507 11:18:09.533221  5117 net.cpp:816] Ignoring source layer res4b9_branch2a_relu
+I0507 11:18:09.533222  5117 net.cpp:816] Ignoring source layer res4b9_branch2b
+I0507 11:18:09.533224  5117 net.cpp:816] Ignoring source layer bn4b9_branch2b
+I0507 11:18:09.533226  5117 net.cpp:816] Ignoring source layer scale4b9_branch2b
+I0507 11:18:09.533246  5117 net.cpp:816] Ignoring source layer res4b9_branch2b_relu
+I0507 11:18:09.533247  5117 net.cpp:816] Ignoring source layer res4b9_branch2c
+I0507 11:18:09.533249  5117 net.cpp:816] Ignoring source layer bn4b9_branch2c
+I0507 11:18:09.533252  5117 net.cpp:816] Ignoring source layer scale4b9_branch2c
+I0507 11:18:09.533253  5117 net.cpp:816] Ignoring source layer res4b9
+I0507 11:18:09.533255  5117 net.cpp:816] Ignoring source layer res4b9_relu
+I0507 11:18:09.533257  5117 net.cpp:816] Ignoring source layer res4b9_res4b9_relu_0_split
+I0507 11:18:09.533260  5117 net.cpp:816] Ignoring source layer res4b10_branch2a
+I0507 11:18:09.533262  5117 net.cpp:816] Ignoring source layer bn4b10_branch2a
+I0507 11:18:09.533279  5117 net.cpp:816] Ignoring source layer scale4b10_branch2a
+I0507 11:18:09.533282  5117 net.cpp:816] Ignoring source layer res4b10_branch2a_relu
+I0507 11:18:09.533283  5117 net.cpp:816] Ignoring source layer res4b10_branch2b
+I0507 11:18:09.533285  5117 net.cpp:816] Ignoring source layer bn4b10_branch2b
+I0507 11:18:09.533288  5117 net.cpp:816] Ignoring source layer scale4b10_branch2b
+I0507 11:18:09.533303  5117 net.cpp:816] Ignoring source layer res4b10_branch2b_relu
+I0507 11:18:09.533305  5117 net.cpp:816] Ignoring source layer res4b10_branch2c
+I0507 11:18:09.533308  5117 net.cpp:816] Ignoring source layer bn4b10_branch2c
+I0507 11:18:09.533309  5117 net.cpp:816] Ignoring source layer scale4b10_branch2c
+I0507 11:18:09.533311  5117 net.cpp:816] Ignoring source layer res4b10
+I0507 11:18:09.533314  5117 net.cpp:816] Ignoring source layer res4b10_relu
+I0507 11:18:09.533316  5117 net.cpp:816] Ignoring source layer res4b10_res4b10_relu_0_split
+I0507 11:18:09.533318  5117 net.cpp:816] Ignoring source layer res4b11_branch2a
+I0507 11:18:09.533335  5117 net.cpp:816] Ignoring source layer bn4b11_branch2a
+I0507 11:18:09.533337  5117 net.cpp:816] Ignoring source layer scale4b11_branch2a
+I0507 11:18:09.533339  5117 net.cpp:816] Ignoring source layer res4b11_branch2a_relu
+I0507 11:18:09.533341  5117 net.cpp:816] Ignoring source layer res4b11_branch2b
+I0507 11:18:09.533344  5117 net.cpp:816] Ignoring source layer bn4b11_branch2b
+I0507 11:18:09.533358  5117 net.cpp:816] Ignoring source layer scale4b11_branch2b
+I0507 11:18:09.533360  5117 net.cpp:816] Ignoring source layer res4b11_branch2b_relu
+I0507 11:18:09.533362  5117 net.cpp:816] Ignoring source layer res4b11_branch2c
+I0507 11:18:09.533365  5117 net.cpp:816] Ignoring source layer bn4b11_branch2c
+I0507 11:18:09.533366  5117 net.cpp:816] Ignoring source layer scale4b11_branch2c
+I0507 11:18:09.533370  5117 net.cpp:816] Ignoring source layer res4b11
+I0507 11:18:09.533371  5117 net.cpp:816] Ignoring source layer res4b11_relu
+I0507 11:18:09.533373  5117 net.cpp:816] Ignoring source layer res4b11_res4b11_relu_0_split
+I0507 11:18:09.533375  5117 net.cpp:816] Ignoring source layer res4b12_branch2a
+I0507 11:18:09.533377  5117 net.cpp:816] Ignoring source layer bn4b12_branch2a
+I0507 11:18:09.533396  5117 net.cpp:816] Ignoring source layer scale4b12_branch2a
+I0507 11:18:09.533397  5117 net.cpp:816] Ignoring source layer res4b12_branch2a_relu
+I0507 11:18:09.533399  5117 net.cpp:816] Ignoring source layer res4b12_branch2b
+I0507 11:18:09.533401  5117 net.cpp:816] Ignoring source layer bn4b12_branch2b
+I0507 11:18:09.533403  5117 net.cpp:816] Ignoring source layer scale4b12_branch2b
+I0507 11:18:09.533418  5117 net.cpp:816] Ignoring source layer res4b12_branch2b_relu
+I0507 11:18:09.533421  5117 net.cpp:816] Ignoring source layer res4b12_branch2c
+I0507 11:18:09.533422  5117 net.cpp:816] Ignoring source layer bn4b12_branch2c
+I0507 11:18:09.533424  5117 net.cpp:816] Ignoring source layer scale4b12_branch2c
+I0507 11:18:09.533442  5117 net.cpp:816] Ignoring source layer res4b12
+I0507 11:18:09.533444  5117 net.cpp:816] Ignoring source layer res4b12_relu
+I0507 11:18:09.533447  5117 net.cpp:816] Ignoring source layer res4b12_res4b12_relu_0_split
+I0507 11:18:09.533448  5117 net.cpp:816] Ignoring source layer res4b13_branch2a
+I0507 11:18:09.533450  5117 net.cpp:816] Ignoring source layer bn4b13_branch2a
+I0507 11:18:09.533470  5117 net.cpp:816] Ignoring source layer scale4b13_branch2a
+I0507 11:18:09.533473  5117 net.cpp:816] Ignoring source layer res4b13_branch2a_relu
+I0507 11:18:09.533474  5117 net.cpp:816] Ignoring source layer res4b13_branch2b
+I0507 11:18:09.533476  5117 net.cpp:816] Ignoring source layer bn4b13_branch2b
+I0507 11:18:09.533478  5117 net.cpp:816] Ignoring source layer scale4b13_branch2b
+I0507 11:18:09.533480  5117 net.cpp:816] Ignoring source layer res4b13_branch2b_relu
+I0507 11:18:09.533483  5117 net.cpp:816] Ignoring source layer res4b13_branch2c
+I0507 11:18:09.533484  5117 net.cpp:816] Ignoring source layer bn4b13_branch2c
+I0507 11:18:09.533486  5117 net.cpp:816] Ignoring source layer scale4b13_branch2c
+I0507 11:18:09.533489  5117 net.cpp:816] Ignoring source layer res4b13
+I0507 11:18:09.533491  5117 net.cpp:816] Ignoring source layer res4b13_relu
+I0507 11:18:09.533493  5117 net.cpp:816] Ignoring source layer res4b13_res4b13_relu_0_split
+I0507 11:18:09.533495  5117 net.cpp:816] Ignoring source layer res4b14_branch2a
+I0507 11:18:09.533498  5117 net.cpp:816] Ignoring source layer bn4b14_branch2a
+I0507 11:18:09.533499  5117 net.cpp:816] Ignoring source layer scale4b14_branch2a
+I0507 11:18:09.533501  5117 net.cpp:816] Ignoring source layer res4b14_branch2a_relu
+I0507 11:18:09.533504  5117 net.cpp:816] Ignoring source layer res4b14_branch2b
+I0507 11:18:09.533505  5117 net.cpp:816] Ignoring source layer bn4b14_branch2b
+I0507 11:18:09.533507  5117 net.cpp:816] Ignoring source layer scale4b14_branch2b
+I0507 11:18:09.533509  5117 net.cpp:816] Ignoring source layer res4b14_branch2b_relu
+I0507 11:18:09.533511  5117 net.cpp:816] Ignoring source layer res4b14_branch2c
+I0507 11:18:09.533514  5117 net.cpp:816] Ignoring source layer bn4b14_branch2c
+I0507 11:18:09.533515  5117 net.cpp:816] Ignoring source layer scale4b14_branch2c
+I0507 11:18:09.533517  5117 net.cpp:816] Ignoring source layer res4b14
+I0507 11:18:09.533519  5117 net.cpp:816] Ignoring source layer res4b14_relu
+I0507 11:18:09.533521  5117 net.cpp:816] Ignoring source layer res4b14_res4b14_relu_0_split
+I0507 11:18:09.533524  5117 net.cpp:816] Ignoring source layer res4b15_branch2a
+I0507 11:18:09.533538  5117 net.cpp:816] Ignoring source layer bn4b15_branch2a
+I0507 11:18:09.533540  5117 net.cpp:816] Ignoring source layer scale4b15_branch2a
+I0507 11:18:09.533542  5117 net.cpp:816] Ignoring source layer res4b15_branch2a_relu
+I0507 11:18:09.533545  5117 net.cpp:816] Ignoring source layer res4b15_branch2b
+I0507 11:18:09.533545  5117 net.cpp:816] Ignoring source layer bn4b15_branch2b
+I0507 11:18:09.533547  5117 net.cpp:816] Ignoring source layer scale4b15_branch2b
+I0507 11:18:09.533550  5117 net.cpp:816] Ignoring source layer res4b15_branch2b_relu
+I0507 11:18:09.533551  5117 net.cpp:816] Ignoring source layer res4b15_branch2c
+I0507 11:18:09.533553  5117 net.cpp:816] Ignoring source layer bn4b15_branch2c
+I0507 11:18:09.533555  5117 net.cpp:816] Ignoring source layer scale4b15_branch2c
+I0507 11:18:09.533558  5117 net.cpp:816] Ignoring source layer res4b15
+I0507 11:18:09.533560  5117 net.cpp:816] Ignoring source layer res4b15_relu
+I0507 11:18:09.533561  5117 net.cpp:816] Ignoring source layer res4b15_res4b15_relu_0_split
+I0507 11:18:09.533563  5117 net.cpp:816] Ignoring source layer res4b16_branch2a
+I0507 11:18:09.533565  5117 net.cpp:816] Ignoring source layer bn4b16_branch2a
+I0507 11:18:09.533567  5117 net.cpp:816] Ignoring source layer scale4b16_branch2a
+I0507 11:18:09.533569  5117 net.cpp:816] Ignoring source layer res4b16_branch2a_relu
+I0507 11:18:09.533571  5117 net.cpp:816] Ignoring source layer res4b16_branch2b
+I0507 11:18:09.533573  5117 net.cpp:816] Ignoring source layer bn4b16_branch2b
+I0507 11:18:09.533576  5117 net.cpp:816] Ignoring source layer scale4b16_branch2b
+I0507 11:18:09.533577  5117 net.cpp:816] Ignoring source layer res4b16_branch2b_relu
+I0507 11:18:09.533579  5117 net.cpp:816] Ignoring source layer res4b16_branch2c
+I0507 11:18:09.533581  5117 net.cpp:816] Ignoring source layer bn4b16_branch2c
+I0507 11:18:09.533583  5117 net.cpp:816] Ignoring source layer scale4b16_branch2c
+I0507 11:18:09.533589  5117 net.cpp:816] Ignoring source layer res4b16
+I0507 11:18:09.533591  5117 net.cpp:816] Ignoring source layer res4b16_relu
+I0507 11:18:09.533593  5117 net.cpp:816] Ignoring source layer res4b16_res4b16_relu_0_split
+I0507 11:18:09.533596  5117 net.cpp:816] Ignoring source layer res4b17_branch2a
+I0507 11:18:09.533597  5117 net.cpp:816] Ignoring source layer bn4b17_branch2a
+I0507 11:18:09.533599  5117 net.cpp:816] Ignoring source layer scale4b17_branch2a
+I0507 11:18:09.533601  5117 net.cpp:816] Ignoring source layer res4b17_branch2a_relu
+I0507 11:18:09.533603  5117 net.cpp:816] Ignoring source layer res4b17_branch2b
+I0507 11:18:09.533605  5117 net.cpp:816] Ignoring source layer bn4b17_branch2b
+I0507 11:18:09.533607  5117 net.cpp:816] Ignoring source layer scale4b17_branch2b
+I0507 11:18:09.533609  5117 net.cpp:816] Ignoring source layer res4b17_branch2b_relu
+I0507 11:18:09.533612  5117 net.cpp:816] Ignoring source layer res4b17_branch2c
+I0507 11:18:09.533612  5117 net.cpp:816] Ignoring source layer bn4b17_branch2c
+I0507 11:18:09.533614  5117 net.cpp:816] Ignoring source layer scale4b17_branch2c
+I0507 11:18:09.533617  5117 net.cpp:816] Ignoring source layer res4b17
+I0507 11:18:09.533619  5117 net.cpp:816] Ignoring source layer res4b17_relu
+I0507 11:18:09.533622  5117 net.cpp:816] Ignoring source layer res4b17_res4b17_relu_0_split
+I0507 11:18:09.533623  5117 net.cpp:816] Ignoring source layer res4b18_branch2a
+I0507 11:18:09.533625  5117 net.cpp:816] Ignoring source layer bn4b18_branch2a
+I0507 11:18:09.533627  5117 net.cpp:816] Ignoring source layer scale4b18_branch2a
+I0507 11:18:09.533629  5117 net.cpp:816] Ignoring source layer res4b18_branch2a_relu
+I0507 11:18:09.533632  5117 net.cpp:816] Ignoring source layer res4b18_branch2b
+I0507 11:18:09.533633  5117 net.cpp:816] Ignoring source layer bn4b18_branch2b
+I0507 11:18:09.533635  5117 net.cpp:816] Ignoring source layer scale4b18_branch2b
+I0507 11:18:09.533638  5117 net.cpp:816] Ignoring source layer res4b18_branch2b_relu
+I0507 11:18:09.533638  5117 net.cpp:816] Ignoring source layer res4b18_branch2c
+I0507 11:18:09.533641  5117 net.cpp:816] Ignoring source layer bn4b18_branch2c
+I0507 11:18:09.533643  5117 net.cpp:816] Ignoring source layer scale4b18_branch2c
+I0507 11:18:09.533645  5117 net.cpp:816] Ignoring source layer res4b18
+I0507 11:18:09.533648  5117 net.cpp:816] Ignoring source layer res4b18_relu
+I0507 11:18:09.533649  5117 net.cpp:816] Ignoring source layer res4b18_res4b18_relu_0_split
+I0507 11:18:09.533651  5117 net.cpp:816] Ignoring source layer res4b19_branch2a
+I0507 11:18:09.533653  5117 net.cpp:816] Ignoring source layer bn4b19_branch2a
+I0507 11:18:09.533654  5117 net.cpp:816] Ignoring source layer scale4b19_branch2a
+I0507 11:18:09.533658  5117 net.cpp:816] Ignoring source layer res4b19_branch2a_relu
+I0507 11:18:09.533659  5117 net.cpp:816] Ignoring source layer res4b19_branch2b
+I0507 11:18:09.533660  5117 net.cpp:816] Ignoring source layer bn4b19_branch2b
+I0507 11:18:09.533663  5117 net.cpp:816] Ignoring source layer scale4b19_branch2b
+I0507 11:18:09.533665  5117 net.cpp:816] Ignoring source layer res4b19_branch2b_relu
+I0507 11:18:09.533666  5117 net.cpp:816] Ignoring source layer res4b19_branch2c
+I0507 11:18:09.533668  5117 net.cpp:816] Ignoring source layer bn4b19_branch2c
+I0507 11:18:09.533670  5117 net.cpp:816] Ignoring source layer scale4b19_branch2c
+I0507 11:18:09.533674  5117 net.cpp:816] Ignoring source layer res4b19
+I0507 11:18:09.533675  5117 net.cpp:816] Ignoring source layer res4b19_relu
+I0507 11:18:09.533676  5117 net.cpp:816] Ignoring source layer res4b19_res4b19_relu_0_split
+I0507 11:18:09.533679  5117 net.cpp:816] Ignoring source layer res4b20_branch2a
+I0507 11:18:09.533680  5117 net.cpp:816] Ignoring source layer bn4b20_branch2a
+I0507 11:18:09.533682  5117 net.cpp:816] Ignoring source layer scale4b20_branch2a
+I0507 11:18:09.533684  5117 net.cpp:816] Ignoring source layer res4b20_branch2a_relu
+I0507 11:18:09.533686  5117 net.cpp:816] Ignoring source layer res4b20_branch2b
+I0507 11:18:09.533694  5117 net.cpp:816] Ignoring source layer bn4b20_branch2b
+I0507 11:18:09.533695  5117 net.cpp:816] Ignoring source layer scale4b20_branch2b
+I0507 11:18:09.533697  5117 net.cpp:816] Ignoring source layer res4b20_branch2b_relu
+I0507 11:18:09.533699  5117 net.cpp:816] Ignoring source layer res4b20_branch2c
+I0507 11:18:09.533701  5117 net.cpp:816] Ignoring source layer bn4b20_branch2c
+I0507 11:18:09.533704  5117 net.cpp:816] Ignoring source layer scale4b20_branch2c
+I0507 11:18:09.533705  5117 net.cpp:816] Ignoring source layer res4b20
+I0507 11:18:09.533707  5117 net.cpp:816] Ignoring source layer res4b20_relu
+I0507 11:18:09.533710  5117 net.cpp:816] Ignoring source layer res4b20_res4b20_relu_0_split
+I0507 11:18:09.533711  5117 net.cpp:816] Ignoring source layer res4b21_branch2a
+I0507 11:18:09.533713  5117 net.cpp:816] Ignoring source layer bn4b21_branch2a
+I0507 11:18:09.533715  5117 net.cpp:816] Ignoring source layer scale4b21_branch2a
+I0507 11:18:09.533717  5117 net.cpp:816] Ignoring source layer res4b21_branch2a_relu
+I0507 11:18:09.533720  5117 net.cpp:816] Ignoring source layer res4b21_branch2b
+I0507 11:18:09.533721  5117 net.cpp:816] Ignoring source layer bn4b21_branch2b
+I0507 11:18:09.533723  5117 net.cpp:816] Ignoring source layer scale4b21_branch2b
+I0507 11:18:09.533725  5117 net.cpp:816] Ignoring source layer res4b21_branch2b_relu
+I0507 11:18:09.533727  5117 net.cpp:816] Ignoring source layer res4b21_branch2c
+I0507 11:18:09.533730  5117 net.cpp:816] Ignoring source layer bn4b21_branch2c
+I0507 11:18:09.533731  5117 net.cpp:816] Ignoring source layer scale4b21_branch2c
+I0507 11:18:09.533733  5117 net.cpp:816] Ignoring source layer res4b21
+I0507 11:18:09.533735  5117 net.cpp:816] Ignoring source layer res4b21_relu
+I0507 11:18:09.533737  5117 net.cpp:816] Ignoring source layer res4b21_res4b21_relu_0_split
+I0507 11:18:09.533740  5117 net.cpp:816] Ignoring source layer res4b22_branch2a
+I0507 11:18:09.533741  5117 net.cpp:816] Ignoring source layer bn4b22_branch2a
+I0507 11:18:09.533743  5117 net.cpp:816] Ignoring source layer scale4b22_branch2a
+I0507 11:18:09.533746  5117 net.cpp:816] Ignoring source layer res4b22_branch2a_relu
+I0507 11:18:09.533747  5117 net.cpp:816] Ignoring source layer res4b22_branch2b
+I0507 11:18:09.533749  5117 net.cpp:816] Ignoring source layer bn4b22_branch2b
+I0507 11:18:09.533751  5117 net.cpp:816] Ignoring source layer scale4b22_branch2b
+I0507 11:18:09.533753  5117 net.cpp:816] Ignoring source layer res4b22_branch2b_relu
+I0507 11:18:09.533756  5117 net.cpp:816] Ignoring source layer res4b22_branch2c
+I0507 11:18:09.533757  5117 net.cpp:816] Ignoring source layer bn4b22_branch2c
+I0507 11:18:09.533759  5117 net.cpp:816] Ignoring source layer scale4b22_branch2c
+I0507 11:18:09.533761  5117 net.cpp:816] Ignoring source layer res4b22
+I0507 11:18:09.533763  5117 net.cpp:816] Ignoring source layer res4b22_relu
+I0507 11:18:09.533766  5117 net.cpp:816] Ignoring source layer res4b22_res4b22_relu_0_split
+I0507 11:18:09.533767  5117 net.cpp:816] Ignoring source layer res5a_branch1
+I0507 11:18:09.533769  5117 net.cpp:816] Ignoring source layer bn5a_branch1
+I0507 11:18:09.533771  5117 net.cpp:816] Ignoring source layer scale5a_branch1
+I0507 11:18:09.533773  5117 net.cpp:816] Ignoring source layer res5a_branch2a
+I0507 11:18:09.533776  5117 net.cpp:816] Ignoring source layer bn5a_branch2a
+I0507 11:18:09.533777  5117 net.cpp:816] Ignoring source layer scale5a_branch2a
+I0507 11:18:09.533779  5117 net.cpp:816] Ignoring source layer res5a_branch2a_relu
+I0507 11:18:09.533782  5117 net.cpp:816] Ignoring source layer res5a_branch2b
+I0507 11:18:09.533783  5117 net.cpp:816] Ignoring source layer bn5a_branch2b
+I0507 11:18:09.533785  5117 net.cpp:816] Ignoring source layer scale5a_branch2b
+I0507 11:18:09.533787  5117 net.cpp:816] Ignoring source layer res5a_branch2b_relu
+I0507 11:18:09.533789  5117 net.cpp:816] Ignoring source layer res5a_branch2c
+I0507 11:18:09.533792  5117 net.cpp:816] Ignoring source layer bn5a_branch2c
+I0507 11:18:09.533793  5117 net.cpp:816] Ignoring source layer scale5a_branch2c
+I0507 11:18:09.533798  5117 net.cpp:816] Ignoring source layer res5a
+I0507 11:18:09.533800  5117 net.cpp:816] Ignoring source layer res5a_relu
+I0507 11:18:09.533803  5117 net.cpp:816] Ignoring source layer res5a_res5a_relu_0_split
+I0507 11:18:09.533805  5117 net.cpp:816] Ignoring source layer res5b_branch2a
+I0507 11:18:09.533807  5117 net.cpp:816] Ignoring source layer bn5b_branch2a
+I0507 11:18:09.533808  5117 net.cpp:816] Ignoring source layer scale5b_branch2a
+I0507 11:18:09.533810  5117 net.cpp:816] Ignoring source layer res5b_branch2a_relu
+I0507 11:18:09.533813  5117 net.cpp:816] Ignoring source layer res5b_branch2b
+I0507 11:18:09.533815  5117 net.cpp:816] Ignoring source layer bn5b_branch2b
+I0507 11:18:09.533816  5117 net.cpp:816] Ignoring source layer scale5b_branch2b
+I0507 11:18:09.533818  5117 net.cpp:816] Ignoring source layer res5b_branch2b_relu
+I0507 11:18:09.533821  5117 net.cpp:816] Ignoring source layer res5b_branch2c
+I0507 11:18:09.533823  5117 net.cpp:816] Ignoring source layer bn5b_branch2c
+I0507 11:18:09.533824  5117 net.cpp:816] Ignoring source layer scale5b_branch2c
+I0507 11:18:09.533826  5117 net.cpp:816] Ignoring source layer res5b
+I0507 11:18:09.533828  5117 net.cpp:816] Ignoring source layer res5b_relu
+I0507 11:18:09.533831  5117 net.cpp:816] Ignoring source layer res5b_res5b_relu_0_split
+I0507 11:18:09.533833  5117 net.cpp:816] Ignoring source layer res5c_branch2a
+I0507 11:18:09.533835  5117 net.cpp:816] Ignoring source layer bn5c_branch2a
+I0507 11:18:09.533836  5117 net.cpp:816] Ignoring source layer scale5c_branch2a
+I0507 11:18:09.533838  5117 net.cpp:816] Ignoring source layer res5c_branch2a_relu
+I0507 11:18:09.533840  5117 net.cpp:816] Ignoring source layer res5c_branch2b
+I0507 11:18:09.533843  5117 net.cpp:816] Ignoring source layer bn5c_branch2b
+I0507 11:18:09.533845  5117 net.cpp:816] Ignoring source layer scale5c_branch2b
+I0507 11:18:09.533848  5117 net.cpp:816] Ignoring source layer res5c_branch2b_relu
+I0507 11:18:09.533849  5117 net.cpp:816] Ignoring source layer res5c_branch2c
+I0507 11:18:09.533851  5117 net.cpp:816] Ignoring source layer bn5c_branch2c
+I0507 11:18:09.533854  5117 net.cpp:816] Ignoring source layer scale5c_branch2c
+I0507 11:18:09.533855  5117 net.cpp:816] Ignoring source layer res5c
+I0507 11:18:09.533856  5117 net.cpp:816] Ignoring source layer res5c_relu
+I0507 11:18:09.533859  5117 net.cpp:816] Ignoring source layer res5c_res5c_relu_0_split
+I0507 11:18:09.533861  5117 net.cpp:816] Ignoring source layer conv1_res05
+I0507 11:18:09.533864  5117 net.cpp:816] Ignoring source layer bn_conv1_res05
+I0507 11:18:09.533864  5117 net.cpp:816] Ignoring source layer scale_conv1_res05
+I0507 11:18:09.533867  5117 net.cpp:816] Ignoring source layer conv1_relu_res05
+I0507 11:18:09.533869  5117 net.cpp:816] Ignoring source layer pool1_res05
+I0507 11:18:09.533871  5117 net.cpp:816] Ignoring source layer pool1_res05_pool1_res05_0_split
+I0507 11:18:09.533872  5117 net.cpp:816] Ignoring source layer res2a_branch1_res05
+I0507 11:18:09.533875  5117 net.cpp:816] Ignoring source layer bn2a_branch1_res05
+I0507 11:18:09.533877  5117 net.cpp:816] Ignoring source layer scale2a_branch1_res05
+I0507 11:18:09.533879  5117 net.cpp:816] Ignoring source layer res2a_branch2a_res05
+I0507 11:18:09.533881  5117 net.cpp:816] Ignoring source layer bn2a_branch2a_res05
+I0507 11:18:09.533884  5117 net.cpp:816] Ignoring source layer scale2a_branch2a_res05
+I0507 11:18:09.533885  5117 net.cpp:816] Ignoring source layer res2a_branch2a_relu_res05
+I0507 11:18:09.533887  5117 net.cpp:816] Ignoring source layer res2a_branch2b_res05
+I0507 11:18:09.533890  5117 net.cpp:816] Ignoring source layer bn2a_branch2b_res05
+I0507 11:18:09.533891  5117 net.cpp:816] Ignoring source layer scale2a_branch2b_res05
+I0507 11:18:09.533893  5117 net.cpp:816] Ignoring source layer res2a_branch2b_relu_res05
+I0507 11:18:09.533895  5117 net.cpp:816] Ignoring source layer res2a_branch2c_res05
+I0507 11:18:09.533897  5117 net.cpp:816] Ignoring source layer bn2a_branch2c_res05
+I0507 11:18:09.533900  5117 net.cpp:816] Ignoring source layer scale2a_branch2c_res05
+I0507 11:18:09.533905  5117 net.cpp:816] Ignoring source layer res2a_res05
+I0507 11:18:09.533906  5117 net.cpp:816] Ignoring source layer res2a_relu_res05
+I0507 11:18:09.533908  5117 net.cpp:816] Ignoring source layer res2a_res05_res2a_relu_res05_0_split
+I0507 11:18:09.533911  5117 net.cpp:816] Ignoring source layer res2b_branch2a_res05
+I0507 11:18:09.533913  5117 net.cpp:816] Ignoring source layer bn2b_branch2a_res05
+I0507 11:18:09.533915  5117 net.cpp:816] Ignoring source layer scale2b_branch2a_res05
+I0507 11:18:09.533916  5117 net.cpp:816] Ignoring source layer res2b_branch2a_relu_res05
+I0507 11:18:09.533920  5117 net.cpp:816] Ignoring source layer res2b_branch2b_res05
+I0507 11:18:09.533921  5117 net.cpp:816] Ignoring source layer bn2b_branch2b_res05
+I0507 11:18:09.533922  5117 net.cpp:816] Ignoring source layer scale2b_branch2b_res05
+I0507 11:18:09.533924  5117 net.cpp:816] Ignoring source layer res2b_branch2b_relu_res05
+I0507 11:18:09.533927  5117 net.cpp:816] Ignoring source layer res2b_branch2c_res05
+I0507 11:18:09.533929  5117 net.cpp:816] Ignoring source layer bn2b_branch2c_res05
+I0507 11:18:09.533931  5117 net.cpp:816] Ignoring source layer scale2b_branch2c_res05
+I0507 11:18:09.533932  5117 net.cpp:816] Ignoring source layer res2b_res05
+I0507 11:18:09.533936  5117 net.cpp:816] Ignoring source layer res2b_relu_res05
+I0507 11:18:09.533936  5117 net.cpp:816] Ignoring source layer res2b_res05_res2b_relu_res05_0_split
+I0507 11:18:09.533938  5117 net.cpp:816] Ignoring source layer res2c_branch2a_res05
+I0507 11:18:09.533941  5117 net.cpp:816] Ignoring source layer bn2c_branch2a_res05
+I0507 11:18:09.533943  5117 net.cpp:816] Ignoring source layer scale2c_branch2a_res05
+I0507 11:18:09.533944  5117 net.cpp:816] Ignoring source layer res2c_branch2a_relu_res05
+I0507 11:18:09.533946  5117 net.cpp:816] Ignoring source layer res2c_branch2b_res05
+I0507 11:18:09.533948  5117 net.cpp:816] Ignoring source layer bn2c_branch2b_res05
+I0507 11:18:09.533951  5117 net.cpp:816] Ignoring source layer scale2c_branch2b_res05
+I0507 11:18:09.533952  5117 net.cpp:816] Ignoring source layer res2c_branch2b_relu_res05
+I0507 11:18:09.533954  5117 net.cpp:816] Ignoring source layer res2c_branch2c_res05
+I0507 11:18:09.533957  5117 net.cpp:816] Ignoring source layer bn2c_branch2c_res05
+I0507 11:18:09.533958  5117 net.cpp:816] Ignoring source layer scale2c_branch2c_res05
+I0507 11:18:09.533960  5117 net.cpp:816] Ignoring source layer res2c_res05
+I0507 11:18:09.533962  5117 net.cpp:816] Ignoring source layer res2c_relu_res05
+I0507 11:18:09.533964  5117 net.cpp:816] Ignoring source layer res2c_res05_res2c_relu_res05_0_split
+I0507 11:18:09.533967  5117 net.cpp:816] Ignoring source layer res3a_branch1_res05
+I0507 11:18:09.533968  5117 net.cpp:816] Ignoring source layer bn3a_branch1_res05
+I0507 11:18:09.533970  5117 net.cpp:816] Ignoring source layer scale3a_branch1_res05
+I0507 11:18:09.533972  5117 net.cpp:816] Ignoring source layer res3a_branch2a_res05
+I0507 11:18:09.533974  5117 net.cpp:816] Ignoring source layer bn3a_branch2a_res05
+I0507 11:18:09.533977  5117 net.cpp:816] Ignoring source layer scale3a_branch2a_res05
+I0507 11:18:09.533978  5117 net.cpp:816] Ignoring source layer res3a_branch2a_relu_res05
+I0507 11:18:09.533980  5117 net.cpp:816] Ignoring source layer res3a_branch2b_res05
+I0507 11:18:09.533982  5117 net.cpp:816] Ignoring source layer bn3a_branch2b_res05
+I0507 11:18:09.533984  5117 net.cpp:816] Ignoring source layer scale3a_branch2b_res05
+I0507 11:18:09.533987  5117 net.cpp:816] Ignoring source layer res3a_branch2b_relu_res05
+I0507 11:18:09.533988  5117 net.cpp:816] Ignoring source layer res3a_branch2c_res05
+I0507 11:18:09.533990  5117 net.cpp:816] Ignoring source layer bn3a_branch2c_res05
+I0507 11:18:09.533993  5117 net.cpp:816] Ignoring source layer scale3a_branch2c_res05
+I0507 11:18:09.533994  5117 net.cpp:816] Ignoring source layer res3a_res05
+I0507 11:18:09.533996  5117 net.cpp:816] Ignoring source layer res3a_relu_res05
+I0507 11:18:09.533998  5117 net.cpp:816] Ignoring source layer res3a_res05_res3a_relu_res05_0_split
+I0507 11:18:09.534004  5117 net.cpp:816] Ignoring source layer res3b1_branch2a_res05
+I0507 11:18:09.534006  5117 net.cpp:816] Ignoring source layer bn3b1_branch2a_res05
+I0507 11:18:09.534008  5117 net.cpp:816] Ignoring source layer scale3b1_branch2a_res05
+I0507 11:18:09.534010  5117 net.cpp:816] Ignoring source layer res3b1_branch2a_relu_res05
+I0507 11:18:09.534013  5117 net.cpp:816] Ignoring source layer res3b1_branch2b_res05
+I0507 11:18:09.534014  5117 net.cpp:816] Ignoring source layer bn3b1_branch2b_res05
+I0507 11:18:09.534015  5117 net.cpp:816] Ignoring source layer scale3b1_branch2b_res05
+I0507 11:18:09.534018  5117 net.cpp:816] Ignoring source layer res3b1_branch2b_relu_res05
+I0507 11:18:09.534019  5117 net.cpp:816] Ignoring source layer res3b1_branch2c_res05
+I0507 11:18:09.534021  5117 net.cpp:816] Ignoring source layer bn3b1_branch2c_res05
+I0507 11:18:09.534024  5117 net.cpp:816] Ignoring source layer scale3b1_branch2c_res05
+I0507 11:18:09.534026  5117 net.cpp:816] Ignoring source layer res3b1_res05
+I0507 11:18:09.534027  5117 net.cpp:816] Ignoring source layer res3b1_relu_res05
+I0507 11:18:09.534029  5117 net.cpp:816] Ignoring source layer res3b1_res05_res3b1_relu_res05_0_split
+I0507 11:18:09.534031  5117 net.cpp:816] Ignoring source layer res3b2_branch2a_res05
+I0507 11:18:09.534034  5117 net.cpp:816] Ignoring source layer bn3b2_branch2a_res05
+I0507 11:18:09.534035  5117 net.cpp:816] Ignoring source layer scale3b2_branch2a_res05
+I0507 11:18:09.534037  5117 net.cpp:816] Ignoring source layer res3b2_branch2a_relu_res05
+I0507 11:18:09.534039  5117 net.cpp:816] Ignoring source layer res3b2_branch2b_res05
+I0507 11:18:09.534041  5117 net.cpp:816] Ignoring source layer bn3b2_branch2b_res05
+I0507 11:18:09.534044  5117 net.cpp:816] Ignoring source layer scale3b2_branch2b_res05
+I0507 11:18:09.534045  5117 net.cpp:816] Ignoring source layer res3b2_branch2b_relu_res05
+I0507 11:18:09.534047  5117 net.cpp:816] Ignoring source layer res3b2_branch2c_res05
+I0507 11:18:09.534049  5117 net.cpp:816] Ignoring source layer bn3b2_branch2c_res05
+I0507 11:18:09.534051  5117 net.cpp:816] Ignoring source layer scale3b2_branch2c_res05
+I0507 11:18:09.534054  5117 net.cpp:816] Ignoring source layer res3b2_res05
+I0507 11:18:09.534055  5117 net.cpp:816] Ignoring source layer res3b2_relu_res05
+I0507 11:18:09.534057  5117 net.cpp:816] Ignoring source layer res3b2_res05_res3b2_relu_res05_0_split
+I0507 11:18:09.534060  5117 net.cpp:816] Ignoring source layer res3b3_branch2a_res05
+I0507 11:18:09.534061  5117 net.cpp:816] Ignoring source layer bn3b3_branch2a_res05
+I0507 11:18:09.534063  5117 net.cpp:816] Ignoring source layer scale3b3_branch2a_res05
+I0507 11:18:09.534065  5117 net.cpp:816] Ignoring source layer res3b3_branch2a_relu_res05
+I0507 11:18:09.534067  5117 net.cpp:816] Ignoring source layer res3b3_branch2b_res05
+I0507 11:18:09.534068  5117 net.cpp:816] Ignoring source layer bn3b3_branch2b_res05
+I0507 11:18:09.534070  5117 net.cpp:816] Ignoring source layer scale3b3_branch2b_res05
+I0507 11:18:09.534073  5117 net.cpp:816] Ignoring source layer res3b3_branch2b_relu_res05
+I0507 11:18:09.534075  5117 net.cpp:816] Ignoring source layer res3b3_branch2c_res05
+I0507 11:18:09.534077  5117 net.cpp:816] Ignoring source layer bn3b3_branch2c_res05
+I0507 11:18:09.534078  5117 net.cpp:816] Ignoring source layer scale3b3_branch2c_res05
+I0507 11:18:09.534081  5117 net.cpp:816] Ignoring source layer res3b3_res05
+I0507 11:18:09.534083  5117 net.cpp:816] Ignoring source layer res3b3_relu_res05
+I0507 11:18:09.534085  5117 net.cpp:816] Ignoring source layer res3b3_res05_res3b3_relu_res05_0_split
+I0507 11:18:09.534086  5117 net.cpp:816] Ignoring source layer res4a_branch1_res05
+I0507 11:18:09.534090  5117 net.cpp:816] Ignoring source layer bn4a_branch1_res05
+I0507 11:18:09.534091  5117 net.cpp:816] Ignoring source layer scale4a_branch1_res05
+I0507 11:18:09.534093  5117 net.cpp:816] Ignoring source layer res4a_branch2a_res05
+I0507 11:18:09.534095  5117 net.cpp:816] Ignoring source layer bn4a_branch2a_res05
+I0507 11:18:09.534097  5117 net.cpp:816] Ignoring source layer scale4a_branch2a_res05
+I0507 11:18:09.534102  5117 net.cpp:816] Ignoring source layer res4a_branch2a_relu_res05
+I0507 11:18:09.534104  5117 net.cpp:816] Ignoring source layer res4a_branch2b_res05
+I0507 11:18:09.534106  5117 net.cpp:816] Ignoring source layer bn4a_branch2b_res05
+I0507 11:18:09.534108  5117 net.cpp:816] Ignoring source layer scale4a_branch2b_res05
+I0507 11:18:09.534111  5117 net.cpp:816] Ignoring source layer res4a_branch2b_relu_res05
+I0507 11:18:09.534112  5117 net.cpp:816] Ignoring source layer res4a_branch2c_res05
+I0507 11:18:09.534114  5117 net.cpp:816] Ignoring source layer bn4a_branch2c_res05
+I0507 11:18:09.534116  5117 net.cpp:816] Ignoring source layer scale4a_branch2c_res05
+I0507 11:18:09.534118  5117 net.cpp:816] Ignoring source layer res4a_res05
+I0507 11:18:09.534121  5117 net.cpp:816] Ignoring source layer res4a_relu_res05
+I0507 11:18:09.534122  5117 net.cpp:816] Ignoring source layer res4a_res05_res4a_relu_res05_0_split
+I0507 11:18:09.534124  5117 net.cpp:816] Ignoring source layer res4b1_branch2a_res05
+I0507 11:18:09.534126  5117 net.cpp:816] Ignoring source layer bn4b1_branch2a_res05
+I0507 11:18:09.534128  5117 net.cpp:816] Ignoring source layer scale4b1_branch2a_res05
+I0507 11:18:09.534129  5117 net.cpp:816] Ignoring source layer res4b1_branch2a_relu_res05
+I0507 11:18:09.534132  5117 net.cpp:816] Ignoring source layer res4b1_branch2b_res05
+I0507 11:18:09.534134  5117 net.cpp:816] Ignoring source layer bn4b1_branch2b_res05
+I0507 11:18:09.534137  5117 net.cpp:816] Ignoring source layer scale4b1_branch2b_res05
+I0507 11:18:09.534138  5117 net.cpp:816] Ignoring source layer res4b1_branch2b_relu_res05
+I0507 11:18:09.534139  5117 net.cpp:816] Ignoring source layer res4b1_branch2c_res05
+I0507 11:18:09.534142  5117 net.cpp:816] Ignoring source layer bn4b1_branch2c_res05
+I0507 11:18:09.534144  5117 net.cpp:816] Ignoring source layer scale4b1_branch2c_res05
+I0507 11:18:09.534145  5117 net.cpp:816] Ignoring source layer res4b1_res05
+I0507 11:18:09.534147  5117 net.cpp:816] Ignoring source layer res4b1_relu_res05
+I0507 11:18:09.534149  5117 net.cpp:816] Ignoring source layer res4b1_res05_res4b1_relu_res05_0_split
+I0507 11:18:09.534152  5117 net.cpp:816] Ignoring source layer res4b2_branch2a_res05
+I0507 11:18:09.534153  5117 net.cpp:816] Ignoring source layer bn4b2_branch2a_res05
+I0507 11:18:09.534155  5117 net.cpp:816] Ignoring source layer scale4b2_branch2a_res05
+I0507 11:18:09.534157  5117 net.cpp:816] Ignoring source layer res4b2_branch2a_relu_res05
+I0507 11:18:09.534159  5117 net.cpp:816] Ignoring source layer res4b2_branch2b_res05
+I0507 11:18:09.534162  5117 net.cpp:816] Ignoring source layer bn4b2_branch2b_res05
+I0507 11:18:09.534163  5117 net.cpp:816] Ignoring source layer scale4b2_branch2b_res05
+I0507 11:18:09.534165  5117 net.cpp:816] Ignoring source layer res4b2_branch2b_relu_res05
+I0507 11:18:09.534168  5117 net.cpp:816] Ignoring source layer res4b2_branch2c_res05
+I0507 11:18:09.534169  5117 net.cpp:816] Ignoring source layer bn4b2_branch2c_res05
+I0507 11:18:09.534171  5117 net.cpp:816] Ignoring source layer scale4b2_branch2c_res05
+I0507 11:18:09.534173  5117 net.cpp:816] Ignoring source layer res4b2_res05
+I0507 11:18:09.534175  5117 net.cpp:816] Ignoring source layer res4b2_relu_res05
+I0507 11:18:09.534178  5117 net.cpp:816] Ignoring source layer res4b2_res05_res4b2_relu_res05_0_split
+I0507 11:18:09.534179  5117 net.cpp:816] Ignoring source layer res4b3_branch2a_res05
+I0507 11:18:09.534181  5117 net.cpp:816] Ignoring source layer bn4b3_branch2a_res05
+I0507 11:18:09.534183  5117 net.cpp:816] Ignoring source layer scale4b3_branch2a_res05
+I0507 11:18:09.534185  5117 net.cpp:816] Ignoring source layer res4b3_branch2a_relu_res05
+I0507 11:18:09.534188  5117 net.cpp:816] Ignoring source layer res4b3_branch2b_res05
+I0507 11:18:09.534189  5117 net.cpp:816] Ignoring source layer bn4b3_branch2b_res05
+I0507 11:18:09.534191  5117 net.cpp:816] Ignoring source layer scale4b3_branch2b_res05
+I0507 11:18:09.534193  5117 net.cpp:816] Ignoring source layer res4b3_branch2b_relu_res05
+I0507 11:18:09.534195  5117 net.cpp:816] Ignoring source layer res4b3_branch2c_res05
+I0507 11:18:09.534200  5117 net.cpp:816] Ignoring source layer bn4b3_branch2c_res05
+I0507 11:18:09.534202  5117 net.cpp:816] Ignoring source layer scale4b3_branch2c_res05
+I0507 11:18:09.534204  5117 net.cpp:816] Ignoring source layer res4b3_res05
+I0507 11:18:09.534206  5117 net.cpp:816] Ignoring source layer res4b3_relu_res05
+I0507 11:18:09.534209  5117 net.cpp:816] Ignoring source layer res4b3_res05_res4b3_relu_res05_0_split
+I0507 11:18:09.534210  5117 net.cpp:816] Ignoring source layer res4b4_branch2a_res05
+I0507 11:18:09.534212  5117 net.cpp:816] Ignoring source layer bn4b4_branch2a_res05
+I0507 11:18:09.534214  5117 net.cpp:816] Ignoring source layer scale4b4_branch2a_res05
+I0507 11:18:09.534216  5117 net.cpp:816] Ignoring source layer res4b4_branch2a_relu_res05
+I0507 11:18:09.534219  5117 net.cpp:816] Ignoring source layer res4b4_branch2b_res05
+I0507 11:18:09.534219  5117 net.cpp:816] Ignoring source layer bn4b4_branch2b_res05
+I0507 11:18:09.534221  5117 net.cpp:816] Ignoring source layer scale4b4_branch2b_res05
+I0507 11:18:09.534224  5117 net.cpp:816] Ignoring source layer res4b4_branch2b_relu_res05
+I0507 11:18:09.534226  5117 net.cpp:816] Ignoring source layer res4b4_branch2c_res05
+I0507 11:18:09.534229  5117 net.cpp:816] Ignoring source layer bn4b4_branch2c_res05
+I0507 11:18:09.534229  5117 net.cpp:816] Ignoring source layer scale4b4_branch2c_res05
+I0507 11:18:09.534232  5117 net.cpp:816] Ignoring source layer res4b4_res05
+I0507 11:18:09.534234  5117 net.cpp:816] Ignoring source layer res4b4_relu_res05
+I0507 11:18:09.534235  5117 net.cpp:816] Ignoring source layer res4b4_res05_res4b4_relu_res05_0_split
+I0507 11:18:09.534237  5117 net.cpp:816] Ignoring source layer res4b5_branch2a_res05
+I0507 11:18:09.534240  5117 net.cpp:816] Ignoring source layer bn4b5_branch2a_res05
+I0507 11:18:09.534241  5117 net.cpp:816] Ignoring source layer scale4b5_branch2a_res05
+I0507 11:18:09.534243  5117 net.cpp:816] Ignoring source layer res4b5_branch2a_relu_res05
+I0507 11:18:09.534245  5117 net.cpp:816] Ignoring source layer res4b5_branch2b_res05
+I0507 11:18:09.534247  5117 net.cpp:816] Ignoring source layer bn4b5_branch2b_res05
+I0507 11:18:09.534250  5117 net.cpp:816] Ignoring source layer scale4b5_branch2b_res05
+I0507 11:18:09.534251  5117 net.cpp:816] Ignoring source layer res4b5_branch2b_relu_res05
+I0507 11:18:09.534253  5117 net.cpp:816] Ignoring source layer res4b5_branch2c_res05
+I0507 11:18:09.534255  5117 net.cpp:816] Ignoring source layer bn4b5_branch2c_res05
+I0507 11:18:09.534257  5117 net.cpp:816] Ignoring source layer scale4b5_branch2c_res05
+I0507 11:18:09.534260  5117 net.cpp:816] Ignoring source layer res4b5_res05
+I0507 11:18:09.534261  5117 net.cpp:816] Ignoring source layer res4b5_relu_res05
+I0507 11:18:09.534263  5117 net.cpp:816] Ignoring source layer res4b5_res05_res4b5_relu_res05_0_split
+I0507 11:18:09.534265  5117 net.cpp:816] Ignoring source layer res4b6_branch2a_res05
+I0507 11:18:09.534267  5117 net.cpp:816] Ignoring source layer bn4b6_branch2a_res05
+I0507 11:18:09.534270  5117 net.cpp:816] Ignoring source layer scale4b6_branch2a_res05
+I0507 11:18:09.534271  5117 net.cpp:816] Ignoring source layer res4b6_branch2a_relu_res05
+I0507 11:18:09.534273  5117 net.cpp:816] Ignoring source layer res4b6_branch2b_res05
+I0507 11:18:09.534274  5117 net.cpp:816] Ignoring source layer bn4b6_branch2b_res05
+I0507 11:18:09.534276  5117 net.cpp:816] Ignoring source layer scale4b6_branch2b_res05
+I0507 11:18:09.534279  5117 net.cpp:816] Ignoring source layer res4b6_branch2b_relu_res05
+I0507 11:18:09.534281  5117 net.cpp:816] Ignoring source layer res4b6_branch2c_res05
+I0507 11:18:09.534283  5117 net.cpp:816] Ignoring source layer bn4b6_branch2c_res05
+I0507 11:18:09.534286  5117 net.cpp:816] Ignoring source layer scale4b6_branch2c_res05
+I0507 11:18:09.534287  5117 net.cpp:816] Ignoring source layer res4b6_res05
+I0507 11:18:09.534289  5117 net.cpp:816] Ignoring source layer res4b6_relu_res05
+I0507 11:18:09.534291  5117 net.cpp:816] Ignoring source layer res4b6_res05_res4b6_relu_res05_0_split
+I0507 11:18:09.534296  5117 net.cpp:816] Ignoring source layer res4b7_branch2a_res05
+I0507 11:18:09.534299  5117 net.cpp:816] Ignoring source layer bn4b7_branch2a_res05
+I0507 11:18:09.534301  5117 net.cpp:816] Ignoring source layer scale4b7_branch2a_res05
+I0507 11:18:09.534302  5117 net.cpp:816] Ignoring source layer res4b7_branch2a_relu_res05
+I0507 11:18:09.534304  5117 net.cpp:816] Ignoring source layer res4b7_branch2b_res05
+I0507 11:18:09.534307  5117 net.cpp:816] Ignoring source layer bn4b7_branch2b_res05
+I0507 11:18:09.534309  5117 net.cpp:816] Ignoring source layer scale4b7_branch2b_res05
+I0507 11:18:09.534310  5117 net.cpp:816] Ignoring source layer res4b7_branch2b_relu_res05
+I0507 11:18:09.534312  5117 net.cpp:816] Ignoring source layer res4b7_branch2c_res05
+I0507 11:18:09.534315  5117 net.cpp:816] Ignoring source layer bn4b7_branch2c_res05
+I0507 11:18:09.534317  5117 net.cpp:816] Ignoring source layer scale4b7_branch2c_res05
+I0507 11:18:09.534318  5117 net.cpp:816] Ignoring source layer res4b7_res05
+I0507 11:18:09.534320  5117 net.cpp:816] Ignoring source layer res4b7_relu_res05
+I0507 11:18:09.534323  5117 net.cpp:816] Ignoring source layer res4b7_res05_res4b7_relu_res05_0_split
+I0507 11:18:09.534324  5117 net.cpp:816] Ignoring source layer res4b8_branch2a_res05
+I0507 11:18:09.534327  5117 net.cpp:816] Ignoring source layer bn4b8_branch2a_res05
+I0507 11:18:09.534328  5117 net.cpp:816] Ignoring source layer scale4b8_branch2a_res05
+I0507 11:18:09.534332  5117 net.cpp:816] Ignoring source layer res4b8_branch2a_relu_res05
+I0507 11:18:09.534332  5117 net.cpp:816] Ignoring source layer res4b8_branch2b_res05
+I0507 11:18:09.534334  5117 net.cpp:816] Ignoring source layer bn4b8_branch2b_res05
+I0507 11:18:09.534337  5117 net.cpp:816] Ignoring source layer scale4b8_branch2b_res05
+I0507 11:18:09.534338  5117 net.cpp:816] Ignoring source layer res4b8_branch2b_relu_res05
+I0507 11:18:09.534340  5117 net.cpp:816] Ignoring source layer res4b8_branch2c_res05
+I0507 11:18:09.534343  5117 net.cpp:816] Ignoring source layer bn4b8_branch2c_res05
+I0507 11:18:09.534344  5117 net.cpp:816] Ignoring source layer scale4b8_branch2c_res05
+I0507 11:18:09.534346  5117 net.cpp:816] Ignoring source layer res4b8_res05
+I0507 11:18:09.534348  5117 net.cpp:816] Ignoring source layer res4b8_relu_res05
+I0507 11:18:09.534350  5117 net.cpp:816] Ignoring source layer res4b8_res05_res4b8_relu_res05_0_split
+I0507 11:18:09.534353  5117 net.cpp:816] Ignoring source layer res4b9_branch2a_res05
+I0507 11:18:09.534354  5117 net.cpp:816] Ignoring source layer bn4b9_branch2a_res05
+I0507 11:18:09.534356  5117 net.cpp:816] Ignoring source layer scale4b9_branch2a_res05
+I0507 11:18:09.534358  5117 net.cpp:816] Ignoring source layer res4b9_branch2a_relu_res05
+I0507 11:18:09.534360  5117 net.cpp:816] Ignoring source layer res4b9_branch2b_res05
+I0507 11:18:09.534363  5117 net.cpp:816] Ignoring source layer bn4b9_branch2b_res05
+I0507 11:18:09.534364  5117 net.cpp:816] Ignoring source layer scale4b9_branch2b_res05
+I0507 11:18:09.534366  5117 net.cpp:816] Ignoring source layer res4b9_branch2b_relu_res05
+I0507 11:18:09.534368  5117 net.cpp:816] Ignoring source layer res4b9_branch2c_res05
+I0507 11:18:09.534370  5117 net.cpp:816] Ignoring source layer bn4b9_branch2c_res05
+I0507 11:18:09.534371  5117 net.cpp:816] Ignoring source layer scale4b9_branch2c_res05
+I0507 11:18:09.534373  5117 net.cpp:816] Ignoring source layer res4b9_res05
+I0507 11:18:09.534375  5117 net.cpp:816] Ignoring source layer res4b9_relu_res05
+I0507 11:18:09.534379  5117 net.cpp:816] Ignoring source layer res4b9_res05_res4b9_relu_res05_0_split
+I0507 11:18:09.534380  5117 net.cpp:816] Ignoring source layer res4b10_branch2a_res05
+I0507 11:18:09.534382  5117 net.cpp:816] Ignoring source layer bn4b10_branch2a_res05
+I0507 11:18:09.534384  5117 net.cpp:816] Ignoring source layer scale4b10_branch2a_res05
+I0507 11:18:09.534386  5117 net.cpp:816] Ignoring source layer res4b10_branch2a_relu_res05
+I0507 11:18:09.534389  5117 net.cpp:816] Ignoring source layer res4b10_branch2b_res05
+I0507 11:18:09.534390  5117 net.cpp:816] Ignoring source layer bn4b10_branch2b_res05
+I0507 11:18:09.534395  5117 net.cpp:816] Ignoring source layer scale4b10_branch2b_res05
+I0507 11:18:09.534397  5117 net.cpp:816] Ignoring source layer res4b10_branch2b_relu_res05
+I0507 11:18:09.534399  5117 net.cpp:816] Ignoring source layer res4b10_branch2c_res05
+I0507 11:18:09.534401  5117 net.cpp:816] Ignoring source layer bn4b10_branch2c_res05
+I0507 11:18:09.534404  5117 net.cpp:816] Ignoring source layer scale4b10_branch2c_res05
+I0507 11:18:09.534406  5117 net.cpp:816] Ignoring source layer res4b10_res05
+I0507 11:18:09.534407  5117 net.cpp:816] Ignoring source layer res4b10_relu_res05
+I0507 11:18:09.534409  5117 net.cpp:816] Ignoring source layer res4b10_res05_res4b10_relu_res05_0_split
+I0507 11:18:09.534411  5117 net.cpp:816] Ignoring source layer res4b11_branch2a_res05
+I0507 11:18:09.534415  5117 net.cpp:816] Ignoring source layer bn4b11_branch2a_res05
+I0507 11:18:09.534415  5117 net.cpp:816] Ignoring source layer scale4b11_branch2a_res05
+I0507 11:18:09.534417  5117 net.cpp:816] Ignoring source layer res4b11_branch2a_relu_res05
+I0507 11:18:09.534420  5117 net.cpp:816] Ignoring source layer res4b11_branch2b_res05
+I0507 11:18:09.534421  5117 net.cpp:816] Ignoring source layer bn4b11_branch2b_res05
+I0507 11:18:09.534423  5117 net.cpp:816] Ignoring source layer scale4b11_branch2b_res05
+I0507 11:18:09.534425  5117 net.cpp:816] Ignoring source layer res4b11_branch2b_relu_res05
+I0507 11:18:09.534427  5117 net.cpp:816] Ignoring source layer res4b11_branch2c_res05
+I0507 11:18:09.534430  5117 net.cpp:816] Ignoring source layer bn4b11_branch2c_res05
+I0507 11:18:09.534431  5117 net.cpp:816] Ignoring source layer scale4b11_branch2c_res05
+I0507 11:18:09.534433  5117 net.cpp:816] Ignoring source layer res4b11_res05
+I0507 11:18:09.534435  5117 net.cpp:816] Ignoring source layer res4b11_relu_res05
+I0507 11:18:09.534437  5117 net.cpp:816] Ignoring source layer res4b11_res05_res4b11_relu_res05_0_split
+I0507 11:18:09.534440  5117 net.cpp:816] Ignoring source layer res4b12_branch2a_res05
+I0507 11:18:09.534441  5117 net.cpp:816] Ignoring source layer bn4b12_branch2a_res05
+I0507 11:18:09.534443  5117 net.cpp:816] Ignoring source layer scale4b12_branch2a_res05
+I0507 11:18:09.534446  5117 net.cpp:816] Ignoring source layer res4b12_branch2a_relu_res05
+I0507 11:18:09.534447  5117 net.cpp:816] Ignoring source layer res4b12_branch2b_res05
+I0507 11:18:09.534449  5117 net.cpp:816] Ignoring source layer bn4b12_branch2b_res05
+I0507 11:18:09.534451  5117 net.cpp:816] Ignoring source layer scale4b12_branch2b_res05
+I0507 11:18:09.534453  5117 net.cpp:816] Ignoring source layer res4b12_branch2b_relu_res05
+I0507 11:18:09.534456  5117 net.cpp:816] Ignoring source layer res4b12_branch2c_res05
+I0507 11:18:09.534457  5117 net.cpp:816] Ignoring source layer bn4b12_branch2c_res05
+I0507 11:18:09.534458  5117 net.cpp:816] Ignoring source layer scale4b12_branch2c_res05
+I0507 11:18:09.534461  5117 net.cpp:816] Ignoring source layer res4b12_res05
+I0507 11:18:09.534463  5117 net.cpp:816] Ignoring source layer res4b12_relu_res05
+I0507 11:18:09.534464  5117 net.cpp:816] Ignoring source layer res4b12_res05_res4b12_relu_res05_0_split
+I0507 11:18:09.534466  5117 net.cpp:816] Ignoring source layer res4b13_branch2a_res05
+I0507 11:18:09.534469  5117 net.cpp:816] Ignoring source layer bn4b13_branch2a_res05
+I0507 11:18:09.534471  5117 net.cpp:816] Ignoring source layer scale4b13_branch2a_res05
+I0507 11:18:09.534472  5117 net.cpp:816] Ignoring source layer res4b13_branch2a_relu_res05
+I0507 11:18:09.534474  5117 net.cpp:816] Ignoring source layer res4b13_branch2b_res05
+I0507 11:18:09.534477  5117 net.cpp:816] Ignoring source layer bn4b13_branch2b_res05
+I0507 11:18:09.534479  5117 net.cpp:816] Ignoring source layer scale4b13_branch2b_res05
+I0507 11:18:09.534481  5117 net.cpp:816] Ignoring source layer res4b13_branch2b_relu_res05
+I0507 11:18:09.534482  5117 net.cpp:816] Ignoring source layer res4b13_branch2c_res05
+I0507 11:18:09.534485  5117 net.cpp:816] Ignoring source layer bn4b13_branch2c_res05
+I0507 11:18:09.534487  5117 net.cpp:816] Ignoring source layer scale4b13_branch2c_res05
+I0507 11:18:09.534492  5117 net.cpp:816] Ignoring source layer res4b13_res05
+I0507 11:18:09.534494  5117 net.cpp:816] Ignoring source layer res4b13_relu_res05
+I0507 11:18:09.534497  5117 net.cpp:816] Ignoring source layer res4b13_res05_res4b13_relu_res05_0_split
+I0507 11:18:09.534498  5117 net.cpp:816] Ignoring source layer res4b14_branch2a_res05
+I0507 11:18:09.534500  5117 net.cpp:816] Ignoring source layer bn4b14_branch2a_res05
+I0507 11:18:09.534502  5117 net.cpp:816] Ignoring source layer scale4b14_branch2a_res05
+I0507 11:18:09.534504  5117 net.cpp:816] Ignoring source layer res4b14_branch2a_relu_res05
+I0507 11:18:09.534507  5117 net.cpp:816] Ignoring source layer res4b14_branch2b_res05
+I0507 11:18:09.534508  5117 net.cpp:816] Ignoring source layer bn4b14_branch2b_res05
+I0507 11:18:09.534509  5117 net.cpp:816] Ignoring source layer scale4b14_branch2b_res05
+I0507 11:18:09.534512  5117 net.cpp:816] Ignoring source layer res4b14_branch2b_relu_res05
+I0507 11:18:09.534514  5117 net.cpp:816] Ignoring source layer res4b14_branch2c_res05
+I0507 11:18:09.534515  5117 net.cpp:816] Ignoring source layer bn4b14_branch2c_res05
+I0507 11:18:09.534518  5117 net.cpp:816] Ignoring source layer scale4b14_branch2c_res05
+I0507 11:18:09.534520  5117 net.cpp:816] Ignoring source layer res4b14_res05
+I0507 11:18:09.534521  5117 net.cpp:816] Ignoring source layer res4b14_relu_res05
+I0507 11:18:09.534523  5117 net.cpp:816] Ignoring source layer res4b14_res05_res4b14_relu_res05_0_split
+I0507 11:18:09.534525  5117 net.cpp:816] Ignoring source layer res4b15_branch2a_res05
+I0507 11:18:09.534528  5117 net.cpp:816] Ignoring source layer bn4b15_branch2a_res05
+I0507 11:18:09.534530  5117 net.cpp:816] Ignoring source layer scale4b15_branch2a_res05
+I0507 11:18:09.534533  5117 net.cpp:816] Ignoring source layer res4b15_branch2a_relu_res05
+I0507 11:18:09.534533  5117 net.cpp:816] Ignoring source layer res4b15_branch2b_res05
+I0507 11:18:09.534536  5117 net.cpp:816] Ignoring source layer bn4b15_branch2b_res05
+I0507 11:18:09.534538  5117 net.cpp:816] Ignoring source layer scale4b15_branch2b_res05
+I0507 11:18:09.534539  5117 net.cpp:816] Ignoring source layer res4b15_branch2b_relu_res05
+I0507 11:18:09.534541  5117 net.cpp:816] Ignoring source layer res4b15_branch2c_res05
+I0507 11:18:09.534544  5117 net.cpp:816] Ignoring source layer bn4b15_branch2c_res05
+I0507 11:18:09.534545  5117 net.cpp:816] Ignoring source layer scale4b15_branch2c_res05
+I0507 11:18:09.534548  5117 net.cpp:816] Ignoring source layer res4b15_res05
+I0507 11:18:09.534549  5117 net.cpp:816] Ignoring source layer res4b15_relu_res05
+I0507 11:18:09.534551  5117 net.cpp:816] Ignoring source layer res4b15_res05_res4b15_relu_res05_0_split
+I0507 11:18:09.534554  5117 net.cpp:816] Ignoring source layer res4b16_branch2a_res05
+I0507 11:18:09.534555  5117 net.cpp:816] Ignoring source layer bn4b16_branch2a_res05
+I0507 11:18:09.534557  5117 net.cpp:816] Ignoring source layer scale4b16_branch2a_res05
+I0507 11:18:09.534559  5117 net.cpp:816] Ignoring source layer res4b16_branch2a_relu_res05
+I0507 11:18:09.534561  5117 net.cpp:816] Ignoring source layer res4b16_branch2b_res05
+I0507 11:18:09.534564  5117 net.cpp:816] Ignoring source layer bn4b16_branch2b_res05
+I0507 11:18:09.534565  5117 net.cpp:816] Ignoring source layer scale4b16_branch2b_res05
+I0507 11:18:09.534567  5117 net.cpp:816] Ignoring source layer res4b16_branch2b_relu_res05
+I0507 11:18:09.534569  5117 net.cpp:816] Ignoring source layer res4b16_branch2c_res05
+I0507 11:18:09.534571  5117 net.cpp:816] Ignoring source layer bn4b16_branch2c_res05
+I0507 11:18:09.534574  5117 net.cpp:816] Ignoring source layer scale4b16_branch2c_res05
+I0507 11:18:09.534575  5117 net.cpp:816] Ignoring source layer res4b16_res05
+I0507 11:18:09.534577  5117 net.cpp:816] Ignoring source layer res4b16_relu_res05
+I0507 11:18:09.534579  5117 net.cpp:816] Ignoring source layer res4b16_res05_res4b16_relu_res05_0_split
+I0507 11:18:09.534581  5117 net.cpp:816] Ignoring source layer res4b17_branch2a_res05
+I0507 11:18:09.534586  5117 net.cpp:816] Ignoring source layer bn4b17_branch2a_res05
+I0507 11:18:09.534590  5117 net.cpp:816] Ignoring source layer scale4b17_branch2a_res05
+I0507 11:18:09.534591  5117 net.cpp:816] Ignoring source layer res4b17_branch2a_relu_res05
+I0507 11:18:09.534593  5117 net.cpp:816] Ignoring source layer res4b17_branch2b_res05
+I0507 11:18:09.534595  5117 net.cpp:816] Ignoring source layer bn4b17_branch2b_res05
+I0507 11:18:09.534597  5117 net.cpp:816] Ignoring source layer scale4b17_branch2b_res05
+I0507 11:18:09.534600  5117 net.cpp:816] Ignoring source layer res4b17_branch2b_relu_res05
+I0507 11:18:09.534601  5117 net.cpp:816] Ignoring source layer res4b17_branch2c_res05
+I0507 11:18:09.534603  5117 net.cpp:816] Ignoring source layer bn4b17_branch2c_res05
+I0507 11:18:09.534605  5117 net.cpp:816] Ignoring source layer scale4b17_branch2c_res05
+I0507 11:18:09.534607  5117 net.cpp:816] Ignoring source layer res4b17_res05
+I0507 11:18:09.534610  5117 net.cpp:816] Ignoring source layer res4b17_relu_res05
+I0507 11:18:09.534611  5117 net.cpp:816] Ignoring source layer res4b17_res05_res4b17_relu_res05_0_split
+I0507 11:18:09.534613  5117 net.cpp:816] Ignoring source layer res4b18_branch2a_res05
+I0507 11:18:09.534615  5117 net.cpp:816] Ignoring source layer bn4b18_branch2a_res05
+I0507 11:18:09.534617  5117 net.cpp:816] Ignoring source layer scale4b18_branch2a_res05
+I0507 11:18:09.534620  5117 net.cpp:816] Ignoring source layer res4b18_branch2a_relu_res05
+I0507 11:18:09.534621  5117 net.cpp:816] Ignoring source layer res4b18_branch2b_res05
+I0507 11:18:09.534623  5117 net.cpp:816] Ignoring source layer bn4b18_branch2b_res05
+I0507 11:18:09.534626  5117 net.cpp:816] Ignoring source layer scale4b18_branch2b_res05
+I0507 11:18:09.534627  5117 net.cpp:816] Ignoring source layer res4b18_branch2b_relu_res05
+I0507 11:18:09.534629  5117 net.cpp:816] Ignoring source layer res4b18_branch2c_res05
+I0507 11:18:09.534631  5117 net.cpp:816] Ignoring source layer bn4b18_branch2c_res05
+I0507 11:18:09.534633  5117 net.cpp:816] Ignoring source layer scale4b18_branch2c_res05
+I0507 11:18:09.534636  5117 net.cpp:816] Ignoring source layer res4b18_res05
+I0507 11:18:09.534637  5117 net.cpp:816] Ignoring source layer res4b18_relu_res05
+I0507 11:18:09.534639  5117 net.cpp:816] Ignoring source layer res4b18_res05_res4b18_relu_res05_0_split
+I0507 11:18:09.534641  5117 net.cpp:816] Ignoring source layer res4b19_branch2a_res05
+I0507 11:18:09.534642  5117 net.cpp:816] Ignoring source layer bn4b19_branch2a_res05
+I0507 11:18:09.534646  5117 net.cpp:816] Ignoring source layer scale4b19_branch2a_res05
+I0507 11:18:09.534647  5117 net.cpp:816] Ignoring source layer res4b19_branch2a_relu_res05
+I0507 11:18:09.534648  5117 net.cpp:816] Ignoring source layer res4b19_branch2b_res05
+I0507 11:18:09.534651  5117 net.cpp:816] Ignoring source layer bn4b19_branch2b_res05
+I0507 11:18:09.534653  5117 net.cpp:816] Ignoring source layer scale4b19_branch2b_res05
+I0507 11:18:09.534656  5117 net.cpp:816] Ignoring source layer res4b19_branch2b_relu_res05
+I0507 11:18:09.534657  5117 net.cpp:816] Ignoring source layer res4b19_branch2c_res05
+I0507 11:18:09.534658  5117 net.cpp:816] Ignoring source layer bn4b19_branch2c_res05
+I0507 11:18:09.534662  5117 net.cpp:816] Ignoring source layer scale4b19_branch2c_res05
+I0507 11:18:09.534663  5117 net.cpp:816] Ignoring source layer res4b19_res05
+I0507 11:18:09.534665  5117 net.cpp:816] Ignoring source layer res4b19_relu_res05
+I0507 11:18:09.534667  5117 net.cpp:816] Ignoring source layer res4b19_res05_res4b19_relu_res05_0_split
+I0507 11:18:09.534669  5117 net.cpp:816] Ignoring source layer res4b20_branch2a_res05
+I0507 11:18:09.534672  5117 net.cpp:816] Ignoring source layer bn4b20_branch2a_res05
+I0507 11:18:09.534672  5117 net.cpp:816] Ignoring source layer scale4b20_branch2a_res05
+I0507 11:18:09.534674  5117 net.cpp:816] Ignoring source layer res4b20_branch2a_relu_res05
+I0507 11:18:09.534677  5117 net.cpp:816] Ignoring source layer res4b20_branch2b_res05
+I0507 11:18:09.534679  5117 net.cpp:816] Ignoring source layer bn4b20_branch2b_res05
+I0507 11:18:09.534684  5117 net.cpp:816] Ignoring source layer scale4b20_branch2b_res05
+I0507 11:18:09.534687  5117 net.cpp:816] Ignoring source layer res4b20_branch2b_relu_res05
+I0507 11:18:09.534688  5117 net.cpp:816] Ignoring source layer res4b20_branch2c_res05
+I0507 11:18:09.534690  5117 net.cpp:816] Ignoring source layer bn4b20_branch2c_res05
+I0507 11:18:09.534693  5117 net.cpp:816] Ignoring source layer scale4b20_branch2c_res05
+I0507 11:18:09.534694  5117 net.cpp:816] Ignoring source layer res4b20_res05
+I0507 11:18:09.534696  5117 net.cpp:816] Ignoring source layer res4b20_relu_res05
+I0507 11:18:09.534698  5117 net.cpp:816] Ignoring source layer res4b20_res05_res4b20_relu_res05_0_split
+I0507 11:18:09.534700  5117 net.cpp:816] Ignoring source layer res4b21_branch2a_res05
+I0507 11:18:09.534703  5117 net.cpp:816] Ignoring source layer bn4b21_branch2a_res05
+I0507 11:18:09.534704  5117 net.cpp:816] Ignoring source layer scale4b21_branch2a_res05
+I0507 11:18:09.534706  5117 net.cpp:816] Ignoring source layer res4b21_branch2a_relu_res05
+I0507 11:18:09.534708  5117 net.cpp:816] Ignoring source layer res4b21_branch2b_res05
+I0507 11:18:09.534709  5117 net.cpp:816] Ignoring source layer bn4b21_branch2b_res05
+I0507 11:18:09.534711  5117 net.cpp:816] Ignoring source layer scale4b21_branch2b_res05
+I0507 11:18:09.534714  5117 net.cpp:816] Ignoring source layer res4b21_branch2b_relu_res05
+I0507 11:18:09.534715  5117 net.cpp:816] Ignoring source layer res4b21_branch2c_res05
+I0507 11:18:09.534718  5117 net.cpp:816] Ignoring source layer bn4b21_branch2c_res05
+I0507 11:18:09.534719  5117 net.cpp:816] Ignoring source layer scale4b21_branch2c_res05
+I0507 11:18:09.534721  5117 net.cpp:816] Ignoring source layer res4b21_res05
+I0507 11:18:09.534723  5117 net.cpp:816] Ignoring source layer res4b21_relu_res05
+I0507 11:18:09.534725  5117 net.cpp:816] Ignoring source layer res4b21_res05_res4b21_relu_res05_0_split
+I0507 11:18:09.534727  5117 net.cpp:816] Ignoring source layer res4b22_branch2a_res05
+I0507 11:18:09.534729  5117 net.cpp:816] Ignoring source layer bn4b22_branch2a_res05
+I0507 11:18:09.534731  5117 net.cpp:816] Ignoring source layer scale4b22_branch2a_res05
+I0507 11:18:09.534734  5117 net.cpp:816] Ignoring source layer res4b22_branch2a_relu_res05
+I0507 11:18:09.534735  5117 net.cpp:816] Ignoring source layer res4b22_branch2b_res05
+I0507 11:18:09.534737  5117 net.cpp:816] Ignoring source layer bn4b22_branch2b_res05
+I0507 11:18:09.534739  5117 net.cpp:816] Ignoring source layer scale4b22_branch2b_res05
+I0507 11:18:09.534741  5117 net.cpp:816] Ignoring source layer res4b22_branch2b_relu_res05
+I0507 11:18:09.534742  5117 net.cpp:816] Ignoring source layer res4b22_branch2c_res05
+I0507 11:18:09.534745  5117 net.cpp:816] Ignoring source layer bn4b22_branch2c_res05
+I0507 11:18:09.534747  5117 net.cpp:816] Ignoring source layer scale4b22_branch2c_res05
+I0507 11:18:09.534749  5117 net.cpp:816] Ignoring source layer res4b22_res05
+I0507 11:18:09.534750  5117 net.cpp:816] Ignoring source layer res4b22_relu_res05
+I0507 11:18:09.534754  5117 net.cpp:816] Ignoring source layer res4b22_res05_res4b22_relu_res05_0_split
+I0507 11:18:09.534755  5117 net.cpp:816] Ignoring source layer res5a_branch1_res05
+I0507 11:18:09.534757  5117 net.cpp:816] Ignoring source layer bn5a_branch1_res05
+I0507 11:18:09.534759  5117 net.cpp:816] Ignoring source layer scale5a_branch1_res05
+I0507 11:18:09.534761  5117 net.cpp:816] Ignoring source layer res5a_branch2a_res05
+I0507 11:18:09.534763  5117 net.cpp:816] Ignoring source layer bn5a_branch2a_res05
+I0507 11:18:09.534765  5117 net.cpp:816] Ignoring source layer scale5a_branch2a_res05
+I0507 11:18:09.534766  5117 net.cpp:816] Ignoring source layer res5a_branch2a_relu_res05
+I0507 11:18:09.534770  5117 net.cpp:816] Ignoring source layer res5a_branch2b_res05
+I0507 11:18:09.534771  5117 net.cpp:816] Ignoring source layer bn5a_branch2b_res05
+I0507 11:18:09.534772  5117 net.cpp:816] Ignoring source layer scale5a_branch2b_res05
+I0507 11:18:09.534775  5117 net.cpp:816] Ignoring source layer res5a_branch2b_relu_res05
+I0507 11:18:09.534777  5117 net.cpp:816] Ignoring source layer res5a_branch2c_res05
+I0507 11:18:09.534782  5117 net.cpp:816] Ignoring source layer bn5a_branch2c_res05
+I0507 11:18:09.534785  5117 net.cpp:816] Ignoring source layer scale5a_branch2c_res05
+I0507 11:18:09.534785  5117 net.cpp:816] Ignoring source layer res5a_res05
+I0507 11:18:09.534788  5117 net.cpp:816] Ignoring source layer res5a_relu_res05
+I0507 11:18:09.534790  5117 net.cpp:816] Ignoring source layer res5a_res05_res5a_relu_res05_0_split
+I0507 11:18:09.534792  5117 net.cpp:816] Ignoring source layer res5b_branch2a_res05
+I0507 11:18:09.534793  5117 net.cpp:816] Ignoring source layer bn5b_branch2a_res05
+I0507 11:18:09.534796  5117 net.cpp:816] Ignoring source layer scale5b_branch2a_res05
+I0507 11:18:09.534798  5117 net.cpp:816] Ignoring source layer res5b_branch2a_relu_res05
+I0507 11:18:09.534801  5117 net.cpp:816] Ignoring source layer res5b_branch2b_res05
+I0507 11:18:09.534802  5117 net.cpp:816] Ignoring source layer bn5b_branch2b_res05
+I0507 11:18:09.534804  5117 net.cpp:816] Ignoring source layer scale5b_branch2b_res05
+I0507 11:18:09.534806  5117 net.cpp:816] Ignoring source layer res5b_branch2b_relu_res05
+I0507 11:18:09.534808  5117 net.cpp:816] Ignoring source layer res5b_branch2c_res05
+I0507 11:18:09.534811  5117 net.cpp:816] Ignoring source layer bn5b_branch2c_res05
+I0507 11:18:09.534812  5117 net.cpp:816] Ignoring source layer scale5b_branch2c_res05
+I0507 11:18:09.534814  5117 net.cpp:816] Ignoring source layer res5b_res05
+I0507 11:18:09.534816  5117 net.cpp:816] Ignoring source layer res5b_relu_res05
+I0507 11:18:09.534818  5117 net.cpp:816] Ignoring source layer res5b_res05_res5b_relu_res05_0_split
+I0507 11:18:09.534821  5117 net.cpp:816] Ignoring source layer res5c_branch2a_res05
+I0507 11:18:09.534823  5117 net.cpp:816] Ignoring source layer bn5c_branch2a_res05
+I0507 11:18:09.534824  5117 net.cpp:816] Ignoring source layer scale5c_branch2a_res05
+I0507 11:18:09.534826  5117 net.cpp:816] Ignoring source layer res5c_branch2a_relu_res05
+I0507 11:18:09.534828  5117 net.cpp:816] Ignoring source layer res5c_branch2b_res05
+I0507 11:18:09.534831  5117 net.cpp:816] Ignoring source layer bn5c_branch2b_res05
+I0507 11:18:09.534832  5117 net.cpp:816] Ignoring source layer scale5c_branch2b_res05
+I0507 11:18:09.534834  5117 net.cpp:816] Ignoring source layer res5c_branch2b_relu_res05
+I0507 11:18:09.534837  5117 net.cpp:816] Ignoring source layer res5c_branch2c_res05
+I0507 11:18:09.534838  5117 net.cpp:816] Ignoring source layer bn5c_branch2c_res05
+I0507 11:18:09.534840  5117 net.cpp:816] Ignoring source layer scale5c_branch2c_res05
+I0507 11:18:09.534842  5117 net.cpp:816] Ignoring source layer res5c_res05
+I0507 11:18:09.534844  5117 net.cpp:816] Ignoring source layer res5c_relu_res05
+I0507 11:18:09.534847  5117 net.cpp:816] Ignoring source layer res5c_res05_res5c_relu_res05_0_split
+I0507 11:18:09.534848  5117 net.cpp:816] Ignoring source layer conv1_res075
+I0507 11:18:09.534850  5117 net.cpp:816] Ignoring source layer bn_conv1_res075
+I0507 11:18:09.534852  5117 net.cpp:816] Ignoring source layer scale_conv1_res075
+I0507 11:18:09.534854  5117 net.cpp:816] Ignoring source layer conv1_relu_res075
+I0507 11:18:09.534857  5117 net.cpp:816] Ignoring source layer pool1_res075
+I0507 11:18:09.534858  5117 net.cpp:816] Ignoring source layer pool1_res075_pool1_res075_0_split
+I0507 11:18:09.534860  5117 net.cpp:816] Ignoring source layer res2a_branch1_res075
+I0507 11:18:09.534862  5117 net.cpp:816] Ignoring source layer bn2a_branch1_res075
+I0507 11:18:09.534864  5117 net.cpp:816] Ignoring source layer scale2a_branch1_res075
+I0507 11:18:09.534867  5117 net.cpp:816] Ignoring source layer res2a_branch2a_res075
+I0507 11:18:09.534868  5117 net.cpp:816] Ignoring source layer bn2a_branch2a_res075
+I0507 11:18:09.534870  5117 net.cpp:816] Ignoring source layer scale2a_branch2a_res075
+I0507 11:18:09.534873  5117 net.cpp:816] Ignoring source layer res2a_branch2a_relu_res075
+I0507 11:18:09.534874  5117 net.cpp:816] Ignoring source layer res2a_branch2b_res075
+I0507 11:18:09.534884  5117 net.cpp:816] Ignoring source layer bn2a_branch2b_res075
+I0507 11:18:09.534890  5117 net.cpp:816] Ignoring source layer scale2a_branch2b_res075
+I0507 11:18:09.534893  5117 net.cpp:816] Ignoring source layer res2a_branch2b_relu_res075
+I0507 11:18:09.534894  5117 net.cpp:816] Ignoring source layer res2a_branch2c_res075
+I0507 11:18:09.534896  5117 net.cpp:816] Ignoring source layer bn2a_branch2c_res075
+I0507 11:18:09.534914  5117 net.cpp:816] Ignoring source layer scale2a_branch2c_res075
+I0507 11:18:09.534915  5117 net.cpp:816] Ignoring source layer res2a_res075
+I0507 11:18:09.534917  5117 net.cpp:816] Ignoring source layer res2a_relu_res075
+I0507 11:18:09.534919  5117 net.cpp:816] Ignoring source layer res2a_res075_res2a_relu_res075_0_split
+I0507 11:18:09.534921  5117 net.cpp:816] Ignoring source layer res2b_branch2a_res075
+I0507 11:18:09.534924  5117 net.cpp:816] Ignoring source layer bn2b_branch2a_res075
+I0507 11:18:09.534925  5117 net.cpp:816] Ignoring source layer scale2b_branch2a_res075
+I0507 11:18:09.534927  5117 net.cpp:816] Ignoring source layer res2b_branch2a_relu_res075
+I0507 11:18:09.534942  5117 net.cpp:816] Ignoring source layer res2b_branch2b_res075
+I0507 11:18:09.534945  5117 net.cpp:816] Ignoring source layer bn2b_branch2b_res075
+I0507 11:18:09.534946  5117 net.cpp:816] Ignoring source layer scale2b_branch2b_res075
+I0507 11:18:09.534948  5117 net.cpp:816] Ignoring source layer res2b_branch2b_relu_res075
+I0507 11:18:09.534950  5117 net.cpp:816] Ignoring source layer res2b_branch2c_res075
+I0507 11:18:09.534952  5117 net.cpp:816] Ignoring source layer bn2b_branch2c_res075
+I0507 11:18:09.534955  5117 net.cpp:816] Ignoring source layer scale2b_branch2c_res075
+I0507 11:18:09.534955  5117 net.cpp:816] Ignoring source layer res2b_res075
+I0507 11:18:09.534957  5117 net.cpp:816] Ignoring source layer res2b_relu_res075
+I0507 11:18:09.534960  5117 net.cpp:816] Ignoring source layer res2b_res075_res2b_relu_res075_0_split
+I0507 11:18:09.534961  5117 net.cpp:816] Ignoring source layer res2c_branch2a_res075
+I0507 11:18:09.534963  5117 net.cpp:816] Ignoring source layer bn2c_branch2a_res075
+I0507 11:18:09.534965  5117 net.cpp:816] Ignoring source layer scale2c_branch2a_res075
+I0507 11:18:09.534967  5117 net.cpp:816] Ignoring source layer res2c_branch2a_relu_res075
+I0507 11:18:09.534970  5117 net.cpp:816] Ignoring source layer res2c_branch2b_res075
+I0507 11:18:09.534971  5117 net.cpp:816] Ignoring source layer bn2c_branch2b_res075
+I0507 11:18:09.534973  5117 net.cpp:816] Ignoring source layer scale2c_branch2b_res075
+I0507 11:18:09.534976  5117 net.cpp:816] Ignoring source layer res2c_branch2b_relu_res075
+I0507 11:18:09.534977  5117 net.cpp:816] Ignoring source layer res2c_branch2c_res075
+I0507 11:18:09.534979  5117 net.cpp:816] Ignoring source layer bn2c_branch2c_res075
+I0507 11:18:09.534981  5117 net.cpp:816] Ignoring source layer scale2c_branch2c_res075
+I0507 11:18:09.534983  5117 net.cpp:816] Ignoring source layer res2c_res075
+I0507 11:18:09.534986  5117 net.cpp:816] Ignoring source layer res2c_relu_res075
+I0507 11:18:09.534987  5117 net.cpp:816] Ignoring source layer res2c_res075_res2c_relu_res075_0_split
+I0507 11:18:09.534989  5117 net.cpp:816] Ignoring source layer res3a_branch1_res075
+I0507 11:18:09.534991  5117 net.cpp:816] Ignoring source layer bn3a_branch1_res075
+I0507 11:18:09.534993  5117 net.cpp:816] Ignoring source layer scale3a_branch1_res075
+I0507 11:18:09.534996  5117 net.cpp:816] Ignoring source layer res3a_branch2a_res075
+I0507 11:18:09.534997  5117 net.cpp:816] Ignoring source layer bn3a_branch2a_res075
+I0507 11:18:09.534999  5117 net.cpp:816] Ignoring source layer scale3a_branch2a_res075
+I0507 11:18:09.535001  5117 net.cpp:816] Ignoring source layer res3a_branch2a_relu_res075
+I0507 11:18:09.535003  5117 net.cpp:816] Ignoring source layer res3a_branch2b_res075
+I0507 11:18:09.535006  5117 net.cpp:816] Ignoring source layer bn3a_branch2b_res075
+I0507 11:18:09.535007  5117 net.cpp:816] Ignoring source layer scale3a_branch2b_res075
+I0507 11:18:09.535009  5117 net.cpp:816] Ignoring source layer res3a_branch2b_relu_res075
+I0507 11:18:09.535012  5117 net.cpp:816] Ignoring source layer res3a_branch2c_res075
+I0507 11:18:09.535015  5117 net.cpp:816] Ignoring source layer bn3a_branch2c_res075
+I0507 11:18:09.535018  5117 net.cpp:816] Ignoring source layer scale3a_branch2c_res075
+I0507 11:18:09.535020  5117 net.cpp:816] Ignoring source layer res3a_res075
+I0507 11:18:09.535022  5117 net.cpp:816] Ignoring source layer res3a_relu_res075
+I0507 11:18:09.535024  5117 net.cpp:816] Ignoring source layer res3a_res075_res3a_relu_res075_0_split
+I0507 11:18:09.535027  5117 net.cpp:816] Ignoring source layer res3b1_branch2a_res075
+I0507 11:18:09.535028  5117 net.cpp:816] Ignoring source layer bn3b1_branch2a_res075
+I0507 11:18:09.535030  5117 net.cpp:816] Ignoring source layer scale3b1_branch2a_res075
+I0507 11:18:09.535032  5117 net.cpp:816] Ignoring source layer res3b1_branch2a_relu_res075
+I0507 11:18:09.535034  5117 net.cpp:816] Ignoring source layer res3b1_branch2b_res075
+I0507 11:18:09.535037  5117 net.cpp:816] Ignoring source layer bn3b1_branch2b_res075
+I0507 11:18:09.535038  5117 net.cpp:816] Ignoring source layer scale3b1_branch2b_res075
+I0507 11:18:09.535039  5117 net.cpp:816] Ignoring source layer res3b1_branch2b_relu_res075
+I0507 11:18:09.535042  5117 net.cpp:816] Ignoring source layer res3b1_branch2c_res075
+I0507 11:18:09.535044  5117 net.cpp:816] Ignoring source layer bn3b1_branch2c_res075
+I0507 11:18:09.535046  5117 net.cpp:816] Ignoring source layer scale3b1_branch2c_res075
+I0507 11:18:09.535048  5117 net.cpp:816] Ignoring source layer res3b1_res075
+I0507 11:18:09.535049  5117 net.cpp:816] Ignoring source layer res3b1_relu_res075
+I0507 11:18:09.535053  5117 net.cpp:816] Ignoring source layer res3b1_res075_res3b1_relu_res075_0_split
+I0507 11:18:09.535053  5117 net.cpp:816] Ignoring source layer res3b2_branch2a_res075
+I0507 11:18:09.535055  5117 net.cpp:816] Ignoring source layer bn3b2_branch2a_res075
+I0507 11:18:09.535058  5117 net.cpp:816] Ignoring source layer scale3b2_branch2a_res075
+I0507 11:18:09.535059  5117 net.cpp:816] Ignoring source layer res3b2_branch2a_relu_res075
+I0507 11:18:09.535061  5117 net.cpp:816] Ignoring source layer res3b2_branch2b_res075
+I0507 11:18:09.535063  5117 net.cpp:816] Ignoring source layer bn3b2_branch2b_res075
+I0507 11:18:09.535065  5117 net.cpp:816] Ignoring source layer scale3b2_branch2b_res075
+I0507 11:18:09.535068  5117 net.cpp:816] Ignoring source layer res3b2_branch2b_relu_res075
+I0507 11:18:09.535069  5117 net.cpp:816] Ignoring source layer res3b2_branch2c_res075
+I0507 11:18:09.535071  5117 net.cpp:816] Ignoring source layer bn3b2_branch2c_res075
+I0507 11:18:09.535073  5117 net.cpp:816] Ignoring source layer scale3b2_branch2c_res075
+I0507 11:18:09.535075  5117 net.cpp:816] Ignoring source layer res3b2_res075
+I0507 11:18:09.535078  5117 net.cpp:816] Ignoring source layer res3b2_relu_res075
+I0507 11:18:09.535079  5117 net.cpp:816] Ignoring source layer res3b2_res075_res3b2_relu_res075_0_split
+I0507 11:18:09.535081  5117 net.cpp:816] Ignoring source layer res3b3_branch2a_res075
+I0507 11:18:09.535084  5117 net.cpp:816] Ignoring source layer bn3b3_branch2a_res075
+I0507 11:18:09.544468  5117 net.cpp:816] Ignoring source layer scale3b3_branch2a_res075
+I0507 11:18:09.544492  5117 net.cpp:816] Ignoring source layer res3b3_branch2a_relu_res075
+I0507 11:18:09.544494  5117 net.cpp:816] Ignoring source layer res3b3_branch2b_res075
+I0507 11:18:09.544512  5117 net.cpp:816] Ignoring source layer bn3b3_branch2b_res075
+I0507 11:18:09.544513  5117 net.cpp:816] Ignoring source layer scale3b3_branch2b_res075
+I0507 11:18:09.544515  5117 net.cpp:816] Ignoring source layer res3b3_branch2b_relu_res075
+I0507 11:18:09.544517  5117 net.cpp:816] Ignoring source layer res3b3_branch2c_res075
+I0507 11:18:09.544519  5117 net.cpp:816] Ignoring source layer bn3b3_branch2c_res075
+I0507 11:18:09.544522  5117 net.cpp:816] Ignoring source layer scale3b3_branch2c_res075
+I0507 11:18:09.544524  5117 net.cpp:816] Ignoring source layer res3b3_res075
+I0507 11:18:09.544539  5117 net.cpp:816] Ignoring source layer res3b3_relu_res075
+I0507 11:18:09.544541  5117 net.cpp:816] Ignoring source layer res3b3_res075_res3b3_relu_res075_0_split
+I0507 11:18:09.544553  5117 net.cpp:816] Ignoring source layer res4a_branch1_res075
+I0507 11:18:09.544555  5117 net.cpp:816] Ignoring source layer bn4a_branch1_res075
+I0507 11:18:09.544558  5117 net.cpp:816] Ignoring source layer scale4a_branch1_res075
+I0507 11:18:09.544559  5117 net.cpp:816] Ignoring source layer res4a_branch2a_res075
+I0507 11:18:09.544562  5117 net.cpp:816] Ignoring source layer bn4a_branch2a_res075
+I0507 11:18:09.544564  5117 net.cpp:816] Ignoring source layer scale4a_branch2a_res075
+I0507 11:18:09.544580  5117 net.cpp:816] Ignoring source layer res4a_branch2a_relu_res075
+I0507 11:18:09.544584  5117 net.cpp:816] Ignoring source layer res4a_branch2b_res075
+I0507 11:18:09.544585  5117 net.cpp:816] Ignoring source layer bn4a_branch2b_res075
+I0507 11:18:09.544587  5117 net.cpp:816] Ignoring source layer scale4a_branch2b_res075
+I0507 11:18:09.544602  5117 net.cpp:816] Ignoring source layer res4a_branch2b_relu_res075
+I0507 11:18:09.544605  5117 net.cpp:816] Ignoring source layer res4a_branch2c_res075
+I0507 11:18:09.544606  5117 net.cpp:816] Ignoring source layer bn4a_branch2c_res075
+I0507 11:18:09.544608  5117 net.cpp:816] Ignoring source layer scale4a_branch2c_res075
+I0507 11:18:09.544610  5117 net.cpp:816] Ignoring source layer res4a_res075
+I0507 11:18:09.544612  5117 net.cpp:816] Ignoring source layer res4a_relu_res075
+I0507 11:18:09.544615  5117 net.cpp:816] Ignoring source layer res4a_res075_res4a_relu_res075_0_split
+I0507 11:18:09.544616  5117 net.cpp:816] Ignoring source layer res4b1_branch2a_res075
+I0507 11:18:09.544618  5117 net.cpp:816] Ignoring source layer bn4b1_branch2a_res075
+I0507 11:18:09.544634  5117 net.cpp:816] Ignoring source layer scale4b1_branch2a_res075
+I0507 11:18:09.544636  5117 net.cpp:816] Ignoring source layer res4b1_branch2a_relu_res075
+I0507 11:18:09.544638  5117 net.cpp:816] Ignoring source layer res4b1_branch2b_res075
+I0507 11:18:09.544641  5117 net.cpp:816] Ignoring source layer bn4b1_branch2b_res075
+I0507 11:18:09.544656  5117 net.cpp:816] Ignoring source layer scale4b1_branch2b_res075
+I0507 11:18:09.544657  5117 net.cpp:816] Ignoring source layer res4b1_branch2b_relu_res075
+I0507 11:18:09.544659  5117 net.cpp:816] Ignoring source layer res4b1_branch2c_res075
+I0507 11:18:09.544661  5117 net.cpp:816] Ignoring source layer bn4b1_branch2c_res075
+I0507 11:18:09.544663  5117 net.cpp:816] Ignoring source layer scale4b1_branch2c_res075
+I0507 11:18:09.544665  5117 net.cpp:816] Ignoring source layer res4b1_res075
+I0507 11:18:09.544667  5117 net.cpp:816] Ignoring source layer res4b1_relu_res075
+I0507 11:18:09.544669  5117 net.cpp:816] Ignoring source layer res4b1_res075_res4b1_relu_res075_0_split
+I0507 11:18:09.544672  5117 net.cpp:816] Ignoring source layer res4b2_branch2a_res075
+I0507 11:18:09.544673  5117 net.cpp:816] Ignoring source layer bn4b2_branch2a_res075
+I0507 11:18:09.544675  5117 net.cpp:816] Ignoring source layer scale4b2_branch2a_res075
+I0507 11:18:09.544677  5117 net.cpp:816] Ignoring source layer res4b2_branch2a_relu_res075
+I0507 11:18:09.544679  5117 net.cpp:816] Ignoring source layer res4b2_branch2b_res075
+I0507 11:18:09.544682  5117 net.cpp:816] Ignoring source layer bn4b2_branch2b_res075
+I0507 11:18:09.544683  5117 net.cpp:816] Ignoring source layer scale4b2_branch2b_res075
+I0507 11:18:09.544685  5117 net.cpp:816] Ignoring source layer res4b2_branch2b_relu_res075
+I0507 11:18:09.544687  5117 net.cpp:816] Ignoring source layer res4b2_branch2c_res075
+I0507 11:18:09.544689  5117 net.cpp:816] Ignoring source layer bn4b2_branch2c_res075
+I0507 11:18:09.544692  5117 net.cpp:816] Ignoring source layer scale4b2_branch2c_res075
+I0507 11:18:09.544693  5117 net.cpp:816] Ignoring source layer res4b2_res075
+I0507 11:18:09.544697  5117 net.cpp:816] Ignoring source layer res4b2_relu_res075
+I0507 11:18:09.544697  5117 net.cpp:816] Ignoring source layer res4b2_res075_res4b2_relu_res075_0_split
+I0507 11:18:09.544699  5117 net.cpp:816] Ignoring source layer res4b3_branch2a_res075
+I0507 11:18:09.544701  5117 net.cpp:816] Ignoring source layer bn4b3_branch2a_res075
+I0507 11:18:09.544708  5117 net.cpp:816] Ignoring source layer scale4b3_branch2a_res075
+I0507 11:18:09.544709  5117 net.cpp:816] Ignoring source layer res4b3_branch2a_relu_res075
+I0507 11:18:09.544711  5117 net.cpp:816] Ignoring source layer res4b3_branch2b_res075
+I0507 11:18:09.544713  5117 net.cpp:816] Ignoring source layer bn4b3_branch2b_res075
+I0507 11:18:09.544716  5117 net.cpp:816] Ignoring source layer scale4b3_branch2b_res075
+I0507 11:18:09.544718  5117 net.cpp:816] Ignoring source layer res4b3_branch2b_relu_res075
+I0507 11:18:09.544734  5117 net.cpp:816] Ignoring source layer res4b3_branch2c_res075
+I0507 11:18:09.544736  5117 net.cpp:816] Ignoring source layer bn4b3_branch2c_res075
+I0507 11:18:09.544739  5117 net.cpp:816] Ignoring source layer scale4b3_branch2c_res075
+I0507 11:18:09.544740  5117 net.cpp:816] Ignoring source layer res4b3_res075
+I0507 11:18:09.544742  5117 net.cpp:816] Ignoring source layer res4b3_relu_res075
+I0507 11:18:09.544757  5117 net.cpp:816] Ignoring source layer res4b3_res075_res4b3_relu_res075_0_split
+I0507 11:18:09.544759  5117 net.cpp:816] Ignoring source layer res4b4_branch2a_res075
+I0507 11:18:09.544761  5117 net.cpp:816] Ignoring source layer bn4b4_branch2a_res075
+I0507 11:18:09.544764  5117 net.cpp:816] Ignoring source layer scale4b4_branch2a_res075
+I0507 11:18:09.544765  5117 net.cpp:816] Ignoring source layer res4b4_branch2a_relu_res075
+I0507 11:18:09.544769  5117 net.cpp:816] Ignoring source layer res4b4_branch2b_res075
+I0507 11:18:09.544770  5117 net.cpp:816] Ignoring source layer bn4b4_branch2b_res075
+I0507 11:18:09.544772  5117 net.cpp:816] Ignoring source layer scale4b4_branch2b_res075
+I0507 11:18:09.544773  5117 net.cpp:816] Ignoring source layer res4b4_branch2b_relu_res075
+I0507 11:18:09.544776  5117 net.cpp:816] Ignoring source layer res4b4_branch2c_res075
+I0507 11:18:09.544778  5117 net.cpp:816] Ignoring source layer bn4b4_branch2c_res075
+I0507 11:18:09.544780  5117 net.cpp:816] Ignoring source layer scale4b4_branch2c_res075
+I0507 11:18:09.544781  5117 net.cpp:816] Ignoring source layer res4b4_res075
+I0507 11:18:09.544785  5117 net.cpp:816] Ignoring source layer res4b4_relu_res075
+I0507 11:18:09.544786  5117 net.cpp:816] Ignoring source layer res4b4_res075_res4b4_relu_res075_0_split
+I0507 11:18:09.544802  5117 net.cpp:816] Ignoring source layer res4b5_branch2a_res075
+I0507 11:18:09.544805  5117 net.cpp:816] Ignoring source layer bn4b5_branch2a_res075
+I0507 11:18:09.544807  5117 net.cpp:816] Ignoring source layer scale4b5_branch2a_res075
+I0507 11:18:09.544809  5117 net.cpp:816] Ignoring source layer res4b5_branch2a_relu_res075
+I0507 11:18:09.544811  5117 net.cpp:816] Ignoring source layer res4b5_branch2b_res075
+I0507 11:18:09.544826  5117 net.cpp:816] Ignoring source layer bn4b5_branch2b_res075
+I0507 11:18:09.544828  5117 net.cpp:816] Ignoring source layer scale4b5_branch2b_res075
+I0507 11:18:09.544831  5117 net.cpp:816] Ignoring source layer res4b5_branch2b_relu_res075
+I0507 11:18:09.544832  5117 net.cpp:816] Ignoring source layer res4b5_branch2c_res075
+I0507 11:18:09.544834  5117 net.cpp:816] Ignoring source layer bn4b5_branch2c_res075
+I0507 11:18:09.544836  5117 net.cpp:816] Ignoring source layer scale4b5_branch2c_res075
+I0507 11:18:09.544838  5117 net.cpp:816] Ignoring source layer res4b5_res075
+I0507 11:18:09.544840  5117 net.cpp:816] Ignoring source layer res4b5_relu_res075
+I0507 11:18:09.544842  5117 net.cpp:816] Ignoring source layer res4b5_res075_res4b5_relu_res075_0_split
+I0507 11:18:09.544844  5117 net.cpp:816] Ignoring source layer res4b6_branch2a_res075
+I0507 11:18:09.544847  5117 net.cpp:816] Ignoring source layer bn4b6_branch2a_res075
+I0507 11:18:09.544848  5117 net.cpp:816] Ignoring source layer scale4b6_branch2a_res075
+I0507 11:18:09.544850  5117 net.cpp:816] Ignoring source layer res4b6_branch2a_relu_res075
+I0507 11:18:09.544852  5117 net.cpp:816] Ignoring source layer res4b6_branch2b_res075
+I0507 11:18:09.544854  5117 net.cpp:816] Ignoring source layer bn4b6_branch2b_res075
+I0507 11:18:09.544857  5117 net.cpp:816] Ignoring source layer scale4b6_branch2b_res075
+I0507 11:18:09.544862  5117 net.cpp:816] Ignoring source layer res4b6_branch2b_relu_res075
+I0507 11:18:09.544864  5117 net.cpp:816] Ignoring source layer res4b6_branch2c_res075
+I0507 11:18:09.544867  5117 net.cpp:816] Ignoring source layer bn4b6_branch2c_res075
+I0507 11:18:09.544868  5117 net.cpp:816] Ignoring source layer scale4b6_branch2c_res075
+I0507 11:18:09.544870  5117 net.cpp:816] Ignoring source layer res4b6_res075
+I0507 11:18:09.544872  5117 net.cpp:816] Ignoring source layer res4b6_relu_res075
+I0507 11:18:09.544874  5117 net.cpp:816] Ignoring source layer res4b6_res075_res4b6_relu_res075_0_split
+I0507 11:18:09.544876  5117 net.cpp:816] Ignoring source layer res4b7_branch2a_res075
+I0507 11:18:09.544878  5117 net.cpp:816] Ignoring source layer bn4b7_branch2a_res075
+I0507 11:18:09.544880  5117 net.cpp:816] Ignoring source layer scale4b7_branch2a_res075
+I0507 11:18:09.544883  5117 net.cpp:816] Ignoring source layer res4b7_branch2a_relu_res075
+I0507 11:18:09.544884  5117 net.cpp:816] Ignoring source layer res4b7_branch2b_res075
+I0507 11:18:09.544886  5117 net.cpp:816] Ignoring source layer bn4b7_branch2b_res075
+I0507 11:18:09.544888  5117 net.cpp:816] Ignoring source layer scale4b7_branch2b_res075
+I0507 11:18:09.544890  5117 net.cpp:816] Ignoring source layer res4b7_branch2b_relu_res075
+I0507 11:18:09.544893  5117 net.cpp:816] Ignoring source layer res4b7_branch2c_res075
+I0507 11:18:09.544894  5117 net.cpp:816] Ignoring source layer bn4b7_branch2c_res075
+I0507 11:18:09.544896  5117 net.cpp:816] Ignoring source layer scale4b7_branch2c_res075
+I0507 11:18:09.544898  5117 net.cpp:816] Ignoring source layer res4b7_res075
+I0507 11:18:09.544900  5117 net.cpp:816] Ignoring source layer res4b7_relu_res075
+I0507 11:18:09.544903  5117 net.cpp:816] Ignoring source layer res4b7_res075_res4b7_relu_res075_0_split
+I0507 11:18:09.544904  5117 net.cpp:816] Ignoring source layer res4b8_branch2a_res075
+I0507 11:18:09.544906  5117 net.cpp:816] Ignoring source layer bn4b8_branch2a_res075
+I0507 11:18:09.544909  5117 net.cpp:816] Ignoring source layer scale4b8_branch2a_res075
+I0507 11:18:09.544910  5117 net.cpp:816] Ignoring source layer res4b8_branch2a_relu_res075
+I0507 11:18:09.544912  5117 net.cpp:816] Ignoring source layer res4b8_branch2b_res075
+I0507 11:18:09.544914  5117 net.cpp:816] Ignoring source layer bn4b8_branch2b_res075
+I0507 11:18:09.544916  5117 net.cpp:816] Ignoring source layer scale4b8_branch2b_res075
+I0507 11:18:09.544919  5117 net.cpp:816] Ignoring source layer res4b8_branch2b_relu_res075
+I0507 11:18:09.544920  5117 net.cpp:816] Ignoring source layer res4b8_branch2c_res075
+I0507 11:18:09.544922  5117 net.cpp:816] Ignoring source layer bn4b8_branch2c_res075
+I0507 11:18:09.544924  5117 net.cpp:816] Ignoring source layer scale4b8_branch2c_res075
+I0507 11:18:09.544926  5117 net.cpp:816] Ignoring source layer res4b8_res075
+I0507 11:18:09.544929  5117 net.cpp:816] Ignoring source layer res4b8_relu_res075
+I0507 11:18:09.544930  5117 net.cpp:816] Ignoring source layer res4b8_res075_res4b8_relu_res075_0_split
+I0507 11:18:09.544932  5117 net.cpp:816] Ignoring source layer res4b9_branch2a_res075
+I0507 11:18:09.544934  5117 net.cpp:816] Ignoring source layer bn4b9_branch2a_res075
+I0507 11:18:09.544936  5117 net.cpp:816] Ignoring source layer scale4b9_branch2a_res075
+I0507 11:18:09.544939  5117 net.cpp:816] Ignoring source layer res4b9_branch2a_relu_res075
+I0507 11:18:09.544941  5117 net.cpp:816] Ignoring source layer res4b9_branch2b_res075
+I0507 11:18:09.544944  5117 net.cpp:816] Ignoring source layer bn4b9_branch2b_res075
+I0507 11:18:09.544945  5117 net.cpp:816] Ignoring source layer scale4b9_branch2b_res075
+I0507 11:18:09.544947  5117 net.cpp:816] Ignoring source layer res4b9_branch2b_relu_res075
+I0507 11:18:09.544950  5117 net.cpp:816] Ignoring source layer res4b9_branch2c_res075
+I0507 11:18:09.544951  5117 net.cpp:816] Ignoring source layer bn4b9_branch2c_res075
+I0507 11:18:09.544953  5117 net.cpp:816] Ignoring source layer scale4b9_branch2c_res075
+I0507 11:18:09.544955  5117 net.cpp:816] Ignoring source layer res4b9_res075
+I0507 11:18:09.544960  5117 net.cpp:816] Ignoring source layer res4b9_relu_res075
+I0507 11:18:09.544962  5117 net.cpp:816] Ignoring source layer res4b9_res075_res4b9_relu_res075_0_split
+I0507 11:18:09.544965  5117 net.cpp:816] Ignoring source layer res4b10_branch2a_res075
+I0507 11:18:09.544966  5117 net.cpp:816] Ignoring source layer bn4b10_branch2a_res075
+I0507 11:18:09.544968  5117 net.cpp:816] Ignoring source layer scale4b10_branch2a_res075
+I0507 11:18:09.544970  5117 net.cpp:816] Ignoring source layer res4b10_branch2a_relu_res075
+I0507 11:18:09.544972  5117 net.cpp:816] Ignoring source layer res4b10_branch2b_res075
+I0507 11:18:09.544975  5117 net.cpp:816] Ignoring source layer bn4b10_branch2b_res075
+I0507 11:18:09.544976  5117 net.cpp:816] Ignoring source layer scale4b10_branch2b_res075
+I0507 11:18:09.544978  5117 net.cpp:816] Ignoring source layer res4b10_branch2b_relu_res075
+I0507 11:18:09.544981  5117 net.cpp:816] Ignoring source layer res4b10_branch2c_res075
+I0507 11:18:09.544983  5117 net.cpp:816] Ignoring source layer bn4b10_branch2c_res075
+I0507 11:18:09.544984  5117 net.cpp:816] Ignoring source layer scale4b10_branch2c_res075
+I0507 11:18:09.544986  5117 net.cpp:816] Ignoring source layer res4b10_res075
+I0507 11:18:09.544988  5117 net.cpp:816] Ignoring source layer res4b10_relu_res075
+I0507 11:18:09.544991  5117 net.cpp:816] Ignoring source layer res4b10_res075_res4b10_relu_res075_0_split
+I0507 11:18:09.544993  5117 net.cpp:816] Ignoring source layer res4b11_branch2a_res075
+I0507 11:18:09.544994  5117 net.cpp:816] Ignoring source layer bn4b11_branch2a_res075
+I0507 11:18:09.544996  5117 net.cpp:816] Ignoring source layer scale4b11_branch2a_res075
+I0507 11:18:09.544999  5117 net.cpp:816] Ignoring source layer res4b11_branch2a_relu_res075
+I0507 11:18:09.545001  5117 net.cpp:816] Ignoring source layer res4b11_branch2b_res075
+I0507 11:18:09.545002  5117 net.cpp:816] Ignoring source layer bn4b11_branch2b_res075
+I0507 11:18:09.545006  5117 net.cpp:816] Ignoring source layer scale4b11_branch2b_res075
+I0507 11:18:09.545007  5117 net.cpp:816] Ignoring source layer res4b11_branch2b_relu_res075
+I0507 11:18:09.545009  5117 net.cpp:816] Ignoring source layer res4b11_branch2c_res075
+I0507 11:18:09.545011  5117 net.cpp:816] Ignoring source layer bn4b11_branch2c_res075
+I0507 11:18:09.545013  5117 net.cpp:816] Ignoring source layer scale4b11_branch2c_res075
+I0507 11:18:09.545015  5117 net.cpp:816] Ignoring source layer res4b11_res075
+I0507 11:18:09.545017  5117 net.cpp:816] Ignoring source layer res4b11_relu_res075
+I0507 11:18:09.545019  5117 net.cpp:816] Ignoring source layer res4b11_res075_res4b11_relu_res075_0_split
+I0507 11:18:09.545022  5117 net.cpp:816] Ignoring source layer res4b12_branch2a_res075
+I0507 11:18:09.545023  5117 net.cpp:816] Ignoring source layer bn4b12_branch2a_res075
+I0507 11:18:09.545025  5117 net.cpp:816] Ignoring source layer scale4b12_branch2a_res075
+I0507 11:18:09.561951  5117 net.cpp:816] Ignoring source layer res4b12_branch2a_relu_res075
+I0507 11:18:09.561964  5117 net.cpp:816] Ignoring source layer res4b12_branch2b_res075
+I0507 11:18:09.561967  5117 net.cpp:816] Ignoring source layer bn4b12_branch2b_res075
+I0507 11:18:09.561969  5117 net.cpp:816] Ignoring source layer scale4b12_branch2b_res075
+I0507 11:18:09.561985  5117 net.cpp:816] Ignoring source layer res4b12_branch2b_relu_res075
+I0507 11:18:09.561986  5117 net.cpp:816] Ignoring source layer res4b12_branch2c_res075
+I0507 11:18:09.561988  5117 net.cpp:816] Ignoring source layer bn4b12_branch2c_res075
+I0507 11:18:09.561990  5117 net.cpp:816] Ignoring source layer scale4b12_branch2c_res075
+I0507 11:18:09.562005  5117 net.cpp:816] Ignoring source layer res4b12_res075
+I0507 11:18:09.562007  5117 net.cpp:816] Ignoring source layer res4b12_relu_res075
+I0507 11:18:09.562011  5117 net.cpp:816] Ignoring source layer res4b12_res075_res4b12_relu_res075_0_split
+I0507 11:18:09.562012  5117 net.cpp:816] Ignoring source layer res4b13_branch2a_res075
+I0507 11:18:09.562014  5117 net.cpp:816] Ignoring source layer bn4b13_branch2a_res075
+I0507 11:18:09.562026  5117 net.cpp:816] Ignoring source layer scale4b13_branch2a_res075
+I0507 11:18:09.562027  5117 net.cpp:816] Ignoring source layer res4b13_branch2a_relu_res075
+I0507 11:18:09.562031  5117 net.cpp:816] Ignoring source layer res4b13_branch2b_res075
+I0507 11:18:09.562032  5117 net.cpp:816] Ignoring source layer bn4b13_branch2b_res075
+I0507 11:18:09.562034  5117 net.cpp:816] Ignoring source layer scale4b13_branch2b_res075
+I0507 11:18:09.562036  5117 net.cpp:816] Ignoring source layer res4b13_branch2b_relu_res075
+I0507 11:18:09.562038  5117 net.cpp:816] Ignoring source layer res4b13_branch2c_res075
+I0507 11:18:09.562041  5117 net.cpp:816] Ignoring source layer bn4b13_branch2c_res075
+I0507 11:18:09.562042  5117 net.cpp:816] Ignoring source layer scale4b13_branch2c_res075
+I0507 11:18:09.562044  5117 net.cpp:816] Ignoring source layer res4b13_res075
+I0507 11:18:09.562047  5117 net.cpp:816] Ignoring source layer res4b13_relu_res075
+I0507 11:18:09.562049  5117 net.cpp:816] Ignoring source layer res4b13_res075_res4b13_relu_res075_0_split
+I0507 11:18:09.562052  5117 net.cpp:816] Ignoring source layer res4b14_branch2a_res075
+I0507 11:18:09.562053  5117 net.cpp:816] Ignoring source layer bn4b14_branch2a_res075
+I0507 11:18:09.562055  5117 net.cpp:816] Ignoring source layer scale4b14_branch2a_res075
+I0507 11:18:09.562057  5117 net.cpp:816] Ignoring source layer res4b14_branch2a_relu_res075
+I0507 11:18:09.562059  5117 net.cpp:816] Ignoring source layer res4b14_branch2b_res075
+I0507 11:18:09.562062  5117 net.cpp:816] Ignoring source layer bn4b14_branch2b_res075
+I0507 11:18:09.562063  5117 net.cpp:816] Ignoring source layer scale4b14_branch2b_res075
+I0507 11:18:09.562065  5117 net.cpp:816] Ignoring source layer res4b14_branch2b_relu_res075
+I0507 11:18:09.562067  5117 net.cpp:816] Ignoring source layer res4b14_branch2c_res075
+I0507 11:18:09.562069  5117 net.cpp:816] Ignoring source layer bn4b14_branch2c_res075
+I0507 11:18:09.562072  5117 net.cpp:816] Ignoring source layer scale4b14_branch2c_res075
+I0507 11:18:09.562074  5117 net.cpp:816] Ignoring source layer res4b14_res075
+I0507 11:18:09.562077  5117 net.cpp:816] Ignoring source layer res4b14_relu_res075
+I0507 11:18:09.562078  5117 net.cpp:816] Ignoring source layer res4b14_res075_res4b14_relu_res075_0_split
+I0507 11:18:09.562093  5117 net.cpp:816] Ignoring source layer res4b15_branch2a_res075
+I0507 11:18:09.562094  5117 net.cpp:816] Ignoring source layer bn4b15_branch2a_res075
+I0507 11:18:09.562096  5117 net.cpp:816] Ignoring source layer scale4b15_branch2a_res075
+I0507 11:18:09.562098  5117 net.cpp:816] Ignoring source layer res4b15_branch2a_relu_res075
+I0507 11:18:09.562100  5117 net.cpp:816] Ignoring source layer res4b15_branch2b_res075
+I0507 11:18:09.562103  5117 net.cpp:816] Ignoring source layer bn4b15_branch2b_res075
+I0507 11:18:09.562104  5117 net.cpp:816] Ignoring source layer scale4b15_branch2b_res075
+I0507 11:18:09.562106  5117 net.cpp:816] Ignoring source layer res4b15_branch2b_relu_res075
+I0507 11:18:09.562108  5117 net.cpp:816] Ignoring source layer res4b15_branch2c_res075
+I0507 11:18:09.562110  5117 net.cpp:816] Ignoring source layer bn4b15_branch2c_res075
+I0507 11:18:09.562113  5117 net.cpp:816] Ignoring source layer scale4b15_branch2c_res075
+I0507 11:18:09.562114  5117 net.cpp:816] Ignoring source layer res4b15_res075
+I0507 11:18:09.562116  5117 net.cpp:816] Ignoring source layer res4b15_relu_res075
+I0507 11:18:09.562119  5117 net.cpp:816] Ignoring source layer res4b15_res075_res4b15_relu_res075_0_split
+I0507 11:18:09.562120  5117 net.cpp:816] Ignoring source layer res4b16_branch2a_res075
+I0507 11:18:09.562122  5117 net.cpp:816] Ignoring source layer bn4b16_branch2a_res075
+I0507 11:18:09.562124  5117 net.cpp:816] Ignoring source layer scale4b16_branch2a_res075
+I0507 11:18:09.562126  5117 net.cpp:816] Ignoring source layer res4b16_branch2a_relu_res075
+I0507 11:18:09.562129  5117 net.cpp:816] Ignoring source layer res4b16_branch2b_res075
+I0507 11:18:09.562130  5117 net.cpp:816] Ignoring source layer bn4b16_branch2b_res075
+I0507 11:18:09.562135  5117 net.cpp:816] Ignoring source layer scale4b16_branch2b_res075
+I0507 11:18:09.562139  5117 net.cpp:816] Ignoring source layer res4b16_branch2b_relu_res075
+I0507 11:18:09.562140  5117 net.cpp:816] Ignoring source layer res4b16_branch2c_res075
+I0507 11:18:09.562142  5117 net.cpp:816] Ignoring source layer bn4b16_branch2c_res075
+I0507 11:18:09.562144  5117 net.cpp:816] Ignoring source layer scale4b16_branch2c_res075
+I0507 11:18:09.562146  5117 net.cpp:816] Ignoring source layer res4b16_res075
+I0507 11:18:09.562149  5117 net.cpp:816] Ignoring source layer res4b16_relu_res075
+I0507 11:18:09.562150  5117 net.cpp:816] Ignoring source layer res4b16_res075_res4b16_relu_res075_0_split
+I0507 11:18:09.562152  5117 net.cpp:816] Ignoring source layer res4b17_branch2a_res075
+I0507 11:18:09.562155  5117 net.cpp:816] Ignoring source layer bn4b17_branch2a_res075
+I0507 11:18:09.562156  5117 net.cpp:816] Ignoring source layer scale4b17_branch2a_res075
+I0507 11:18:09.562158  5117 net.cpp:816] Ignoring source layer res4b17_branch2a_relu_res075
+I0507 11:18:09.562160  5117 net.cpp:816] Ignoring source layer res4b17_branch2b_res075
+I0507 11:18:09.562162  5117 net.cpp:816] Ignoring source layer bn4b17_branch2b_res075
+I0507 11:18:09.562165  5117 net.cpp:816] Ignoring source layer scale4b17_branch2b_res075
+I0507 11:18:09.562166  5117 net.cpp:816] Ignoring source layer res4b17_branch2b_relu_res075
+I0507 11:18:09.562167  5117 net.cpp:816] Ignoring source layer res4b17_branch2c_res075
+I0507 11:18:09.562170  5117 net.cpp:816] Ignoring source layer bn4b17_branch2c_res075
+I0507 11:18:09.562172  5117 net.cpp:816] Ignoring source layer scale4b17_branch2c_res075
+I0507 11:18:09.562175  5117 net.cpp:816] Ignoring source layer res4b17_res075
+I0507 11:18:09.562175  5117 net.cpp:816] Ignoring source layer res4b17_relu_res075
+I0507 11:18:09.562178  5117 net.cpp:816] Ignoring source layer res4b17_res075_res4b17_relu_res075_0_split
+I0507 11:18:09.562180  5117 net.cpp:816] Ignoring source layer res4b18_branch2a_res075
+I0507 11:18:09.562182  5117 net.cpp:816] Ignoring source layer bn4b18_branch2a_res075
+I0507 11:18:09.562185  5117 net.cpp:816] Ignoring source layer scale4b18_branch2a_res075
+I0507 11:18:09.562186  5117 net.cpp:816] Ignoring source layer res4b18_branch2a_relu_res075
+I0507 11:18:09.562188  5117 net.cpp:816] Ignoring source layer res4b18_branch2b_res075
+I0507 11:18:09.562191  5117 net.cpp:816] Ignoring source layer bn4b18_branch2b_res075
+I0507 11:18:09.562192  5117 net.cpp:816] Ignoring source layer scale4b18_branch2b_res075
+I0507 11:18:09.562194  5117 net.cpp:816] Ignoring source layer res4b18_branch2b_relu_res075
+I0507 11:18:09.562196  5117 net.cpp:816] Ignoring source layer res4b18_branch2c_res075
+I0507 11:18:09.562198  5117 net.cpp:816] Ignoring source layer bn4b18_branch2c_res075
+I0507 11:18:09.562201  5117 net.cpp:816] Ignoring source layer scale4b18_branch2c_res075
+I0507 11:18:09.562202  5117 net.cpp:816] Ignoring source layer res4b18_res075
+I0507 11:18:09.562204  5117 net.cpp:816] Ignoring source layer res4b18_relu_res075
+I0507 11:18:09.562206  5117 net.cpp:816] Ignoring source layer res4b18_res075_res4b18_relu_res075_0_split
+I0507 11:18:09.562208  5117 net.cpp:816] Ignoring source layer res4b19_branch2a_res075
+I0507 11:18:09.562211  5117 net.cpp:816] Ignoring source layer bn4b19_branch2a_res075
+I0507 11:18:09.562212  5117 net.cpp:816] Ignoring source layer scale4b19_branch2a_res075
+I0507 11:18:09.562214  5117 net.cpp:816] Ignoring source layer res4b19_branch2a_relu_res075
+I0507 11:18:09.562216  5117 net.cpp:816] Ignoring source layer res4b19_branch2b_res075
+I0507 11:18:09.562219  5117 net.cpp:816] Ignoring source layer bn4b19_branch2b_res075
+I0507 11:18:09.562220  5117 net.cpp:816] Ignoring source layer scale4b19_branch2b_res075
+I0507 11:18:09.562222  5117 net.cpp:816] Ignoring source layer res4b19_branch2b_relu_res075
+I0507 11:18:09.562224  5117 net.cpp:816] Ignoring source layer res4b19_branch2c_res075
+I0507 11:18:09.562227  5117 net.cpp:816] Ignoring source layer bn4b19_branch2c_res075
+I0507 11:18:09.562228  5117 net.cpp:816] Ignoring source layer scale4b19_branch2c_res075
+I0507 11:18:09.562234  5117 net.cpp:816] Ignoring source layer res4b19_res075
+I0507 11:18:09.562237  5117 net.cpp:816] Ignoring source layer res4b19_relu_res075
+I0507 11:18:09.562239  5117 net.cpp:816] Ignoring source layer res4b19_res075_res4b19_relu_res075_0_split
+I0507 11:18:09.562240  5117 net.cpp:816] Ignoring source layer res4b20_branch2a_res075
+I0507 11:18:09.562242  5117 net.cpp:816] Ignoring source layer bn4b20_branch2a_res075
+I0507 11:18:09.562244  5117 net.cpp:816] Ignoring source layer scale4b20_branch2a_res075
+I0507 11:18:09.562247  5117 net.cpp:816] Ignoring source layer res4b20_branch2a_relu_res075
+I0507 11:18:09.562248  5117 net.cpp:816] Ignoring source layer res4b20_branch2b_res075
+I0507 11:18:09.562250  5117 net.cpp:816] Ignoring source layer bn4b20_branch2b_res075
+I0507 11:18:09.562252  5117 net.cpp:816] Ignoring source layer scale4b20_branch2b_res075
+I0507 11:18:09.562255  5117 net.cpp:816] Ignoring source layer res4b20_branch2b_relu_res075
+I0507 11:18:09.562256  5117 net.cpp:816] Ignoring source layer res4b20_branch2c_res075
+I0507 11:18:09.562258  5117 net.cpp:816] Ignoring source layer bn4b20_branch2c_res075
+I0507 11:18:09.562260  5117 net.cpp:816] Ignoring source layer scale4b20_branch2c_res075
+I0507 11:18:09.562263  5117 net.cpp:816] Ignoring source layer res4b20_res075
+I0507 11:18:09.562264  5117 net.cpp:816] Ignoring source layer res4b20_relu_res075
+I0507 11:18:09.562266  5117 net.cpp:816] Ignoring source layer res4b20_res075_res4b20_relu_res075_0_split
+I0507 11:18:09.562268  5117 net.cpp:816] Ignoring source layer res4b21_branch2a_res075
+I0507 11:18:09.562270  5117 net.cpp:816] Ignoring source layer bn4b21_branch2a_res075
+I0507 11:18:09.562273  5117 net.cpp:816] Ignoring source layer scale4b21_branch2a_res075
+I0507 11:18:09.562274  5117 net.cpp:816] Ignoring source layer res4b21_branch2a_relu_res075
+I0507 11:18:09.562276  5117 net.cpp:816] Ignoring source layer res4b21_branch2b_res075
+I0507 11:18:09.562278  5117 net.cpp:816] Ignoring source layer bn4b21_branch2b_res075
+I0507 11:18:09.562280  5117 net.cpp:816] Ignoring source layer scale4b21_branch2b_res075
+I0507 11:18:09.562283  5117 net.cpp:816] Ignoring source layer res4b21_branch2b_relu_res075
+I0507 11:18:09.562284  5117 net.cpp:816] Ignoring source layer res4b21_branch2c_res075
+I0507 11:18:09.562286  5117 net.cpp:816] Ignoring source layer bn4b21_branch2c_res075
+I0507 11:18:09.562288  5117 net.cpp:816] Ignoring source layer scale4b21_branch2c_res075
+I0507 11:18:09.562290  5117 net.cpp:816] Ignoring source layer res4b21_res075
+I0507 11:18:09.562292  5117 net.cpp:816] Ignoring source layer res4b21_relu_res075
+I0507 11:18:09.562294  5117 net.cpp:816] Ignoring source layer res4b21_res075_res4b21_relu_res075_0_split
+I0507 11:18:09.562296  5117 net.cpp:816] Ignoring source layer res4b22_branch2a_res075
+I0507 11:18:09.562299  5117 net.cpp:816] Ignoring source layer bn4b22_branch2a_res075
+I0507 11:18:09.562300  5117 net.cpp:816] Ignoring source layer scale4b22_branch2a_res075
+I0507 11:18:09.562304  5117 net.cpp:816] Ignoring source layer res4b22_branch2a_relu_res075
+I0507 11:18:09.562304  5117 net.cpp:816] Ignoring source layer res4b22_branch2b_res075
+I0507 11:18:09.562306  5117 net.cpp:816] Ignoring source layer bn4b22_branch2b_res075
+I0507 11:18:09.562309  5117 net.cpp:816] Ignoring source layer scale4b22_branch2b_res075
+I0507 11:18:09.562310  5117 net.cpp:816] Ignoring source layer res4b22_branch2b_relu_res075
+I0507 11:18:09.562312  5117 net.cpp:816] Ignoring source layer res4b22_branch2c_res075
+I0507 11:18:09.562314  5117 net.cpp:816] Ignoring source layer bn4b22_branch2c_res075
+I0507 11:18:09.562316  5117 net.cpp:816] Ignoring source layer scale4b22_branch2c_res075
+I0507 11:18:09.562319  5117 net.cpp:816] Ignoring source layer res4b22_res075
+I0507 11:18:09.562320  5117 net.cpp:816] Ignoring source layer res4b22_relu_res075
+I0507 11:18:09.562322  5117 net.cpp:816] Ignoring source layer res4b22_res075_res4b22_relu_res075_0_split
+I0507 11:18:09.562325  5117 net.cpp:816] Ignoring source layer res5a_branch1_res075
+I0507 11:18:09.562330  5117 net.cpp:816] Ignoring source layer bn5a_branch1_res075
+I0507 11:18:09.562331  5117 net.cpp:816] Ignoring source layer scale5a_branch1_res075
+I0507 11:18:09.562333  5117 net.cpp:816] Ignoring source layer res5a_branch2a_res075
+I0507 11:18:09.562335  5117 net.cpp:816] Ignoring source layer bn5a_branch2a_res075
+I0507 11:18:09.562338  5117 net.cpp:816] Ignoring source layer scale5a_branch2a_res075
+I0507 11:18:09.562340  5117 net.cpp:816] Ignoring source layer res5a_branch2a_relu_res075
+I0507 11:18:09.562341  5117 net.cpp:816] Ignoring source layer res5a_branch2b_res075
+I0507 11:18:09.562343  5117 net.cpp:816] Ignoring source layer bn5a_branch2b_res075
+I0507 11:18:09.562346  5117 net.cpp:816] Ignoring source layer scale5a_branch2b_res075
+I0507 11:18:09.562347  5117 net.cpp:816] Ignoring source layer res5a_branch2b_relu_res075
+I0507 11:18:09.562350  5117 net.cpp:816] Ignoring source layer res5a_branch2c_res075
+I0507 11:18:09.562351  5117 net.cpp:816] Ignoring source layer bn5a_branch2c_res075
+I0507 11:18:09.562355  5117 net.cpp:816] Ignoring source layer scale5a_branch2c_res075
+I0507 11:18:09.562355  5117 net.cpp:816] Ignoring source layer res5a_res075
+I0507 11:18:09.562357  5117 net.cpp:816] Ignoring source layer res5a_relu_res075
+I0507 11:18:09.562360  5117 net.cpp:816] Ignoring source layer res5a_res075_res5a_relu_res075_0_split
+I0507 11:18:09.562361  5117 net.cpp:816] Ignoring source layer res5b_branch2a_res075
+I0507 11:18:09.562363  5117 net.cpp:816] Ignoring source layer bn5b_branch2a_res075
+I0507 11:18:09.562366  5117 net.cpp:816] Ignoring source layer scale5b_branch2a_res075
+I0507 11:18:09.562367  5117 net.cpp:816] Ignoring source layer res5b_branch2a_relu_res075
+I0507 11:18:09.562369  5117 net.cpp:816] Ignoring source layer res5b_branch2b_res075
+I0507 11:18:09.562371  5117 net.cpp:816] Ignoring source layer bn5b_branch2b_res075
+I0507 11:18:09.562373  5117 net.cpp:816] Ignoring source layer scale5b_branch2b_res075
+I0507 11:18:09.562376  5117 net.cpp:816] Ignoring source layer res5b_branch2b_relu_res075
+I0507 11:18:09.562377  5117 net.cpp:816] Ignoring source layer res5b_branch2c_res075
+I0507 11:18:09.562379  5117 net.cpp:816] Ignoring source layer bn5b_branch2c_res075
+I0507 11:18:09.562381  5117 net.cpp:816] Ignoring source layer scale5b_branch2c_res075
+I0507 11:18:09.562383  5117 net.cpp:816] Ignoring source layer res5b_res075
+I0507 11:18:09.562386  5117 net.cpp:816] Ignoring source layer res5b_relu_res075
+I0507 11:18:09.562387  5117 net.cpp:816] Ignoring source layer res5b_res075_res5b_relu_res075_0_split
+I0507 11:18:09.562389  5117 net.cpp:816] Ignoring source layer res5c_branch2a_res075
+I0507 11:18:09.562391  5117 net.cpp:816] Ignoring source layer bn5c_branch2a_res075
+I0507 11:18:09.562393  5117 net.cpp:816] Ignoring source layer scale5c_branch2a_res075
+I0507 11:18:09.593947  5117 net.cpp:816] Ignoring source layer res5c_branch2a_relu_res075
+I0507 11:18:09.593956  5117 net.cpp:816] Ignoring source layer res5c_branch2b_res075
+I0507 11:18:09.593960  5117 net.cpp:816] Ignoring source layer bn5c_branch2b_res075
+I0507 11:18:09.593961  5117 net.cpp:816] Ignoring source layer scale5c_branch2b_res075
+I0507 11:18:09.593963  5117 net.cpp:816] Ignoring source layer res5c_branch2b_relu_res075
+I0507 11:18:09.593966  5117 net.cpp:816] Ignoring source layer res5c_branch2c_res075
+I0507 11:18:09.593967  5117 net.cpp:816] Ignoring source layer bn5c_branch2c_res075
+I0507 11:18:09.593971  5117 net.cpp:816] Ignoring source layer scale5c_branch2c_res075
+I0507 11:18:09.593972  5117 net.cpp:816] Ignoring source layer res5c_res075
+I0507 11:18:09.593987  5117 net.cpp:816] Ignoring source layer res5c_relu_res075
+I0507 11:18:09.593989  5117 net.cpp:816] Ignoring source layer res5c_res075_res5c_relu_res075_0_split
+I0507 11:18:09.593991  5117 net.cpp:816] Ignoring source layer fc1_voc12_c0
+I0507 11:18:09.593993  5117 net.cpp:816] Ignoring source layer fc1_voc12_c1
+I0507 11:18:09.593996  5117 net.cpp:816] Ignoring source layer fc1_voc12_c2
+I0507 11:18:09.593997  5117 net.cpp:816] Ignoring source layer fc1_voc12_c3
+I0507 11:18:09.594009  5117 net.cpp:816] Ignoring source layer fc1_voc12
+I0507 11:18:09.594012  5117 net.cpp:816] Ignoring source layer fc1_voc12_fc1_voc12_0_split
+I0507 11:18:09.594013  5117 net.cpp:816] Ignoring source layer fc1_voc12_res05_c0
+I0507 11:18:09.594015  5117 net.cpp:816] Ignoring source layer fc1_voc12_res05_c1
+I0507 11:18:09.594018  5117 net.cpp:816] Ignoring source layer fc1_voc12_res05_c2
+I0507 11:18:09.594020  5117 net.cpp:816] Ignoring source layer fc1_voc12_res05_c3
+I0507 11:18:09.594022  5117 net.cpp:816] Ignoring source layer fc1_voc12_res05
+I0507 11:18:09.594024  5117 net.cpp:816] Ignoring source layer fc1_voc12_res05_fc1_voc12_res05_0_split
+I0507 11:18:09.594027  5117 net.cpp:816] Ignoring source layer fc1_voc12_res075_c0
+I0507 11:18:09.594029  5117 net.cpp:816] Ignoring source layer fc1_voc12_res075_c1
+I0507 11:18:09.594032  5117 net.cpp:816] Ignoring source layer fc1_voc12_res075_c2
+I0507 11:18:09.594033  5117 net.cpp:816] Ignoring source layer fc1_voc12_res075_c3
+I0507 11:18:09.594036  5117 net.cpp:816] Ignoring source layer fc1_voc12_res075
+I0507 11:18:09.594038  5117 net.cpp:816] Ignoring source layer fc1_voc12_res05_interp
+I0507 11:18:09.594040  5117 net.cpp:816] Ignoring source layer fc1_voc12_res075_interp
+I0507 11:18:09.594041  5117 net.cpp:816] Ignoring source layer fc1_voc12_res075_interp_fc1_voc12_res075_interp_0_split
+I0507 11:18:09.594044  5117 net.cpp:816] Ignoring source layer fc_fusion
+I0507 11:18:09.594046  5117 net.cpp:816] Ignoring source layer fc_fusion_fc_fusion_0_split
+I0507 11:18:09.594048  5117 net.cpp:816] Ignoring source layer label_shrink
+I0507 11:18:09.594050  5117 net.cpp:816] Ignoring source layer label_shrink_label_shrink_0_split
+I0507 11:18:09.594053  5117 net.cpp:816] Ignoring source layer loss
+I0507 11:18:09.594055  5117 net.cpp:816] Ignoring source layer accuracy
+I0507 11:18:09.594058  5117 net.cpp:816] Ignoring source layer loss_res1
+I0507 11:18:09.594059  5117 net.cpp:816] Ignoring source layer accuracy_res1
+I0507 11:18:09.594061  5117 net.cpp:816] Ignoring source layer loss_res075
+I0507 11:18:09.594063  5117 net.cpp:816] Ignoring source layer accuracy_res075
+I0507 11:18:09.594065  5117 net.cpp:816] Ignoring source layer label_shrink16
+I0507 11:18:09.594069  5117 net.cpp:816] Ignoring source layer label_shrink16_label_shrink16_0_split
+I0507 11:18:09.594070  5117 net.cpp:816] Ignoring source layer loss_res05
+I0507 11:18:09.594072  5117 net.cpp:816] Ignoring source layer accuracy_res05
+I0507 11:18:09.606925  5117 caffe.cpp:252] Running for 1449 iterations.
+I0507 11:18:39.940996  5117 caffe.cpp:281] Loss: 0

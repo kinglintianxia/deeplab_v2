@@ -1,0 +1,4 @@
+Log file created at: 2018/05/10 11:07:59
+Running on machine: king-jun
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+F0510 11:07:59.479415 22232 image_seg_data_layer.cpp:82] Check failed: cv_img.data Could not load /JPEGImages/2007_000033.jpg

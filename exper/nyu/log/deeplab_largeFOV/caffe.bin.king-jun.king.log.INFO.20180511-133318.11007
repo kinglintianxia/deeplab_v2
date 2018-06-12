@@ -1,0 +1,6 @@
+Log file created at: 2018/05/11 13:33:18
+Running on machine: king-jun
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I0511 13:33:18.853821 11007 caffe.cpp:237] Use GPU with device ID 0
+I0511 13:33:18.870360 11007 caffe.cpp:241] GPU device name: GeForce GT 730
+F0511 13:33:19.042027 11007 upgrade_proto.cpp:68] Check failed: ReadProtoFromTextFile(param_file, param) Failed to parse NetParameter file: nyu/config/deeplab_largeFOV/test_val.prototxt

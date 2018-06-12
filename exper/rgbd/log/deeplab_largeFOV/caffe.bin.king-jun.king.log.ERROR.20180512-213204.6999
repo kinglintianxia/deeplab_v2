@@ -1,0 +1,5 @@
+Log file created at: 2018/05/12 21:32:04
+Running on machine: king-jun
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+E0512 21:32:04.031594  7004 io.cpp:81] Could not open or find file /home/king/Documents/image/scene_09/
+F0512 21:32:04.045542  7004 data_transformer.cpp:474] Check failed: img_channels == data_channels (1 vs. 3) 

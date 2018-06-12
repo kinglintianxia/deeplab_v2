@@ -1,0 +1,4 @@
+Log file created at: 2018/05/10 11:31:08
+Running on machine: king-jun
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+F0510 11:31:08.630610 22712 net.cpp:829] Cannot copy param 0 weights from layer 'fc8_voc12_1'; shape mismatch.  Source param shape is 21 1024 1 1 (21504); target param shape is 459 1024 1 1 (470016). To learn this layer's parameters from scratch rather than copying from a saved net, rename the layer.

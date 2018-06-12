@@ -1,0 +1,5 @@
+Log file created at: 2018/06/03 22:29:27
+Running on machine: king-jun
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+E0603 22:29:27.734271  3961 io.cpp:81] Could not open or find file /home/king/Documents/image/VOC_aug/dataset//SegmentationClassAug/2007_000033.png
+F0603 22:29:27.734408  3961 data_transformer.cpp:475] Check failed: img_height == seg_height (366 vs. 0) 
