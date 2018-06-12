@@ -1,7 +1,7 @@
 # Install deeplab_v2 
 
 #1 clone codes
-* git clone https://github.com/xmojiao/deeplab_v2.git
+* git clone https://github.com/kinglintianxia/deeplab_v2
 
 #2 config
 * see kinglintianxia/caffe_learning/Install_caffe.md
